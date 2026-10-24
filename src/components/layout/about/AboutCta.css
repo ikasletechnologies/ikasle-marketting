@@ -1,0 +1,100 @@
+.about-cta {
+  position: relative;
+  display: flex;
+  min-height: 190px;
+  align-items: center;
+  overflow: hidden;
+  padding: 34px 24px;
+  background-color: #087aaf;
+  background-position: center;
+  background-size: cover;
+  isolation: isolate;
+}
+
+.about-cta::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(4, 67, 116, 0.05) 0%, rgba(0, 122, 172, 0.02) 58%, rgba(0, 45, 91, 0.08) 100%);
+  content: '';
+}
+
+.about-cta-inner {
+  display: flex;
+  width: min(100%, 1380px);
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.about-cta-copy { min-width: 0; }
+
+.about-cta-eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+}
+
+.about-cta h2 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2rem, 3vw, 3.15rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+  text-shadow: 0 2px 14px rgba(0, 31, 72, 0.13);
+}
+
+.about-cta-button {
+  display: inline-flex;
+  flex: 0 0 auto;
+  min-width: 252px;
+  min-height: 56px;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 15px 26px;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(1, 39, 78, 0.16);
+  color: var(--color-dark-navy);
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 750;
+  transition: box-shadow var(--transition-fast);
+}
+
+.about-cta-button svg { color: #147da9; }
+.about-cta-button > span { display: inline-block; }
+
+.about-cta-button:hover {
+  box-shadow: 0 12px 30px rgba(1, 39, 78, 0.24);
+}
+
+.about-cta-button:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.65);
+  outline-offset: 4px;
+}
+
+@media (max-width: 760px) {
+  .about-cta { min-height: 270px; background-position: 62% center; }
+  .about-cta-inner { flex-direction: column; align-items: flex-start; gap: 27px; }
+  .about-cta::after { position: absolute; inset: 0; z-index: -1; background: rgba(1, 48, 99, 0.18); content: ''; }
+}
+
+@media (max-width: 480px) {
+  .about-cta { min-height: 285px; padding: 38px 20px; background-position: 67% center; }
+  .about-cta h2 { max-width: 350px; }
+  .about-cta-button { width: 100%; min-width: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-cta-button { transition: none; }
+}

@@ -1,0 +1,15 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "IKASLĒ M A R K E T I N G" [ref=e6] [cursor=pointer]:
+        - /url: "#home"
+        - generic [ref=e7]: IKASLĒ
+        - generic [ref=e8]: M A R K E T I N G
+      - navigation [ref=e9]:
+        - button "Home" [ref=e10] [cursor=pointer]
+        - button "About" [ref=e11] [cursor=pointer]
+        - button "Services" [ref=e12] [cursor=pointer]
+        - button "Blogs" [ref=e13] [cursor=pointer]
+        - button "Contact" [ref=e14] [cursor=pointer]
+      - button "Let's Talk" [ref=e16] [cursor=pointer]
+  - main [ref=e20]

@@ -1,0 +1,237 @@
+.site-footer {
+  width: 100%;
+  border-top: 1px solid #d8e3eb;
+  background: #fff;
+  color: var(--color-dark-navy);
+}
+
+.footer-main {
+  display: grid;
+  grid-template-columns: 1.25fr 0.76fr 0.95fr 0.88fr;
+  gap: clamp(42px, 5vw, 88px);
+  width: min(100% - 112px, 1480px);
+  margin: 0 auto;
+  padding: 44px 0 40px;
+}
+
+.footer-brand {
+  min-width: 0;
+}
+
+.footer-logo-button {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.footer-logo-button img {
+  display: block;
+  width: clamp(205px, 18vw, 278px);
+  height: auto;
+}
+
+.footer-brand > p {
+  max-width: 335px;
+  margin-top: 14px;
+  color: #405972;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.footer-ribbon {
+  display: block;
+  width: min(100%, 410px);
+  height: auto;
+  margin-top: 19px;
+  overflow: visible;
+}
+
+.footer-column h2 {
+  margin: 0 0 16px;
+  color: var(--color-dark-navy);
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.footer-column nav img {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.footer-column nav {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+}
+
+.footer-column nav button,
+.footer-column nav a {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #405973;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.35;
+  text-align: left;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.footer-column nav button:hover,
+.footer-column nav button:focus-visible,
+.footer-column nav a:hover,
+.footer-column nav a:focus-visible {
+  color: var(--color-growth-teal);
+  transform: translateX(3px);
+  outline: none;
+}
+
+.footer-services nav {
+  gap: 14px;
+}
+
+.footer-legal nav {
+  gap: 11px;
+}
+
+.footer-conversation {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid #dbe5ec;
+}
+
+.footer-conversation > p {
+  margin: 0 0 8px;
+  color: #5a7086;
+  font-size: 14px;
+}
+
+.footer-conversation button {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #087caf;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.footer-conversation button svg {
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.footer-conversation button:hover svg,
+.footer-conversation button:focus-visible svg {
+  transform: translateX(5px);
+}
+
+.footer-bottom {
+  display: flex;
+  width: min(100% - 56px, 1535px);
+  min-height: 67px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  border-top: 1px solid #cfdce5;
+  color: #485f77;
+  font-size: 14px;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+@media (max-width: 1080px) {
+  .footer-main {
+    grid-template-columns: 1.2fr repeat(2, 1fr);
+    width: min(100% - 64px, 1480px);
+  }
+
+  .footer-legal {
+    grid-column: 2 / 4;
+  }
+
+  .footer-conversation {
+    max-width: 340px;
+  }
+}
+
+@media (max-width: 760px) {
+  .footer-main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 38px 28px;
+    width: min(100% - 40px, 1480px);
+    padding: 38px 0;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .footer-logo-button img {
+    width: 210px;
+  }
+
+  .footer-brand > p {
+    max-width: 360px;
+  }
+
+  .footer-ribbon {
+    width: min(100%, 360px);
+  }
+
+  .footer-legal {
+    grid-column: auto;
+  }
+
+  .footer-bottom {
+    width: min(100% - 40px, 1535px);
+    min-height: 88px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 7px;
+  }
+}
+
+@media (max-width: 500px) {
+  .footer-main {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-brand,
+  .footer-legal {
+    grid-column: auto;
+  }
+
+  .footer-ribbon {
+    width: 100%;
+  }
+
+  .footer-column nav {
+    gap: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-column nav button,
+  .footer-column nav a,
+  .footer-conversation button svg {
+    transition-duration: 0.01ms;
+  }
+}

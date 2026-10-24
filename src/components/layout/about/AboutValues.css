@@ -1,0 +1,102 @@
+.about-values {
+  padding: clamp(62px, 6vw, 92px) 24px clamp(70px, 7vw, 106px);
+  border-top: 1px solid rgba(33, 120, 167, 0.07);
+  background: linear-gradient(110deg, #fff 0%, #fdfefe 78%, #f8fcfc 100%);
+}
+
+.about-values-inner {
+  width: min(100%, 1380px);
+  margin: 0 auto;
+}
+
+.about-values-eyebrow {
+  display: block;
+  margin-bottom: 10px;
+  color: #117cab;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+}
+
+.about-values h2 {
+  margin: 0 0 35px;
+  color: var(--color-dark-navy);
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+}
+
+.about-values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.about-value {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 22px;
+  min-width: 0;
+  padding: 0 clamp(34px, 4.4vw, 68px);
+  border-left: 1px solid #dce8ec;
+}
+
+.about-value:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.about-value:last-child { padding-right: 0; }
+
+.about-value-number {
+  padding-top: 10px;
+  color: #087aaa;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.about-value-icon {
+  display: block;
+  margin: 0 0 14px;
+  color: #087dad;
+}
+
+.about-value h3 {
+  margin: 0 0 7px;
+  color: var(--color-dark-navy);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.about-value p {
+  max-width: 310px;
+  margin: 0;
+  color: #455c74;
+  font-size: 16px;
+  line-height: 1.42;
+}
+
+@media (max-width: 900px) {
+  .about-values-grid { grid-template-columns: 1fr; }
+  .about-value, .about-value:first-child, .about-value:last-child {
+    grid-template-columns: 48px minmax(0, 1fr);
+    padding: 28px 0;
+    border-top: 1px solid #dce8ec;
+    border-left: 0;
+  }
+  .about-value:first-child { border-top: 0; padding-top: 0; }
+  .about-value p { max-width: 520px; }
+}
+
+@media (max-width: 520px) {
+  .about-values { padding: 50px 20px 62px; }
+  .about-values h2 { margin-bottom: 24px; }
+  .about-value { gap: 14px; }
+  .about-value-icon { width: 42px; height: 42px; }
+  .about-value h3 { font-size: 18px; }
+  .about-value p { font-size: 15px; }
+}

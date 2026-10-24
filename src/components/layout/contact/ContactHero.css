@@ -1,0 +1,170 @@
+﻿.contact-page-hero {
+  position: relative;
+  min-height: clamp(500px, 38vw, 610px);
+  overflow: hidden;
+  border-bottom: 1px solid rgba(205, 225, 234, 0.75);
+  background: #f9fdfe;
+  isolation: isolate;
+}
+
+.contact-page-hero__art {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  animation: contactHeroReveal 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.contact-page-hero__inner {
+  display: flex;
+  width: min(100% - 96px, 1380px);
+  min-height: inherit;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.contact-page-hero__content {
+  width: min(48%, 675px);
+  padding: 55px 0 38px;
+  animation: contactHeroCopyIn 720ms 100ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.contact-page-hero__eyebrow {
+  margin: 0 0 23px;
+  color: var(--color-growth-teal);
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.42em;
+}
+
+.contact-page-hero h1 {
+  margin: 0;
+  color: var(--color-dark-navy);
+  font-family: var(--font-heading);
+  font-size: clamp(3.2rem, 5.1vw, 5.05rem);
+  font-weight: 800;
+  letter-spacing: -0.052em;
+  line-height: 0.98;
+}
+
+.contact-page-hero h1 span {
+  display: block;
+  color: var(--color-growth-teal);
+}
+
+.contact-page-hero__copy {
+  max-width: 650px;
+  margin: 23px 0 0;
+  color: #334b64;
+  font-size: clamp(1.05rem, 1.55vw, 1.38rem);
+  line-height: 1.48;
+}
+
+.contact-page-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 31px;
+}
+
+.contact-page-hero__button {
+  display: inline-flex;
+  min-height: 58px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 28px;
+  border: 1.5px solid #d5e1e8;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--color-dark-navy);
+  cursor: pointer;
+  font: 600 16px/1 var(--font-body);
+  text-decoration: none;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms ease, background 220ms ease;
+}
+
+.contact-page-hero__button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(9, 52, 80, 0.13);
+}
+
+.contact-page-hero__button--primary {
+  border-color: transparent;
+  background: linear-gradient(105deg, #237fb6, #2187bd);
+  color: #fff;
+}
+
+.contact-page-hero__button--whatsapp {
+  border-color: var(--color-growth-teal);
+  color: var(--color-growth-teal);
+}
+
+.contact-page-hero__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 43px;
+  color: #748ba0;
+  font-size: 15px;
+}
+
+.contact-page-hero__breadcrumb button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+}
+
+.contact-page-hero__breadcrumb button:hover,
+.contact-page-hero__breadcrumb strong {
+  color: var(--color-growth-teal);
+  font-weight: 500;
+}
+
+@keyframes contactHeroCopyIn {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes contactHeroReveal {
+  from { opacity: 0; transform: scale(1.025); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 1050px) {
+  .contact-page-hero__inner { width: min(100% - 56px, 1380px); }
+  .contact-page-hero__content { width: 52%; }
+  .contact-page-hero h1 { font-size: clamp(2.75rem, 5.8vw, 4.2rem); }
+  .contact-page-hero__button { min-height: 52px; padding: 0 20px; font-size: 14px; }
+}
+
+@media (max-width: 760px) {
+  .contact-page-hero { min-height: 760px; }
+  .contact-page-hero__art { height: 50%; top: auto; object-position: 68% center; }
+  .contact-page-hero__inner { width: min(100% - 40px, 1380px); align-items: flex-start; }
+  .contact-page-hero__content { width: 100%; padding: 48px 0 28px; }
+  .contact-page-hero h1 { font-size: clamp(2.65rem, 12vw, 4rem); }
+  .contact-page-hero__copy { max-width: 560px; font-size: 1rem; }
+  .contact-page-hero__actions { gap: 10px; margin-top: 25px; }
+  .contact-page-hero__button { min-height: 49px; padding: 0 18px; }
+  .contact-page-hero__breadcrumb { margin-top: 28px; }
+}
+
+@media (max-width: 470px) {
+  .contact-page-hero { min-height: 730px; }
+  .contact-page-hero__actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .contact-page-hero__button--secondary { grid-column: 1 / -1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-page-hero__art,
+  .contact-page-hero__content { animation: none; }
+  .contact-page-hero__button { transition-duration: 0.01ms; }
+}
