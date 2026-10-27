@@ -36,12 +36,14 @@ export interface SocialMediaPageProps {
   onHomeClick?: () => void;
   onServicesClick?: () => void;
   onContactClick?: () => void;
+  onStrategyClick?: () => void;
 }
 
 export const SocialMediaPage: React.FC<SocialMediaPageProps> = ({
   onHomeClick,
   onServicesClick,
   onContactClick,
+  onStrategyClick,
 }) => {
   const root = useRef<HTMLElement>(null);
 
@@ -211,7 +213,11 @@ export const SocialMediaPage: React.FC<SocialMediaPageProps> = ({
                     {service.tags.map((tag) => <li className="sm-tag" key={tag}>{tag}</li>)}
                   </ul>
                 </div>
-                <button type="button" className="sm-card-link" onClick={onContactClick}>
+                <button
+                  type="button"
+                  className="sm-card-link"
+                  onClick={service.id === 'strategy' && onStrategyClick ? onStrategyClick : onContactClick}
+                >
                   <span>View Service</span>
                   <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />
                 </button>

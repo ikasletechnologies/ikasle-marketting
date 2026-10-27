@@ -224,7 +224,7 @@ export const ServicesListing: React.FC<ServicesListingProps> = ({ onServiceClick
 
         <div className="listing-grid">
           {SERVICES.map((service) => (
-            <article className={`listing-card listing-card--${service.kind}`} key={service.id}>
+            <article className={`listing-card listing-card--${service.kind}`} key={service.id} role="link" tabIndex={0} onClick={() => onServiceClick?.(service.id)} onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') onServiceClick?.(service.id); }}>
               <div className="listing-visual">
                 <span className="listing-number" aria-hidden="true">{service.number}</span>
                 <div className="listing-art">
@@ -264,7 +264,7 @@ export const ServicesListing: React.FC<ServicesListingProps> = ({ onServiceClick
                   ))}
                 </ul>
 
-                <button type="button" className="listing-button" onClick={() => onServiceClick?.(service.id)}>
+                <button type="button" className="listing-button" onClick={(event) => { event.stopPropagation(); onServiceClick?.(service.id); }}>
                   <span>{service.linkText}</span>
                   <ArrowRight size={18} strokeWidth={2} aria-hidden="true" />
                 </button>

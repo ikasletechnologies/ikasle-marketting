@@ -37,14 +37,48 @@ export interface DigitalMarketingPageProps {
   onHomeClick?: () => void;
   onServicesClick?: () => void;
   onContactClick?: () => void;
+  onStrategyClick?: () => void;
+  onResearchClick?: () => void;
+  onGoogleAdsClick?: () => void;
+  onDisplayYoutubeClick?: () => void;
+  onMetaAdsClick?: () => void;
+  onContentClick?: () => void;
+  onEmailClick?: () => void;
+  onLeadsClick?: () => void;
+  onLandingClick?: () => void;
+  onAnalyticsClick?: () => void;
 }
 
 export const DigitalMarketingPage: React.FC<DigitalMarketingPageProps> = ({
   onHomeClick,
   onServicesClick,
   onContactClick,
+  onStrategyClick,
+  onResearchClick,
+  onGoogleAdsClick,
+  onDisplayYoutubeClick,
+  onMetaAdsClick,
+  onContentClick,
+  onEmailClick,
+  onLeadsClick,
+  onLandingClick,
+  onAnalyticsClick,
 }) => {
   const root = useRef<HTMLElement>(null);
+
+  const openDigitalService = (serviceId: string) => {
+    if (serviceId === 'strategy') onStrategyClick?.();
+    else if (serviceId === 'research') onResearchClick?.();
+    else if (serviceId === 'google-ads') onGoogleAdsClick?.();
+    else if (serviceId === 'display-youtube') onDisplayYoutubeClick?.();
+    else if (serviceId === 'meta-ads') onMetaAdsClick?.();
+    else if (serviceId === 'content') onContentClick?.();
+    else if (serviceId === 'email') onEmailClick?.();
+    else if (serviceId === 'leads') onLeadsClick?.();
+    else if (serviceId === 'landing') onLandingClick?.();
+    else if (serviceId === 'analytics') onAnalyticsClick?.();
+    else onContactClick?.();
+  };
 
   useGSAP(() => {
     const mm = gsap.matchMedia();
@@ -208,7 +242,7 @@ export const DigitalMarketingPage: React.FC<DigitalMarketingPageProps> = ({
 
           <div className="dm-grid">
             {SERVICES.map((service, index) => (
-              <article className="dm-card" key={service.id}>
+              <article className="dm-card" key={service.id} role="link" tabIndex={0} onClick={() => openDigitalService(service.id)} onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') openDigitalService(service.id); }}>
                 <span className="dm-card-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
                 <span className="dm-card-icon" aria-hidden="true">{DIGITAL_ICONS[service.icon]}</span>
                 <div className="dm-card-body">
@@ -218,7 +252,7 @@ export const DigitalMarketingPage: React.FC<DigitalMarketingPageProps> = ({
                     <ul className="dm-tags" aria-label={`${service.title} includes`}>
                       {service.tags.map((tag) => <li className="dm-tag" key={tag}>{tag}</li>)}
                     </ul>
-                    <button type="button" className="dm-card-link" onClick={onContactClick}>
+                    <button type="button" className="dm-card-link" onClick={(event) => { event.stopPropagation(); openDigitalService(service.id); }}>
                       <span>View Service</span>
                       <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />
                     </button>

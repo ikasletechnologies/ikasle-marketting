@@ -237,3 +237,6 @@
   .listing-button,
   .listing-button svg { transition: none; }
 }
+
+.listing-card[role="link"] { cursor: pointer; }
+.listing-card[role="link"]:focus-visible { outline: 3px solid rgba(33, 120, 167, 0.28); outline-offset: 5px; }

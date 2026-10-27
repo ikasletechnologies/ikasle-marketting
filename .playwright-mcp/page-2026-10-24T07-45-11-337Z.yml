@@ -1,0 +1,141 @@
+- generic [ref=e4]:
+  - banner [ref=e5]:
+    - generic [ref=e6]:
+      - button [ref=e7] [cursor=pointer]:
+        - img "Ikasle Marketing" [ref=e8]
+      - navigation "Primary navigation" [ref=e9]:
+        - button "Home" [ref=e10] [cursor=pointer]
+        - button "About" [ref=e11] [cursor=pointer]
+        - button "Services" [ref=e14] [cursor=pointer]
+        - button "Blogs" [ref=e17] [cursor=pointer]
+        - button "Contact" [ref=e18] [cursor=pointer]
+      - button "Let's Talk" [ref=e20] [cursor=pointer]
+  - main [ref=e24]:
+    - region [ref=e25]:
+      - generic [ref=e27]:
+        - paragraph [ref=e28]: DIGITAL MARKETING. REAL DIRECTION.
+        - heading [level=1] [ref=e29]:
+          - text: Turn digital reach
+          - generic [ref=e30]:
+            - text: into
+            - strong [ref=e31]: brand growth.
+        - paragraph [ref=e32]: Strategy, social media, SEO and creative campaigns that move your business forward.
+        - generic [ref=e33]:
+          - button "Explore Services" [ref=e36] [cursor=pointer]
+          - button "Let’s Talk" [ref=e42] [cursor=pointer]
+        - paragraph [ref=e44]:
+          - generic [ref=e45]: Strategy
+          - generic [ref=e47]: Creativity
+          - generic [ref=e49]: Growth
+    - generic [ref=e51]:
+      - generic [ref=e52]:
+        - generic [ref=e53]: WHAT WE DO
+        - heading "The right strategy. The right kind of growth." [level=2] [ref=e54]:
+          - generic [ref=e55]: The right strategy.
+          - generic [ref=e56]: The right kind of growth.
+        - paragraph [ref=e57]: From the first impression to the next conversion, we bring your marketing together.
+      - generic [ref=e58]:
+        - button "Explore Digital Marketing" [ref=e59] [cursor=pointer]:
+          - generic [ref=e62]:
+            - heading "Digital Marketing" [level=3] [ref=e63]
+            - paragraph [ref=e64]: Strategy, paid advertising, content and analytics.
+            - button "Explore Digital Marketing" [ref=e65]
+        - button "Explore Social Media" [ref=e69] [cursor=pointer]:
+          - generic [ref=e72]:
+            - heading "Social Media Marketing" [level=3] [ref=e73]
+            - paragraph [ref=e74]: Content, reels and communities built around your brand.
+            - button "Explore Social Media" [ref=e75]
+        - button "Explore SEO" [ref=e79] [cursor=pointer]:
+          - generic [ref=e82]:
+            - heading "SEO & Search Growth" [level=3] [ref=e83]
+            - paragraph [ref=e84]: Technical, on-page and local SEO for better visibility.
+            - button "Explore SEO" [ref=e85]
+        - button "Explore Branding" [ref=e89] [cursor=pointer]:
+          - generic [ref=e92]:
+            - heading "Brand Growth & Creative" [level=3] [ref=e93]
+            - paragraph [ref=e94]: Brand identity, creative campaigns and website experiences.
+            - button "Explore Branding" [ref=e95]
+      - button "View All Services" [ref=e100] [cursor=pointer]
+    - region [ref=e104]:
+      - generic [ref=e105]:
+        - generic [ref=e106]:
+          - heading "From Strategy toSuccess" [level=2] [ref=e107]:
+            - generic [ref=e110]: From Strategy to
+            - strong [ref=e113]: Success
+          - paragraph [ref=e114]: The right marketing steps. The right growth.Your success.
+        - generic [ref=e116]:
+          - list [ref=e117]:
+            - listitem [ref=e118]:
+              - heading "Understand Your Audience" [level=3] [ref=e121]
+              - paragraph [ref=e122]: Know who they are, what they need, and what motivates them.
+            - listitem [ref=e123]:
+              - heading "Build Your Brand Presence" [level=3] [ref=e126]
+              - paragraph [ref=e127]: Create a strong identity and show up where your audience is.
+            - listitem [ref=e128]:
+              - heading "Create Valuable Content" [level=3] [ref=e131]
+              - paragraph [ref=e132]: Educate, entertain, and solve real problems with the right content.
+            - listitem [ref=e133]:
+              - heading "Attract & Engage Traffic" [level=3] [ref=e136]
+              - paragraph [ref=e137]: Use the right channels — SEO, social media, email, and ads.
+            - listitem [ref=e138]:
+              - heading "Convert Leads to Customers" [level=3] [ref=e141]
+              - paragraph [ref=e142]: Make it easy for people to take action and choose you.
+            - listitem [ref=e143]:
+              - heading "Keep Growing" [level=3] [ref=e146]
+              - paragraph [ref=e147]: Analyze, optimize and improve with data and feedback.
+            - listitem [ref=e148]:
+              - heading "Achieve Long-Term Success" [level=3] [ref=e151]
+              - paragraph [ref=e152]: Build a sustainable brand, more customers and bigger dreams.
+          - generic [ref=e160]:
+            - heading "Better Marketing. Bigger Growth." [level=3] [ref=e161]:
+              - generic [ref=e162]: Better Marketing.
+              - generic [ref=e163]: Bigger Growth.
+            - list "Our approach" [ref=e164]:
+              - listitem [ref=e165]:
+                - generic [ref=e166]: Plan
+                - generic [aria-hidden] [ref=e167]: →
+              - listitem [ref=e168]:
+                - generic [ref=e169]: Create
+                - generic [aria-hidden] [ref=e170]: →
+              - listitem [ref=e171]:
+                - generic [ref=e172]: Engage
+                - generic [aria-hidden] [ref=e173]: →
+              - listitem [ref=e174]:
+                - generic [ref=e175]: Grow
+                - generic [aria-hidden] [ref=e176]: →
+              - listitem [ref=e177]:
+                - generic [ref=e178]: Succeed
+  - contentinfo [ref=e179]:
+    - generic [ref=e180]:
+      - generic [ref=e181]:
+        - button "Go to home" [ref=e182] [cursor=pointer]:
+          - img "Ikasle Marketing" [ref=e183]
+        - paragraph [ref=e184]: Strategy, creativity and digital marketing for brands ready to grow.
+        - img "Ikasle brand ribbon" [ref=e185]
+      - generic [ref=e189]:
+        - heading "Quick Links" [level=2] [ref=e190]
+        - navigation "Footer quick links" [ref=e191]:
+          - button "Home" [ref=e192] [cursor=pointer]
+          - button "About" [ref=e194] [cursor=pointer]
+          - button "Services" [ref=e196] [cursor=pointer]
+          - button "Blogs" [ref=e198] [cursor=pointer]
+          - button "Contact" [ref=e200] [cursor=pointer]
+      - generic [ref=e202]:
+        - heading "Our Services" [level=2] [ref=e203]
+        - navigation "Our services" [ref=e204]:
+          - button "Digital Marketing" [ref=e205] [cursor=pointer]
+          - button "Social Media Marketing" [ref=e207] [cursor=pointer]
+          - button "SEO & Search Growth" [ref=e209] [cursor=pointer]
+          - button "Brand Growth & Creative" [ref=e211] [cursor=pointer]
+      - generic [ref=e213]:
+        - heading "Help & Legal" [level=2] [ref=e214]
+        - navigation "Help and legal" [ref=e215]:
+          - button "Privacy Policy" [ref=e216] [cursor=pointer]
+          - button "Terms & Conditions" [ref=e218] [cursor=pointer]
+          - button "FAQ" [ref=e220] [cursor=pointer]
+        - generic [ref=e222]:
+          - paragraph [ref=e223]: Have a project in mind?
+          - button "Start a Conversation" [ref=e224] [cursor=pointer]
+    - generic [ref=e228]:
+      - paragraph [ref=e229]: © 2026 IKASLĒ Marketing. All rights reserved.
+      - paragraph [ref=e230]: Strategy. Creativity. Growth.

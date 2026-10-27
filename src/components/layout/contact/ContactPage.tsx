@@ -62,7 +62,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onHomeClick }) => {
                 </h2>
                 <p className="contact-details-copy">
                   Whether you need a stronger brand, better visibility or your next campaign,
-                  letâ€™s talk.
+                  letÃ¢â‚¬â„¢s talk.
                 </p>
 
                 <div className="contact-methods">
@@ -136,10 +136,10 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onHomeClick }) => {
                   <span className="contact-select-wrap">
                     <select name="budget" defaultValue="">
                       <option value="" disabled>Select a budget range</option>
-                      <option>â‚¹25,000 â€“ â‚¹50,000</option>
-                      <option>â‚¹50,000 â€“ â‚¹1,00,000</option>
-                      <option>â‚¹1,00,000 â€“ â‚¹2,50,000</option>
-                      <option>â‚¹2,50,000+</option>
+                      <option>Ã¢â€šÂ¹25,000 Ã¢â‚¬â€œ Ã¢â€šÂ¹50,000</option>
+                      <option>Ã¢â€šÂ¹50,000 Ã¢â‚¬â€œ Ã¢â€šÂ¹1,00,000</option>
+                      <option>Ã¢â€šÂ¹1,00,000 Ã¢â‚¬â€œ Ã¢â€šÂ¹2,50,000</option>
+                      <option>Ã¢â€šÂ¹2,50,000+</option>
                     </select>
                     <ChevronDown size={20} aria-hidden="true" />
                   </span>
@@ -172,7 +172,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onHomeClick }) => {
               </button>
 
               <p className={'contact-success' + (submitted ? ' is-visible' : '')} role="status">
-                Thanks â€” weâ€™ll get back to you shortly.
+                Thanks Ã¢â‚¬â€ weÃ¢â‚¬â„¢ll get back to you shortly.
               </p>
             </form>
           </div>
