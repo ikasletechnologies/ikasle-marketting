@@ -1,0 +1,42 @@
+/* ---------- Hero: map phone, storefront, big pin ---------- */
+.lo-l-ground{left:-2em;top:9em}
+.lo-ground{width:40em;height:18em;overflow:hidden;opacity:.75;transform:perspective(900px) rotateX(58deg) rotateZ(-14deg);-webkit-mask-image:radial-gradient(ellipse at center,#000 40%,transparent 72%);mask-image:radial-gradient(ellipse at center,#000 40%,transparent 72%)}
+.lo-l-shop{left:23em;top:11.5em}
+.lo-shop{width:12em;height:11em;filter:drop-shadow(0 1.2em 1.4em #0b2b4c40)}
+.lo-l-bigpin{left:26.2em;top:2.5em}
+.lo-bigpin-wrap{position:relative;width:5em;height:9em}
+.lo-bigpin{position:absolute;left:0;top:0;width:5em;height:6.7em;filter:drop-shadow(0 .8em 1em #0b2b4c55)}
+.lo-ripple{position:absolute;left:.5em;bottom:0;width:4em;height:1.4em;border-radius:50%;border:.18em solid #0aa5a3}
+.lo-l-phone{left:7em;top:0}
+.lo-phone{transform:rotate(8deg)}
+.lo-searchbar{position:absolute;left:.8em;right:.8em;top:2.4em;display:flex;align-items:center;gap:.4em;padding:.5em .6em;border-radius:1em;background:#fff;color:#2c4a60;font-size:.55em;box-shadow:0 .4em .8em #0b2b4c22}
+.lo-searchbar svg{width:1.1em;height:1.1em;color:#0a6fa8}
+.lo-searchbar svg:last-child{margin-left:auto}
+.lo-pin{position:absolute;width:1.5em;height:2em}
+.lo-pin-svg{display:block;width:100%;height:100%}
+.lo-biz{position:absolute;left:.6em;right:.6em;bottom:.8em;padding:.5em;border-radius:.8em;background:#fff;box-shadow:0 .6em 1.2em #0b2b4c33}
+.lo-biz-img{height:3.6em;overflow:hidden;border-radius:.5em;background:#e8f0f3}
+.lo-biz b{display:block;margin:.35em 0;color:var(--navy);font-size:.62em}
+.lo-biz-actions{display:flex;justify-content:space-around}
+.lo-biz-actions span{display:flex;flex-direction:column;align-items:center;gap:.2em;color:#4b6377;font-size:.42em}
+.lo-biz-actions svg{width:2em;height:2em;padding:.4em;border-radius:50%;background:#e3f1f8;color:#0a6fa8}
+
+/* ---------- Deliverables: report + info cards ---------- */
+.lo-l-book{left:1em;top:1em}
+.lo-book{width:16em;height:21em}
+.lo-book .sa-book-cover{padding-bottom:0}
+.lo-book .sa-brand{font-size:.85em;margin-bottom:1.6em}
+.lo-book h4{text-transform:uppercase;font-size:1.8em;transform:rotate(-8deg);transform-origin:0 50%}
+.lo-book-map{position:absolute;left:.9em;right:0;bottom:0;height:10em;opacity:.9}
+.lo-book-pin{position:absolute;left:42%;top:12%;width:3em;height:4em;filter:drop-shadow(0 .6em .8em #0b2b4c55)}
+.lo-card{display:flex;gap:.8em;width:13em;padding:1em;border-radius:.8em;background:linear-gradient(150deg,#fff,#f4f8fa);box-shadow:0 1.4em 2.2em -1em #0b2b4c44}
+.lo-card>div{flex:1}
+.lo-card b{display:block;margin-bottom:.6em;color:var(--navy);font-size:.72em}
+.lo-card-icon{display:grid;place-items:center;flex:none;width:2.4em;height:2.4em;border-radius:.6em;background:#e3f1f8;color:#0a6fa8}
+.lo-card-icon svg{width:1.3em;height:1.3em}
+.lo-check-row{display:flex;align-items:center;gap:.5em;margin-bottom:.35em;color:#4b6377;font-size:.6em}
+.lo-check-row i{display:grid;place-items:center;width:1.4em;height:1.4em;border-radius:50%;background:#0aa5a3;color:#fff}
+.lo-check-row i svg{width:1em;height:1em;stroke-width:3.5}
+.lo-l-info{left:20em;top:0}
+.lo-l-pages{left:20.5em;top:11.4em}
+.lo-l-listings{left:21em;top:17em}

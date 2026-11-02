@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ChevronDown, ChevronRight, Menu, X } from 'lucide-react';
 import logoImg from '../../../assets/logo-clean.png';
 import { ROUTES, isServiceSection, sectionFromPath, normalise } from '../../../routes';
@@ -26,18 +26,22 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       { label: 'Social Media Strategy', target: 'Social Media Strategy' },
       { label: 'Profile Setup & Optimisation', target: 'Profile Setup & Optimisation' },
       { label: 'Social Media Management', target: 'Social Media Management' },
+      { label: 'Content Planning & Calendars', target: 'Content Planning' },
+      { label: 'Creative Posts & Carousels', target: 'Creative Posts & Carousels' },
       ...[
-        'Content Planning & Calendars', 'Creative Posts & Carousels', 'Reels & Short-Form Video',
-        'Community Management', 'Social Media Advertising', 'Influencer & Creator Campaigns', 'Social Analytics & Reporting',
-      ].map((label) => ({ label, target: 'Social Media Marketing' })),
+        'Reels & Short-Form Video', 'Community Management', 'Social Media Advertising',
+        'Influencer & Creator Campaigns', 'Social Analytics & Reporting',
+      ].map((label) => ({ label, target: label })),
     ],
   },
   {
     title: 'SEO & Search Growth', target: 'SEO & Search Growth', items: [
-      'SEO Audit & Strategy', 'Keyword & Search Intent Research', 'Technical SEO', 'On-Page SEO',
-      'Local SEO', 'Google Business Profile', 'SEO Content & Topic Planning',
-      'Off-Page SEO & Digital PR', 'E-Commerce SEO', 'Search Analytics & Reporting',
-    ].map((label) => ({ label, target: 'SEO & Search Growth' })),
+      ...[
+        'SEO Audit & Strategy', 'Keyword & Search Intent Research', 'Technical SEO', 'On-Page SEO',
+        'Local SEO', 'Google Business Profile', 'SEO Content & Topic Planning',
+        'Off-Page SEO & Digital PR', 'E-Commerce SEO', 'Search Analytics & Reporting',
+      ].map((label) => ({ label, target: label })),
+    ],
   },
   {
     title: 'Brand Growth & Creative', target: 'Brand Growth & Creative', items: [
@@ -45,7 +49,7 @@ const SERVICE_GROUPS: ServiceGroup[] = [
       'Logo & Visual Identity', 'Brand Guidelines & Templates', 'Marketing Collateral Design',
       'Website & Landing Page Design', 'Creative Campaigns & Storytelling',
       'Brand Experience & Consistency', 'Brand Launch & Refresh',
-    ].map((label) => ({ label, target: 'Brand Growth & Creative' })),
+    ].map((label) => ({ label, target: label })),
   },
 ];
 
@@ -56,6 +60,19 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange, onCtaCli
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileCategoryOpen, setMobileCategoryOpen] = useState<string | null>(null);
   const [desktopServicesDismissed, setDesktopServicesDismissed] = useState(false);
+  // Desktop sub-menu shown on hover. Switching categories waits briefly so a diagonal
+  // move from a category towards its sub-menu doesn't open the rows it passes over.
+  const [hoverCategory, setHoverCategory] = useState<string | null>(null);
+  const switchTimer = useRef<number | undefined>(undefined);
+  const clearSwitch = () => window.clearTimeout(switchTimer.current);
+  useEffect(() => clearSwitch, []);
+
+  const hoverOn = (title: string) => {
+    clearSwitch();
+    if (hoverCategory === null) setHoverCategory(title);
+    else if (hoverCategory !== title) switchTimer.current = window.setTimeout(() => setHoverCategory(title), 160);
+  };
+  const closeDropdown = () => { clearSwitch(); setHoverCategory(null); };
   const navLinks = ['Home', 'About', 'Services', 'Blogs', 'Contact'];
 
   const currentPath = typeof window !== 'undefined' ? normalise(window.location.pathname) : '/';
@@ -101,6 +118,11 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange, onCtaCli
   };
 
   const handleNavClick = (link: string) => {
+    // Close the desktop dropdown after a choice: hide it until the pointer returns to
+    // the Services trigger, and drop focus so it isn't held open by the clicked button.
+    setDesktopServicesDismissed(true);
+    closeDropdown();
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
     setMobileMenuOpen(false);
     setMobileServicesOpen(false);
     setMobileCategoryOpen(null);
@@ -126,17 +148,21 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange, onCtaCli
                 <button type="button" className="mobile-services-toggle" onClick={() => setMobileServicesOpen((open) => !open)} aria-label="Toggle services menu" aria-expanded={mobileServicesOpen}><ChevronDown /></button>
               </div>
 
-              <div className="services-dropdown">
+              <div className="services-dropdown" onMouseLeave={closeDropdown}>
                 <div className="services-groups">
                   {SERVICE_GROUPS.map((group) => {
                     const categoryActive = isCategoryActive(group);
                     return (
-                      <div className={`services-category ${mobileCategoryOpen === group.title ? 'mobile-expanded' : ''}`} key={group.title}>
+                      <div
+                        className={`services-category ${mobileCategoryOpen === group.title ? 'mobile-expanded' : ''} ${hoverCategory === group.title ? 'hover-open' : ''}`}
+                        key={group.title}
+                        onMouseEnter={() => hoverOn(group.title)}
+                      >
                         <div className="category-row">
                           <button type="button" className={`category-link ${categoryActive ? 'active' : ''}`} onClick={() => handleNavClick(group.target)}><span>{group.title}</span><ChevronRight /></button>
                           <button type="button" className="mobile-category-toggle" onClick={() => setMobileCategoryOpen((open) => open === group.title ? null : group.title)} aria-label={`Toggle ${group.title} services`}><ChevronDown /></button>
                         </div>
-                        <div className="services-submenu">
+                        <div className="services-submenu" onMouseEnter={clearSwitch}>
                           <p>{group.title}</p>
                           {group.items.map((item) => (
                             <button

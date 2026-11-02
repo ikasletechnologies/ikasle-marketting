@@ -349,6 +349,20 @@
   transform: translateX(5px);
 }
 
+.contact-error {
+  min-height: 20px;
+  margin: 12px 0 0;
+  color: #c0392b;
+  font-size: 13px;
+  text-align: center;
+}
+
+.contact-submit:disabled {
+  cursor: wait;
+  opacity: 0.72;
+  transform: none;
+  box-shadow: 0 8px 18px rgba(33, 120, 167, 0.12);
+}
 .contact-success {
   height: 0;
   margin: 0;
@@ -514,18 +528,4 @@
     transition-duration: 0.01ms;
   }
 }
-.contact-crosshair {
-  transition: opacity 180ms ease;
-}
 
-@media (pointer: coarse) {
-  .contact-crosshair {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .contact-crosshair {
-    display: none;
-  }
-}

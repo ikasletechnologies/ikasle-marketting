@@ -1,0 +1,54 @@
+/* ---------- Hero: campaign laptop + ad phone ---------- */
+.ad-l-laptop{left:9.5em;top:1.6em}
+.ad-laptop .sa-laptop-screen{height:16.5em}
+.ad-dash{display:flex;height:100%;background:#f4f8fa}
+.ad-dash-side{display:flex;flex-direction:column;align-items:center;gap:1em;width:2.6em;padding:1em 0;background:linear-gradient(180deg,#0b3a66,#0a5c8c);color:#bfe3f2}
+.ad-dash-side svg{width:1em;height:1em}
+.ad-dash-main{flex:1;padding:.9em 1em}
+.ad-dash-main h5{margin:0 0 .7em;color:var(--navy);font-size:1em;font-weight:700}
+.ad-panel{margin-bottom:.7em;padding:.7em .8em;border-radius:.6em;background:#fff;box-shadow:0 .2em .6em #0b2b4c12}
+.ad-panel small{display:block;margin-bottom:.4em;color:#203b52;font-size:.68em;font-weight:700}
+.ad-audience{display:flex;align-items:center;justify-content:space-between}
+.ad-audience ul{list-style:none;margin:0;padding:0;display:grid;gap:.4em}
+.ad-audience li{display:flex;align-items:center;gap:.5em;color:#4b6377;font-size:.6em}
+.ad-check{display:grid;place-items:center;width:1.5em;height:1.5em;border-radius:.35em;background:#0aa5a3;color:#fff}
+.ad-check svg{width:1.1em;height:1.1em;stroke-width:3.5}
+.ad-aud-icon{width:2.6em;height:2.6em;color:#1a7fc0}
+.ad-creatives{display:grid;grid-template-columns:repeat(3,1fr);gap:.5em}
+.ad-creative{display:block;height:3.6em;overflow:hidden;border-radius:.4em}
+.ad-l-phone{left:3.5em;top:.6em}
+.ad-phone{transform:rotate(-2deg)}
+.ad-post{display:flex;flex-direction:column;height:100%;padding:2.2em .7em .8em;background:#fff}
+.ad-post-head{display:flex;align-items:center;gap:.5em;margin-bottom:.6em}
+.ad-post-logo{display:grid;place-items:center;width:2em;height:2em;border-radius:50%;background:var(--navy);color:#fff;font-size:.6em;font-weight:800}
+.ad-post-head b{display:block;font-size:.62em;letter-spacing:.1em;color:var(--navy)}
+.ad-post-head small{display:block;font-size:.5em;color:#7a8e9c}
+.ad-post-img{position:relative;flex:1;overflow:hidden;border-radius:.5em}
+.ad-post-img p{position:absolute;left:.7em;top:.6em;margin:0;color:var(--navy);font-size:.78em;font-weight:800;line-height:1.1}
+.ad-post-cta{display:flex;align-items:center;gap:.6em;margin:.6em 0}
+.ad-post-cta .sa-lines{flex:1}
+.ad-chip{padding:.35em .7em;border-radius:.4em;background:#e5f1f7;color:var(--navy);font-size:.55em;font-weight:700;white-space:nowrap}
+.ad-post-icons{display:flex;gap:.8em;color:#3b5163}
+.ad-post-icons svg{width:1em;height:1em}
+.ad-save{margin-left:auto}
+
+/* ---------- Deliverables: book + ad cards ---------- */
+.ad-l-book{left:2em;top:1.2em}
+.ad-book .sa-brand{font-size:.85em;margin-bottom:1.8em}
+.ad-book-img{position:absolute;left:0;right:0;bottom:0;height:9.5em}
+.ad-l-card1{left:19.5em;top:1.5em}
+.ad-l-card2{left:18.5em;top:13em}
+.ad-card{width:13em;padding:.6em .6em .9em;border-radius:.6em;background:#fff;box-shadow:0 1.6em 2.4em -1em #0b2b4c44}
+.ad-l-card1 .ad-card{transform:rotate(4deg)}
+.ad-l-card2 .ad-card{transform:rotate(-3deg)}
+.ad-card-img{position:relative;height:7.6em;margin-bottom:.7em;overflow:hidden;border-radius:.35em}
+.ad-card-img p{position:absolute;left:.7em;top:.7em;margin:0;color:var(--navy);font-size:.95em;font-weight:800;line-height:1.1}
+.ad-card-img p.light{color:#fff}
+
+/* ---------- Related thumbnails ---------- */
+.ad-thumb{display:grid;place-items:center;width:100%;height:100%;background:linear-gradient(160deg,#e9f2f5,#d6e6ec)}
+.ad-thumb-dark{background:linear-gradient(160deg,#1d3346,#0b2b4c)}
+.ad-thumb-phone{font-size:4.6px}
+.ad-thumb-laptop{font-size:3.2px}
+.ad-thumb-play{position:absolute;top:50%;left:50%;display:grid;place-items:center;width:5em;height:5em;margin:-2.5em 0 0 -2.5em;border-radius:50%;background:#0b2b4c88;color:#fff}
+.ad-thumb-play svg{width:2.4em;height:2.4em;fill:#fff}

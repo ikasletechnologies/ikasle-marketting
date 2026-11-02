@@ -1,0 +1,44 @@
+/* ---------- Hero: keyword monitor + intent pills ---------- */
+.kw-l-monitor{left:2em;top:0}
+.kw-monitor{width:21em}
+.kw-monitor .sa-monitor-screen{height:14.5em}
+.kw-screen{height:100%;padding:1em;background:linear-gradient(160deg,#f7fbff,#e8f2fa)}
+.kw-search{display:flex;align-items:center;gap:.5em;height:2.4em;margin-bottom:.8em;padding:0 0 0 .7em;border:.1em solid #c9dceb;border-radius:.6em;background:#fff;overflow:hidden}
+.kw-search>svg{width:1em;height:1em;color:#5a7488}
+.kw-typed{color:#0b2b4c;font-size:.8em;font-weight:600;white-space:nowrap}
+.kw-caret{width:.1em;height:1.1em;background:#0a6fa8}
+.kw-search b{display:grid;place-items:center;width:2.6em;height:100%;margin-left:auto;background:#0a6fa8;color:#fff}
+.kw-search b svg{width:1em;height:1em}
+.kw-row{display:flex;align-items:center;gap:.6em;padding:.45em .3em;border-bottom:.08em solid #dbe6ee}
+.kw-row>svg{width:.85em;height:.85em;color:#6a8396}
+.kw-row span{flex:1;color:#2c4a60;font-size:.62em}
+.kw-tag{padding:.25em .6em;border-radius:.3em;color:#fff;font-size:.52em;font-style:normal;font-weight:700}
+.kw-info{background:#1a8fd0}.kw-comm{background:#0aa5a3}.kw-nav{background:#2f6fe0}.kw-trans{background:#1fb37a}
+.kw-l-links{left:22.4em;top:1.8em}
+.kw-links{display:block;width:4em;height:14em;overflow:visible}
+.kw-link{fill:none;stroke:#0a6fa8;stroke-width:1.2;stroke-dasharray:4 4;opacity:.6}
+.kw-l-pill{left:26.2em}
+.kw-l-pill-0{top:.4em}.kw-l-pill-1{top:3.9em}.kw-l-pill-2{top:7.4em}.kw-l-pill-3{top:10.9em}
+.kw-pill{display:inline-block;min-width:8.8em;padding:.75em 1.1em;border-radius:.8em;color:#fff;font-size:.95em;font-weight:700;text-align:center;box-shadow:0 0 1.4em #3fd0ff66,0 1em 1.6em -.8em #0b2b4c88;border:.08em solid #ffffff88}
+.kw-pill.kw-info{background:linear-gradient(140deg,#1a9fe0,#0a6fa8)}
+.kw-pill.kw-nav{background:linear-gradient(140deg,#3f8bf0,#1a5fc0)}
+.kw-pill.kw-comm{background:linear-gradient(140deg,#14c0b8,#0a8f9c)}
+.kw-pill.kw-trans{background:linear-gradient(140deg,#2bd09a,#0e9a74)}
+.kw-l-books{left:0;top:19.2em}
+.kw-books{display:flex;flex-direction:column;align-items:flex-start;gap:.15em;transform:rotate(-3deg)}
+.kw-books span{width:11em;padding:.4em .9em;border-radius:.2em .5em .5em .2em;background:linear-gradient(90deg,#1d3d63,#2c5a86);color:#dbe9f6;font-size:.75em;font-weight:600;box-shadow:0 .5em 1em -.4em #0b2b4c88}
+.kw-books span:nth-child(1){background:linear-gradient(90deg,#e6edf2,#f6f9fb);color:#2c4a60;margin-left:.6em}
+.kw-books span:nth-child(3){margin-left:.4em}
+.kw-l-mug{left:28.5em;top:16em}
+.kw-mug{width:6em;height:6.8em}
+
+/* ---------- Deliverables: research book + chips ---------- */
+.kw-l-sprig{left:25em;top:-2.4em}
+.kw-sprig{display:block;width:12em}
+.kw-l-book{left:1em;top:1.5em}
+.kw-book .sa-brand{font-size:.85em;margin-bottom:2.4em}
+.kw-book h4{text-transform:uppercase;font-size:1.6em;transform:rotate(-8deg);transform-origin:0 50%}
+.kw-book p{color:#1a7fc0;transform:rotate(-8deg);transform-origin:0 50%}
+.kw-l-chip{left:19.5em}
+.kw-l-chip-0{top:2em}.kw-l-chip-1{top:7em;left:20em}.kw-l-chip-2{top:12em;left:20.5em}.kw-l-chip-3{top:17em;left:21em}
+.kw-chip{width:12em;white-space:normal;transform:rotate(-10deg) skewX(-6deg)}

@@ -1,0 +1,53 @@
+/* ---------- Mini website (responsive) ---------- */
+.wd-site{height:100%;overflow:hidden;background:#fff}
+.wd-scroll{padding:.6em .7em}
+.wd-nav{display:flex;align-items:center;gap:.6em;margin-bottom:.7em}
+.wd-nav .sa-brand{font-size:.45em}
+.wd-links{display:flex;gap:.4em;margin-left:auto}
+.wd-links i{width:1.6em;height:.3em;border-radius:1em;background:#d0dbe4}
+.wd-cta{width:2.6em;height:.9em;margin-left:auto;border-radius:.2em;background:#0a6fa8}
+.wd-links+.wd-cta{margin-left:.4em}
+.wd-hero{display:grid;grid-template-columns:1fr 1fr;gap:.5em;align-items:center;margin-bottom:.7em}
+.wd-hero h5{margin:0 0 .4em;color:var(--navy);font-size:.85em;font-weight:800;line-height:1.1}
+.wd-hero h5 em{color:#0a87b4}
+.wd-btn{display:block;width:3.6em;height:.9em;margin-top:.4em;border-radius:.2em;background:#0a6fa8}
+.wd-hero-img{display:block;height:5em;overflow:hidden;border-radius:.3em}
+.wd-features{display:grid;grid-template-columns:repeat(3,1fr);gap:.4em;margin-bottom:.7em}
+.wd-features span{display:flex;flex-direction:column;gap:.3em;padding:.5em;border-radius:.3em;background:#f2f6f9;color:#1d3a52;font-size:.4em;font-weight:700}
+.wd-features i{width:1.6em;height:1.6em;border-radius:50%;background:#d5ecf3}
+.wd-more{display:grid;grid-template-columns:1fr 1fr;gap:.5em}
+.wd-more-img{display:block;height:4em;overflow:hidden;border-radius:.3em}
+.wd-s-tablet .wd-hero,.wd-s-phone .wd-hero{grid-template-columns:1fr}
+.wd-s-phone .wd-features{grid-template-columns:1fr}
+.wd-s-phone .wd-hero h5{font-size:.7em}
+
+/* ---------- Hero: devices + floating cards ---------- */
+.wd-l-plant{left:31em;top:12em}
+.wd-plant{display:block;width:6em}
+.wd-l-monitor{left:1.5em;top:1em}
+.wd-monitor{width:21em}
+.wd-monitor .sa-monitor-screen{height:13.5em}
+.wd-l-tablet{left:18.5em;top:9em}
+.wd-tablet{width:9em;height:12em;padding:.45em;border-radius:.9em;background:linear-gradient(150deg,#3a4048,#121519 55%,#2a2f35);box-shadow:0 1.6em 2.2em -1em #0b2b4c66}
+.wd-tablet .wd-site{border-radius:.5em;font-size:.85em}
+.wd-l-phone{left:27.5em;top:11.5em}
+.wd-phone{font-size:.48em}
+.wd-phone .wd-site{font-size:1.5em}
+.wd-chip{width:10.5em}
+.wd-l-c1{left:24.5em;top:0}
+.wd-l-c2{left:24.5em;top:3.4em}
+.wd-l-c3{left:24.5em;top:6.8em}
+
+/* ---------- Deliverables: design book + print + wireframes ---------- */
+.wd-l-wire{left:17em;top:3em}
+.wd-wire{display:grid;gap:.5em;width:10em;padding:.9em;border-radius:.3em;background:#fff;box-shadow:0 1.4em 2em -1em #0b2b4c44;transform:rotate(8deg)}
+.wd-wire-box{display:flex;gap:.5em;align-items:center;padding:.5em;border:.08em dashed #a9bccb;border-radius:.2em}
+.wd-wire-box i{flex:none;width:2.4em;height:1.8em;background:repeating-linear-gradient(45deg,#e1e9ef 0 .2em,#f6f9fb .2em .4em)}
+.wd-wire-box .sa-lines{flex:1}
+.wd-l-print{left:10.5em;top:1em}
+.wd-print{width:12em;height:17em;border-radius:.3em;overflow:hidden;box-shadow:0 1.6em 2.4em -1em #0b2b4c55;transform:rotate(4deg)}
+.wd-l-book{left:0;top:2.5em}
+.wd-book{width:13em;height:18em}
+.wd-book .sa-brand{font-size:.8em;margin-bottom:2.6em}
+.wd-book h4{font-size:1.35em;text-transform:uppercase}
+.wd-book p{margin-top:2.4em;font-size:.6em}

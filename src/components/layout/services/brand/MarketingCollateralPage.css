@@ -1,0 +1,55 @@
+.ss-collateral .ss-hero h1{max-width:11.5em}
+
+/* ---------- Hero: collateral spread ---------- */
+.mc-l-plant{left:29.5em;top:-1.5em}
+.mc-plant{display:block;width:7em}
+.mc-cut{position:relative;display:block;height:6em;overflow:hidden;clip-path:polygon(0 0,100% 0,100% 70%,0 100%)}
+.mc-cut.sm{height:4.2em}
+.mc-rule{display:block;width:2em;height:.2em;margin-top:.6em;background:#0aa5a3}
+.mc-l-brochure{left:6em;top:1em}
+.mc-brochure{width:9.5em;height:13em;padding:0 0 1em;overflow:hidden;border-radius:.2em;background:#fff;box-shadow:0 1.6em 2.4em -1em #0b2b4c55;transform:perspective(900px) rotateY(18deg)}
+.mc-brochure h5{margin:.8em 1em 0;color:var(--navy);font-size:.9em;font-weight:800;line-height:1.1}
+.mc-brochure .mc-rule{margin-left:1.1em}
+.mc-l-trifold{left:16em;top:2.6em}
+.mc-trifold{display:flex;height:9.5em;filter:drop-shadow(0 1.4em 1.6em #0b2b4c44)}
+.mc-trifold span{display:block;width:4.6em;overflow:hidden;background:#fff}
+.mc-trifold span:nth-child(1){padding:.7em .5em;transform:perspective(600px) rotateY(18deg)}
+.mc-trifold span:nth-child(2){transform:perspective(600px) rotateY(-14deg)}
+.mc-trifold span:nth-child(3){transform:perspective(600px) rotateY(14deg)}
+.mc-trifold b{display:block;margin-bottom:.5em;color:var(--navy);font-size:.62em;line-height:1.15}
+.mc-l-mag{left:4em;top:13em}
+.mc-mag{display:flex;width:20em;height:10em;transform:perspective(900px) rotateX(38deg) rotateZ(-10deg);filter:drop-shadow(0 1.6em 1.8em #0b2b4c44)}
+.mc-mag-page{flex:1;padding:.8em;overflow:hidden;background:linear-gradient(90deg,#fff,#f3f6f7)}
+.mc-mag-page h5{margin:.5em 0 0;color:var(--navy);font-size:.75em;font-weight:800;line-height:1.1}
+.mc-turn{background:linear-gradient(90deg,#e6ebed,#fff 18%)}
+.mc-li{display:flex;align-items:center;gap:.4em;margin-top:.35em}
+.mc-li i{flex:none;width:.7em;height:.7em;border-radius:50%;background:#1a6fd0}
+.mc-li .sa-lines{flex:1}
+.mc-mag-img{display:block;height:2.6em;margin-top:.4em;overflow:hidden;border-radius:.2em}
+.mc-l-tablet{left:24.5em;top:9.5em}
+.mc-tablet{width:11em;height:8em;padding:.45em;border-radius:.9em;background:linear-gradient(150deg,#3a4048,#121519 55%,#2a2f35);box-shadow:0 1.6em 2.2em -1em #0b2b4c66;transform:rotate(14deg)}
+.mc-tablet-screen{display:grid;grid-template-columns:1fr 1fr;height:100%;overflow:hidden;border-radius:.5em;background:#fff}
+.mc-tablet-screen b{padding:.7em .6em;color:var(--navy);font-size:.6em;line-height:1.15}
+.mc-tablet-screen span{display:block;clip-path:polygon(25% 0,100% 0,100% 100%,0 100%)}
+
+/* ---------- Deliverables: open magazine + flyers ---------- */
+.mc-l-spread{left:0;top:2em}
+.mc-spread{display:flex;width:22em;height:16em;filter:drop-shadow(0 1.8em 2em #0b2b4c44)}
+.mc-spread-l,.mc-spread-r{position:relative;flex:1;padding:1em;overflow:hidden}
+.mc-spread-l{background:linear-gradient(90deg,#fff,#f2f5f6 90%,#e1e7ea)}
+.mc-spread-r{background:linear-gradient(90deg,#e1e7ea,#f6f8f9 10%,#fff)}
+.mc-spread-img{position:absolute;inset:0 0 50% 0;clip-path:polygon(0 0,100% 0,100% 60%,0 100%)}
+.mc-spread-l h5{position:relative;margin-top:7.5em;color:var(--navy);font-size:.95em;font-weight:800;line-height:1.1}
+.mc-spread-l small{display:block;margin-top:.6em;color:#4b6377;font-size:.48em}
+.mc-spread-r h6{margin:0 0 .5em;color:var(--navy);font-size:.7em;font-weight:800}
+.mc-spread-r .sa-lines{margin-bottom:.9em}
+.mc-step{display:flex;align-items:center;gap:.5em;margin-bottom:.7em;color:#1d3a52;font-size:.55em;font-weight:700}
+.mc-step i{display:grid;place-items:center;width:2.6em;height:2.6em;border-radius:50%;background:#0a8f9c;color:#fff}
+.mc-step svg{width:1.4em;height:1.4em}
+.mc-l-b1{left:22em;top:0}
+.mc-l-b2{left:23.5em;top:12em}
+.mc-flyer{width:11em;padding:.8em;border-radius:.2em;background:#fff;box-shadow:0 1.4em 2em -1em #0b2b4c55;transform:rotate(8deg)}
+.mc-flyer h5{margin:0 0 .5em;color:var(--navy);font-size:.75em;font-weight:800;line-height:1.1}
+.mc-flyer span{display:block;height:5em;overflow:hidden;border-radius:.2em}
+.mc-flyer.alt{transform:rotate(-6deg)}
+.mc-flyer.alt h5{margin:.5em 0 0}

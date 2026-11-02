@@ -1,0 +1,45 @@
+/* ---------- Hero: guidelines book, tablet, brochure ---------- */
+.bg-l-book{left:9em;top:0}
+.bg-spread{display:flex;width:25em;height:15em;transform:perspective(1100px) rotateX(20deg) rotateZ(-8deg);filter:drop-shadow(0 1.8em 2em #0b2b4c44)}
+.bg-page{position:relative;flex:1;padding:1.2em}
+.bg-page:first-child{background:linear-gradient(90deg,#fff 0%,#f6f8f8 88%,#e3e8ea 100%);border-radius:.4em 0 0 .4em}
+.bg-page+.bg-page{background:linear-gradient(90deg,#e3e8ea 0%,#f6f8f8 12%,#fff 100%);border-radius:0 .4em .4em 0}
+.bg-page-mark{display:block;width:4.4em;height:4.4em;margin:1em auto 1em}
+.bg-hex{display:block;width:100%;height:100%}
+.bg-page h5{margin:0 0 .8em;color:var(--navy);font-size:1.15em;font-weight:600;line-height:1.1}
+.bg-page .sa-lines{width:70%}
+.bg-page small{display:block;margin-bottom:.3em;color:var(--navy);font-size:.5em;font-weight:700}
+.bg-usage{display:block;width:3em;height:3em;margin-bottom:.6em;padding:.4em;border:.08em dashed #9fb6c4}
+.bg-dots{display:flex;gap:.3em;margin-bottom:.4em}
+.bg-dots i{width:1.1em;height:1.1em;border-radius:50%}
+.bg-type{padding:0;background:none;box-shadow:none;font-size:.7em}
+.bg-l-brochure{left:25em;top:11em}
+.bg-brochure{position:relative;width:10em;height:12em;overflow:hidden;border-radius:.3em;box-shadow:0 1.4em 2em -1em #0b2b4c66;transform:rotate(-14deg)}
+.bg-geo{position:absolute;inset:0;width:100%;height:100%}
+.bg-brochure span{position:absolute;left:1em;right:1.4em;bottom:2.4em;padding:.4em .5em;background:#ffffffd9;color:#0b2b4c;font-family:'Segoe Print','Comic Sans MS',cursive;font-size:.6em;transform:rotate(30deg)}
+.bg-l-tablet{left:4em;top:12.5em}
+.bg-tablet{width:17em;height:12em;padding:.6em;border-radius:1.2em;background:linear-gradient(150deg,#3a4048,#121519 55%,#2a2f35);box-shadow:0 1.8em 2.6em -1em #0b2b4c66;transform:rotate(-6deg)}
+.bg-tablet-screen{height:100%;padding:.7em;border-radius:.7em;background:#f5f8fb;overflow:hidden}
+.bg-tablet-screen small{display:block;margin-bottom:.35em;color:var(--navy);font-size:.5em;font-weight:800}
+.bg-tpl-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.4em;margin-bottom:.6em}
+.bg-tpl{position:relative;display:block;height:3.6em;overflow:hidden;border-radius:.3em;box-shadow:0 .2em .5em #0b2b4c22}
+.bg-tpl b{position:absolute;left:.4em;top:.3em;color:#0b2b4c;font-size:.45em}
+
+/* ---------- Deliverables: guidelines book, tablet, fold-out ---------- */
+.bg-l-gbook{left:1em;top:.5em}
+.bg-gbook{width:14em;height:19em}
+.bg-gbook .sa-book-cover{padding-top:2.4em}
+.bg-gbook-geo{position:absolute;top:auto;left:auto;right:0;bottom:0;width:62%;height:58%;opacity:.95}
+.bg-gbook h4{position:relative;z-index:2;font-size:1.45em;font-weight:600}
+.bg-gbook p{position:relative;z-index:2;margin-top:1.4em;font-size:.6em}
+.bg-l-tab2{left:15em;top:4em}
+.bg-tablet.lg{width:19em;height:13em;transform:rotate(-2deg)}
+.bg-tab2{display:grid;grid-template-columns:1fr 1.3fr .6fr;gap:.5em}
+.bg-tab2-copy{display:flex;flex-direction:column;gap:.5em;padding-top:.6em}
+.bg-tab2-copy b{color:var(--navy);font-size:.8em;line-height:1.15}
+.bg-tab2-btn{display:block;width:3em;height:.9em;border-radius:.2em;background:#0a6fa8}
+.bg-tab2-img,.bg-tab2-side{overflow:hidden;border-radius:.3em}
+.bg-l-fold{left:12.5em;top:17em}
+.bg-fold{display:grid;grid-template-columns:1fr 1fr 1fr;width:20em;height:7em;overflow:hidden;border-radius:.3em;background:#fff;box-shadow:0 1.4em 2em -1em #0b2b4c55;transform:perspective(800px) rotateX(35deg) rotateZ(-6deg)}
+.bg-fold-text{padding:.8em;color:#0b2b4c;font-family:'Segoe Print','Comic Sans MS',cursive;font-size:.6em}
+.bg-fold-img{display:block;border-left:.1em solid #e3e8ea}

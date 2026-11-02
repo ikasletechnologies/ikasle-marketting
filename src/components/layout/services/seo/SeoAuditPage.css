@@ -1,0 +1,36 @@
+/* ---------- Hero: audit laptop + magnifier ---------- */
+.au-l-plant{left:29em;top:0}
+.au-plant{display:block;width:7.5em}
+.au-l-laptop{left:2.5em;top:2.4em}
+.au-laptop{width:27em;transform:perspective(1200px) rotateY(-12deg) rotateZ(-2deg)}
+.au-laptop .sa-laptop-screen{height:16.5em}
+.au-screen{height:100%;padding:1em 1.1em;background:linear-gradient(160deg,#fafdff,#eaf4fa)}
+.au-screen h5{margin:0 0 .8em;color:var(--navy);font-size:1.05em;font-weight:800}
+.au-cols{display:grid;grid-template-columns:.85fr 1.15fr;gap:.8em}
+.au-cols ul{list-style:none;margin:0;padding:0;display:grid;gap:.45em}
+.au-cols li{display:flex;align-items:center;gap:.5em;padding:.35em .45em;border-radius:.45em;background:#fff;color:#2c4a60;font-size:.6em;font-weight:600;box-shadow:0 .2em .5em #0b2b4c10}
+.au-item-icon{display:grid;place-items:center;width:1.9em;height:1.9em;border-radius:50%;background:#e2f3f6;color:#0a8fb0}
+.au-item-icon svg{width:1.1em;height:1.1em}
+.au-tick{display:grid;place-items:center;width:1.5em;height:1.5em;margin-left:auto;border-radius:50%;background:#0aa5a3;color:#fff}
+.au-tick svg{width:1em;height:1em;stroke-width:3.5}
+.au-right{display:grid;gap:.6em}
+.au-card{padding:.6em .7em;border-radius:.5em;background:#fff;box-shadow:0 .2em .5em #0b2b4c10}
+.au-card small{display:block;margin-bottom:.5em;color:#203b52;font-size:.55em;font-weight:700}
+.au-chart{display:block;width:100%;height:5em}
+.au-bar{display:block;height:.42em;margin-bottom:.4em;border-radius:1em;background:#2f8fe0}
+.au-bar.alt{background:#2ec4b6}
+.au-l-mag{left:22.5em;top:1.4em}
+.au-mag{width:8em;height:8em}
+
+/* ---------- Deliverables: audit book + chip staircase ---------- */
+.au-l-book{left:1em;top:1.5em}
+.au-book .sa-brand{font-size:.85em;margin-bottom:2.4em}
+.au-book h4{text-transform:uppercase;font-size:1.75em;transform:rotate(-8deg);transform-origin:0 50%}
+.au-book .sa-book-rule{transform:rotate(-8deg)}
+.au-l-chip{left:19em}
+.au-l-chip-0{top:0}
+.au-l-chip-1{top:4.6em;left:19.8em}
+.au-l-chip-2{top:9.2em;left:20.6em}
+.au-l-chip-3{top:13.8em;left:21.4em}
+.au-l-chip-4{top:18.4em;left:22.2em}
+.au-chip{width:12.5em}

@@ -1,0 +1,74 @@
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background: var(--bg-canvas);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 320ms ease, visibility 320ms ease;
+}
+
+.page-loader.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.page-loader-card {
+  display: grid;
+  justify-items: center;
+  gap: 15px;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+}
+
+.page-loader-mark {
+  position: relative;
+  display: grid;
+  width: 82px;
+  height: 82px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-md);
+}
+
+.page-loader-mark img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.page-loader-ring {
+  position: absolute;
+  inset: -7px;
+  border: 2px solid var(--color-teal-subtle);
+  border-top-color: var(--color-growth-teal);
+  border-right-color: var(--color-primary);
+  border-radius: 50%;
+  animation: pageLoaderSpin 900ms linear infinite;
+}
+
+.page-loader-label {
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+@keyframes pageLoaderSpin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-loader-ring {
+    animation-duration: 2.4s;
+  }
+}

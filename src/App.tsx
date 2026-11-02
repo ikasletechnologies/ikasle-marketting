@@ -18,7 +18,12 @@ import { SeoPage } from './components/layout/services/seo/SeoPage';
 import { SocialMediaPage } from './components/layout/services/social/SocialMediaPage';
 import { SocialMediaStrategyPage } from './components/layout/services/social/SocialMediaStrategyPage';
 import { ProfileSetupPage } from './components/layout/services/social/ProfileSetupPage';
-import { SocialMediaManagementPage } from './components/layout/services/social/SocialMediaManagementPage';
+import { ContentPlanningPage } from './components/layout/services/social/ContentPlanningPage';
+import { CreativePostsPage } from './components/layout/services/social/CreativePostsPage';
+import { SOCIAL_SECTION_BY_ID, SOCIAL_TEMPLATE_PAGES } from './components/layout/services/social/socialTemplatePages';
+import { SEO_SECTION_BY_ID, SEO_TEMPLATE_PAGES } from './components/layout/services/seo/seoTemplatePages';
+import { BRAND_SECTION_BY_ID, BRAND_TEMPLATE_PAGES } from './components/layout/services/brand/brandTemplatePages';
+import { DIGITAL_RELATED_SECTIONS } from './components/layout/services/digital/digitalRelated';
 import { ServicesCta } from './components/layout/services/ServicesCta';
 import { ServicesListing } from './components/layout/services/ServicesListing';
 import { ServicesHero } from './components/layout/services/ServicesHero';
@@ -37,17 +42,38 @@ import { PrivacyPolicyPage, TermsPage, FaqPage } from './components/layout/legal
 import { JourneySection } from './components/layout/home/JourneySection';
 import { WhyChooseUs } from './components/layout/home/WhyChooseUs';
 import { Footer } from './components/layout/shared/Footer';
+import PageLoader from './components/ui/PageLoader';
 import { pathFromSection, sectionFromPath } from './routes';
 
 export const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>(() => sectionFromPath(window.location.pathname));
+  const [isPageLoading, setIsPageLoading] = useState(true);
+  const loaderTimerRef = useRef<number | null>(null);
   const aboutMainRef = useRef<HTMLElement>(null);
 
+  const startPageTransition = (duration = 520) => {
+    if (loaderTimerRef.current !== null) window.clearTimeout(loaderTimerRef.current);
+    setIsPageLoading(true);
+    loaderTimerRef.current = window.setTimeout(() => {
+      setIsPageLoading(false);
+      loaderTimerRef.current = null;
+    }, duration);
+  };
+  useEffect(() => {
+    const initialTimer = window.setTimeout(() => setIsPageLoading(false), 760);
+    return () => window.clearTimeout(initialTimer);
+  }, []);
   // Keep the address bar in sync, and support the browser's back/forward buttons.
   useEffect(() => {
-    const onPopState = () => setActiveSection(sectionFromPath(window.location.pathname));
+    const onPopState = () => {
+      startPageTransition();
+      setActiveSection(sectionFromPath(window.location.pathname));
+    };
     window.addEventListener('popstate', onPopState);
-    return () => window.removeEventListener('popstate', onPopState);
+    return () => {
+      window.removeEventListener('popstate', onPopState);
+      if (loaderTimerRef.current !== null) window.clearTimeout(loaderTimerRef.current);
+    };
   }, []);
 
   useEffect(() => {
@@ -55,6 +81,7 @@ export const App: React.FC = () => {
   }, [activeSection]);
 
   const openSection = (section: string) => {
+    startPageTransition();
     const path = pathFromSection(section);
     if (window.location.pathname !== path) window.history.pushState({}, '', path);
     setActiveSection(section);
@@ -68,9 +95,12 @@ const isBlogsPage = activeSection === 'Blogs';
 const isCareersPage = activeSection === 'Careers';
   const goHome = () => openSection('Home');
   const goContact = () => openSection('Contact');
+  const openDigitalRelated = (id: string) => openSection(DIGITAL_RELATED_SECTIONS[id] ?? 'Digital Marketing');
+  const DetailTemplatePage = SOCIAL_TEMPLATE_PAGES[activeSection] ?? SEO_TEMPLATE_PAGES[activeSection] ?? BRAND_TEMPLATE_PAGES[activeSection];
 
   return (
     <ClickSpark sparkColor={['#0781b1', '#1aa6b7', '#35d7d0']} shape="line" sparkCount={10} sparkSize={12} sparkRadius={34} duration={550} style={{ height: 'auto' }}>
+    <PageLoader visible={isPageLoading} />
     <div style={{ minHeight: '100vh', backgroundColor: '#ffffff' }}>
       <Header
         activeTab={activeSection}
@@ -84,7 +114,7 @@ const isCareersPage = activeSection === 'Careers';
           onServicesClick={() => openSection('Services')}
           onDigitalClick={() => openSection('Digital Marketing')}
           onContactClick={goContact}
-          onRelatedClick={(id) => openSection(id === 'strategy' ? 'Digital Marketing Strategy' : id === 'google' ? 'Google Search Ads' : id === 'landing' ? 'Landing Pages & CRO' : 'Digital Marketing')}
+          onRelatedClick={openDigitalRelated}
         />
       ) : activeSection === 'Landing Pages & CRO' ? (
         <LandingCroPage
@@ -92,7 +122,7 @@ const isCareersPage = activeSection === 'Careers';
           onServicesClick={() => openSection('Services')}
           onDigitalClick={() => openSection('Digital Marketing')}
           onContactClick={goContact}
-          onRelatedClick={(id) => openSection(id === 'google' ? 'Google Search Ads' : id === 'meta' ? 'Meta Advertising' : 'Digital Marketing')}
+          onRelatedClick={openDigitalRelated}
         />
       ) : activeSection === 'Lead Generation & Nurturing' ? (
         <LeadGenerationPage
@@ -100,7 +130,7 @@ const isCareersPage = activeSection === 'Careers';
           onServicesClick={() => openSection('Services')}
           onDigitalClick={() => openSection('Digital Marketing')}
           onContactClick={goContact}
-          onRelatedClick={(id) => openSection(id === 'meta' ? 'Meta Advertising' : id === 'email' ? 'Email Marketing' : 'Digital Marketing')}
+          onRelatedClick={openDigitalRelated}
         />
       ) : activeSection === 'Email Marketing' ? (
         <EmailMarketingPage
@@ -108,7 +138,7 @@ const isCareersPage = activeSection === 'Careers';
           onServicesClick={() => openSection('Services')}
           onDigitalClick={() => openSection('Digital Marketing')}
           onContactClick={goContact}
-          onRelatedClick={(id) => openSection(id === 'content' ? 'Content Marketing' : 'Digital Marketing')}
+          onRelatedClick={openDigitalRelated}
         />
       ) : activeSection === 'Content Marketing' ? (
         <ContentMarketingPage
@@ -116,7 +146,7 @@ const isCareersPage = activeSection === 'Careers';
           onServicesClick={() => openSection('Services')}
           onDigitalClick={() => openSection('Digital Marketing')}
           onContactClick={goContact}
-          onRelatedClick={(id) => openSection(id === 'strategy' ? 'Digital Marketing Strategy' : 'Digital Marketing')}
+          onRelatedClick={openDigitalRelated}
         />
       ) : activeSection === 'Meta Advertising' ? (
         <MetaAdsPage
@@ -124,7 +154,7 @@ const isCareersPage = activeSection === 'Careers';
           onServicesClick={() => openSection('Services')}
           onDigitalClick={() => openSection('Digital Marketing')}
           onContactClick={goContact}
-          onRelatedClick={() => openSection('Digital Marketing')}
+          onRelatedClick={openDigitalRelated}
         />
       ) : activeSection === 'Display & YouTube Advertising' ? (
         <DisplayYoutubePage
@@ -132,7 +162,7 @@ const isCareersPage = activeSection === 'Careers';
           onServicesClick={() => openSection('Services')}
           onDigitalClick={() => openSection('Digital Marketing')}
           onContactClick={goContact}
-          onRelatedClick={(id) => openSection(id === 'research' ? 'Audience & Competitor Research' : 'Digital Marketing')}
+          onRelatedClick={openDigitalRelated}
         />
       ) : activeSection === 'Google Search Ads' ? (
         <GoogleSearchAdsPage
@@ -140,7 +170,7 @@ const isCareersPage = activeSection === 'Careers';
           onServicesClick={() => openSection('Services')}
           onDigitalClick={() => openSection('Digital Marketing')}
           onContactClick={goContact}
-          onRelatedClick={(id) => openSection(id === 'strategy' ? 'Digital Marketing Strategy' : 'Digital Marketing')}
+          onRelatedClick={openDigitalRelated}
         />
       ) : activeSection === 'Audience & Competitor Research' ? (
         <AudienceResearchPage
@@ -148,7 +178,7 @@ const isCareersPage = activeSection === 'Careers';
           onServicesClick={() => openSection('Services')}
           onDigitalClick={() => openSection('Digital Marketing')}
           onContactClick={goContact}
-          onRelatedClick={(id) => openSection(id === 'strategy' ? 'Digital Marketing Strategy' : 'Digital Marketing')}
+          onRelatedClick={openDigitalRelated}
         />
       ) : activeSection === 'Digital Marketing Strategy' ? (
         <DigitalStrategyPage
@@ -162,12 +192,22 @@ const isCareersPage = activeSection === 'Careers';
           onHomeClick={goHome}
           onServicesClick={() => openSection('Services')}
           onContactClick={goContact}
+          onServiceClick={(id) => {
+            const section = BRAND_SECTION_BY_ID[id];
+            if (section) openSection(section);
+            return Boolean(section);
+          }}
         />
       ) : activeSection === 'SEO & Search Growth' ? (
         <SeoPage
           onHomeClick={goHome}
           onServicesClick={() => openSection('Services')}
           onContactClick={goContact}
+          onServiceClick={(id) => {
+            const section = SEO_SECTION_BY_ID[id];
+            if (section) openSection(section);
+            return Boolean(section);
+          }}
         />
       ) : activeSection === 'Social Media Strategy' ? (
         <SocialMediaStrategyPage
@@ -175,6 +215,24 @@ const isCareersPage = activeSection === 'Careers';
           onServicesClick={() => openSection('Services')}
           onSocialClick={() => openSection('Social Media Marketing')}
           onContactClick={goContact}
+        />
+      ) : activeSection === 'Content Planning' ? (
+        <ContentPlanningPage
+          onHomeClick={goHome}
+          onServicesClick={() => openSection('Services')}
+          onSocialClick={() => openSection('Social Media Marketing')}
+          onContactClick={goContact}
+          onRelatedClick={(target) => openSection(target === 'management' ? 'Social Media Management' : target === 'creative' ? 'Creative Posts & Carousels' : target === 'reels' ? 'Reels & Short-Form Video' : target === 'profile' ? 'Profile Setup & Optimisation' : 'Social Media Strategy')}
+        />
+      ) : DetailTemplatePage ? (
+        <DetailTemplatePage onNavigate={openSection} />
+      ) : activeSection === 'Creative Posts & Carousels' ? (
+        <CreativePostsPage
+          onHomeClick={goHome}
+          onServicesClick={() => openSection('Services')}
+          onSocialClick={() => openSection('Social Media Marketing')}
+          onContactClick={goContact}
+          onRelatedClick={(target) => openSection(target === 'planning' ? 'Content Planning' : target === 'management' ? 'Social Media Management' : 'Meta Advertising')}
         />
       ) : activeSection === 'Social Media Marketing' ? (
         <SocialMediaPage
@@ -184,13 +242,8 @@ const isCareersPage = activeSection === 'Careers';
           onStrategyClick={() => openSection('Social Media Strategy')}
           onProfileClick={() => openSection('Profile Setup & Optimisation')}
           onManagementClick={() => openSection('Social Media Management')}
-        />
-       ) : activeSection === 'Social Media Management' ? (
-        <SocialMediaManagementPage
-          onHomeClick={goHome}
-          onServicesClick={() => openSection('Services')}
-          onSocialClick={() => openSection('Social Media Marketing')}
-          onContactClick={goContact}
+          onPostsClick={() => openSection('Creative Posts & Carousels')}
+          onServiceClick={(id) => openSection(SOCIAL_SECTION_BY_ID[id] ?? 'Contact')}
         />
       ) : activeSection === 'Profile Setup & Optimisation' ? (
         <ProfileSetupPage
@@ -198,6 +251,7 @@ const isCareersPage = activeSection === 'Careers';
           onServicesClick={() => openSection('Services')}
           onSocialClick={() => openSection('Social Media Marketing')}
           onContactClick={goContact}
+          onNavigate={openSection}
         />
       ) : activeSection === 'Digital Marketing' ? (
         <DigitalMarketingPage
@@ -233,8 +287,8 @@ const isCareersPage = activeSection === 'Careers';
           <AboutHero onHomeClick={() => openSection('Home')} />
           <AboutStory />
           <AboutPurpose />
-          <AboutValues />
           <AboutProcess />
+          <AboutValues />
           <AboutCta onCtaClick={() => openSection('Contact')} />
         </main>
       ) : isServicesPage ? (
@@ -251,7 +305,8 @@ const isCareersPage = activeSection === 'Careers';
           />
 
           <ServicesSection
-            onServiceClick={() => openSection('Services')}
+            onServiceClick={(id) => openSection(id === 'digital-marketing' ? 'Digital Marketing' : id === 'social-media' ? 'Social Media Marketing' : id === 'seo-search' ? 'SEO & Search Growth' : id === 'brand-growth' ? 'Brand Growth & Creative' : 'Services')}
+            onNavigate={openSection}
             onViewAllClick={() => openSection('Services')}
           />
 

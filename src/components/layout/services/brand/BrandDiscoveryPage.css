@@ -1,0 +1,42 @@
+/* ---------- Hero: discovery desk ---------- */
+.bd-l-frame{left:9em;top:0}
+.bd-frame{display:grid;grid-template-columns:1fr 1fr;gap:.7em;width:14em;padding:.8em;border-radius:.4em;background:linear-gradient(145deg,#c89f73,#9d7450);box-shadow:0 1.6em 2.4em -1em #0b2b4c55}
+.bd-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4em;height:5.2em;border-radius:.2em;background:#fff;color:#0b2b4c;font-size:.75em;font-weight:600}
+.bd-tile svg{width:1.8em;height:1.8em;color:#0a6fa8}
+.bd-l-swatches{left:24.5em;top:1.2em}
+.bd-swatches{width:7em;transform:rotate(4deg)}
+.bd-l-books{left:28.5em;top:9.5em}
+.bd-books{display:grid;gap:.15em;transform:rotate(14deg)}
+.bd-books span{width:8em;padding:.35em .8em;border-radius:.2em .5em .5em .2em;background:linear-gradient(90deg,#c9dfe8,#e6f1f5);color:#1d3a52;font-size:.65em;font-weight:800;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 .4em .8em -.4em #0b2b4c66}
+.bd-l-report{left:4em;top:10.5em}
+.bd-report{width:12em;height:12.5em;transform:perspective(900px) rotateX(30deg) rotateZ(-14deg)}
+.bd-report .sa-book-cover{padding:1.2em 1em 1em 1.6em}
+.bd-report h4{font-size:1.3em;font-style:italic}
+.bd-report-brand{position:absolute;left:1.6em;bottom:.8em;z-index:2;font-size:.6em}
+.bd-l-type{left:20em;top:12.5em}
+.bd-type{transform:rotate(6deg)}
+.bd-l-mag{left:16.5em;top:15.5em}
+.bd-mag{width:6em;height:6em}
+.bd-l-note{left:29em;top:18em}
+.bd-note{padding:.9em 1.1em;border-radius:.3em;background:#fbf8f2;box-shadow:0 1em 1.6em -.8em #0b2b4c55;color:#3b4f63;font-family:'Segoe Print','Comic Sans MS',cursive;font-size:.8em;line-height:1.4;transform:rotate(-8deg)}
+
+/* ---------- Deliverables: report on desk ---------- */
+.bd-l-desk{left:0;top:0}
+.bd-desk{width:36em;height:25em;border-radius:1em;background:radial-gradient(circle at 70% 30%,#f7f4ee,#e6dfd3);box-shadow:inset 0 0 0 .1em #fff8,0 1.4em 2.4em -1.4em #0b2b4c55}
+.bd-l-sprig{left:1em;top:-1.5em}
+.bd-sprig{display:block;width:7em}
+.bd-l-photos{left:1.5em;top:9em}
+.bd-photos{display:grid;gap:.6em;transform:rotate(-6deg)}
+.bd-photos span{width:6.5em;height:5em;overflow:hidden;border:.35em solid #fff;border-radius:.2em;box-shadow:0 .8em 1.4em -.6em #0b2b4c55}
+.bd-l-big{left:8.5em;top:1.5em}
+.bd-big{width:17em;height:21em;transform:perspective(1200px) rotateY(-10deg) rotateZ(-4deg)}
+.bd-big .sa-brand{font-size:.85em;margin-bottom:3em}
+.bd-big h4{text-transform:uppercase;font-size:1.55em;transform:rotate(-8deg);transform-origin:0 50%}
+.bd-big p{transform:rotate(-8deg);transform-origin:0 50%}
+.bd-big p small{display:block;font-size:.8em}
+.bd-l-sw2{left:27em;top:1em}
+.bd-sw-cards{position:relative;width:7em;height:6em}
+.bd-sw-cards i{position:absolute;width:5em;height:4em;border-radius:.3em;background:linear-gradient(140deg,#5fd4e0,#0aa5a3);box-shadow:0 .8em 1.2em -.6em #0b2b4c66;transform:rotate(12deg)}
+.bd-sw-cards i+i{left:1.6em;top:1.8em;background:linear-gradient(140deg,#1a6fd0,#0b2b4c);transform:rotate(-8deg)}
+.bd-l-note2{left:27.5em;top:12em}
+.bd-note.lg{font-size:.9em}

@@ -1,0 +1,33 @@
+/* ---------- Hero: analytics laptop ---------- */
+.sr-l-laptop{left:3em;top:2em}
+.sr-laptop{width:27em;transform:perspective(1200px) rotateY(-14deg) rotateZ(-2deg)}
+.sr-laptop .sa-laptop-screen{height:16.5em}
+.sr-screen{display:flex;height:100%}
+.sr-screen aside{display:flex;flex-direction:column;gap:.55em;width:7em;padding:.9em .7em;background:linear-gradient(180deg,#0b2b4c,#0a3d63)}
+.sr-screen aside .sa-brand{font-size:.62em;margin-bottom:.9em}
+.sr-screen aside span:not(.sa-brand){padding:.3em .5em;border-radius:1em;color:#bcd6ea;font-size:.5em}
+.sr-screen aside span.on{background:#0aa5a3;color:#fff}
+.sr-main{flex:1;padding:.9em;background:linear-gradient(160deg,#f7fbff,#eaf3f9)}
+.sr-main h5{margin:0 0 .7em;color:var(--navy);font-size:.82em;font-weight:800}
+.sr-cards{display:grid;grid-template-columns:1fr 1fr;gap:.6em}
+.sr-card{padding:.6em;border-radius:.5em;background:#fff;box-shadow:0 .3em .8em #0b2b4c14}
+.sr-card small{display:block;margin-bottom:.4em;color:#203b52;font-size:.5em;font-weight:700}
+.sr-chart{display:block;height:4em}
+.sr-l-mag{left:27.5em;top:12em}
+.sr-mag{width:8em;height:8em}
+
+/* ---------- Deliverables: report book + chart sheets ---------- */
+.sr-l-sheet2{left:19em;top:.2em}
+.sr-l-sheet{left:16em;top:2em}
+.sr-sheet{display:grid;gap:.8em;width:14em;padding:1.2em;border-radius:.4em;background:#fff;box-shadow:0 1.6em 2.4em -1em #0b2b4c40;transform:rotate(6deg)}
+.sr-sheet.back{height:18em;transform:rotate(12deg);opacity:.9}
+.sr-sheet-chart{display:block;height:4.5em}
+.sr-sheet-bars{display:block;height:4em;padding-left:4em}
+.sr-donut{width:4.5em;height:4.5em;margin-top:-4.5em}
+.sr-l-book{left:1em;top:1em}
+.sr-book{width:15.5em;height:21em}
+.sr-book .sa-brand{font-size:.85em;margin-bottom:1.8em}
+.sr-book h4{text-transform:uppercase;font-size:1.55em;transform:rotate(-8deg);transform-origin:0 50%}
+.sr-book .sa-book-rule{transform:rotate(-8deg)}
+.sr-book .sa-wave-cover{height:40%}
+.sr-book .sr-book-foot{position:absolute;left:2.2em;bottom:.8em;z-index:2;margin:0;color:#fff;font-size:.6em;line-height:1.4}

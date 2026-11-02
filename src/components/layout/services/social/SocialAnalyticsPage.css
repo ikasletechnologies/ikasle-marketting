@@ -1,0 +1,40 @@
+/* ---------- Hero: analytics tablet ---------- */
+.ss-analytics .ss-hero-inner{grid-template-columns:1.2fr .8fr}
+.ss-analytics .ss-hero h1{font-size:clamp(32px,3.3vw,42px)}
+@media(max-width:900px){.ss-analytics .ss-hero-inner{grid-template-columns:1fr}}
+.an-l-plant{left:29em;top:-1em}
+.an-plant{display:block;width:8em}
+.an-l-tablet{left:3em;top:1.2em}
+.an-tablet{width:28em;height:19em;padding:.8em;border-radius:1.6em;background:linear-gradient(150deg,#3a4048,#121519 55%,#2a2f35);box-shadow:0 2.4em 3.6em -1em #0b2b4c66;transform:perspective(1200px) rotateY(-16deg) rotateX(6deg) rotateZ(-3deg)}
+.an-screen{display:flex;height:100%;overflow:hidden;border-radius:1em;background:radial-gradient(circle at 80% 0%,#12406a 0%,transparent 50%),linear-gradient(160deg,#0d2440,#081a30)}
+.an-side{display:flex;flex-direction:column;align-items:center;gap:1.1em;width:2.8em;padding:1.1em 0;background:#ffffff08;color:#7fb4d8}
+.an-side svg{width:1em;height:1em}
+.an-grid{flex:1;display:grid;grid-template-columns:1.7fr 1fr;grid-template-rows:1.25fr 1fr;gap:.6em;padding:.8em}
+.an-card{padding:.6em .7em;border-radius:.6em;background:#ffffff0d;border:.08em solid #ffffff12}
+.an-card small{display:block;margin-bottom:.4em;color:#cfe2f2;font-size:.6em;font-weight:700}
+.an-chart svg{display:block;width:100%;height:5.2em}
+.an-donut-card{display:flex;flex-direction:column}
+.an-donut{width:4em;height:4em;margin:0 auto .3em}
+.an-bars{flex:1;display:flex;align-items:flex-end;gap:.3em;min-height:1.6em}
+.an-bar{flex:1;border-radius:.15em .15em 0 0;background:linear-gradient(180deg,#3fe0d0,#1a8fd0)}
+.an-thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:.4em;padding:.5em}
+.an-thumbs span{overflow:hidden;border-radius:.35em}
+.an-audience>div{display:flex;gap:.5em}
+.an-audience span{width:2.4em;height:2.4em;border-radius:50%;overflow:hidden}
+.an-l-pen{left:7em;top:21.6em}
+.an-pen{display:block;width:16em;height:.55em;border-radius:1em;background:linear-gradient(180deg,#fff,#d7dde2);box-shadow:0 .5em 1em #0b2b4c33;transform:rotate(-8deg)}
+
+/* ---------- Deliverables: review book + content analysis ---------- */
+.an-l-book{left:3em;top:1em}
+.an-book{width:15.5em;height:21.5em;transform:perspective(1200px) rotateY(-20deg) rotateZ(-3deg)}
+.an-book h4{margin-top:1.6em;font-size:1.9em}
+.an-book-wave{position:absolute;left:0;right:0;bottom:3em;width:100%;height:7em}
+.an-book-brand{position:absolute;left:2.2em;bottom:1.4em;font-size:.7em}
+.an-l-report{left:16em;top:2.2em}
+.an-report{width:16em;padding:1.2em;border-radius:.4em;background:#fff;box-shadow:0 1.6em 2.4em -1em #0b2b4c40;transform:rotate(6deg)}
+.an-report h5{margin:0 0 .8em;color:var(--navy);font-size:.8em;font-weight:800}
+.an-report-thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:.5em;margin-bottom:1em}
+.an-report-thumbs span{height:4.2em;overflow:hidden;border-radius:.3em}
+.an-report-body{display:grid;grid-template-columns:1fr 1fr;gap:1em;align-items:center}
+.an-hbars{display:grid;gap:.4em}
+.an-hbar{display:block;height:.45em;border-radius:1em;background:linear-gradient(90deg,#0aa5a3,#3fe0d0)}

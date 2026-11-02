@@ -27,11 +27,11 @@ export const ContactHero: React.FC<ContactHeroProps> = ({ onHomeClick }) => {
           </p>
 
           <div className="contact-page-hero__actions" aria-label="Contact options">
-            <a className="contact-page-hero__button contact-page-hero__button--primary" href="tel:+910000000000">
+            <a className="contact-page-hero__button contact-page-hero__button--primary" href="tel:+917845132962">
               <Phone size={21} aria-hidden="true" />
               <span>Call Us</span>
             </a>
-            <a className="contact-page-hero__button contact-page-hero__button--whatsapp" href="https://wa.me/" target="_blank" rel="noreferrer">
+            <a className="contact-page-hero__button contact-page-hero__button--whatsapp" href="https://wa.me/917845132962" target="_blank" rel="noreferrer">
               <MessageCircle size={22} aria-hidden="true" />
               <span>WhatsApp</span>
             </a>

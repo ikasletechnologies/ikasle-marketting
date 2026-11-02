@@ -1,0 +1,42 @@
+/* ---------- Hero: social inbox ---------- */
+.cm-l-inbox{left:5em;top:1.5em}
+.cm-inbox{display:flex;width:19em;height:20em;padding:.7em;border-radius:1.4em;background:linear-gradient(150deg,#ffffffcc,#d4edf3aa);border:.12em solid #ffffffcc;box-shadow:0 2.2em 3.4em -1em #0b5c7e55;backdrop-filter:blur(6px);transform:perspective(1000px) rotateY(-14deg) rotateX(4deg)}
+.cm-side{display:flex;flex-direction:column;align-items:center;gap:1.1em;width:3.4em;padding:1em 0;border-radius:1em;background:linear-gradient(180deg,#0d5a78,#0a7f9c)}
+.cm-side-dots{color:#bfe9f2;font-size:.7em;letter-spacing:.2em}
+.cm-side>span:not(.cm-side-dots){position:relative;display:grid;place-items:center;width:2.2em;height:2.2em;border-radius:.6em;color:#d7f1f6}
+.cm-side>span.active{background:#ffffff26;color:#fff}
+.cm-side svg{width:1.2em;height:1.2em}
+.cm-badge{position:absolute;top:-.3em;right:-.3em;display:grid;place-items:center;width:1.1em;height:1.1em;border-radius:50%;background:#ff6159;color:#fff;font-size:.55em;font-style:normal;font-weight:800}
+.cm-main{flex:1;padding:.6em .2em .4em .8em}
+.cm-main h4{margin:.2em 0 .8em;padding:.5em .8em;border-radius:.6em;background:#0b6f8f;color:#fff;font-size:1em;font-weight:700}
+.cm-row{display:flex;align-items:center;gap:.7em;margin-bottom:.6em;padding:.6em .7em;border-radius:.7em;background:#fff;box-shadow:0 .2em .5em #0b2b4c12}
+.cm-row-av{flex:none;width:2.2em;height:2.2em;border-radius:50%;overflow:hidden}
+.cm-row .sa-lines{flex:1}
+.cm-av{display:block;width:4.6em;height:4.6em;border-radius:50%;overflow:hidden;border:.25em solid #fff;box-shadow:0 1em 1.8em -.4em #0b2b4c55}
+.cm-l-av1{left:23.5em;top:0}
+.cm-l-av2{left:27em;top:7.6em}
+.cm-l-av3{left:24.5em;top:14.6em}
+.cm-bubble{display:flex;align-items:center;gap:.35em;padding:.8em 1em;border-radius:1em 1em 1em .2em;background:#fff;box-shadow:0 1em 1.6em -.6em #0b2b4c44}
+.cm-l-b1{left:28.6em;top:.9em}
+.cm-l-b1 .cm-bubble{width:5.4em}
+.cm-l-b1 .sa-lines{flex:1}
+.cm-l-b1 .sa-lines i{background:#7fc4dc}
+.cm-l-b2{left:31.8em;top:9em}
+.cm-dot{display:block;width:.55em;height:.55em;border-radius:50%;background:#0a87b4}
+.cm-l-group{left:20em;top:18em}
+.cm-group{display:grid;place-items:center;width:4em;height:4em;border-radius:50%;background:linear-gradient(140deg,#1aa0d0,#0a6fa8);color:#fff;border:.25em solid #fff;box-shadow:0 1em 1.8em -.4em #0b2b4c55}
+.cm-group svg{width:1.9em;height:1.9em}
+
+/* ---------- Deliverables: playbook + replies ---------- */
+.cm-l-book{left:1em;top:2em}
+.cm-book .sa-brand{font-size:.85em;margin-bottom:3em}
+.cm-book p{margin-top:2.6em}
+.cm-book-rule2{display:block;width:2em;height:.18em;margin-top:2em;border-radius:1em;background:#0aa5a3}
+.cm-l-reply{left:18.5em}
+.cm-l-reply-0{top:1em}
+.cm-l-reply-1{top:9em;left:18em}
+.cm-l-reply-2{top:17em;left:19em}
+.cm-reply{display:flex;gap:.9em;align-items:flex-start;width:15em;padding:1.1em 1.2em;border-radius:1em;background:linear-gradient(150deg,#fff,#f1f6f8);border:.1em solid #fff;box-shadow:0 1.6em 2.4em -1em #0b2b4c44;transform:rotate(-7deg) skewX(-4deg)}
+.cm-reply-icon{display:grid;place-items:center;flex:none;width:2.3em;height:2.3em;border-radius:50%;background:#e2f1f8;color:#0a6fa8}
+.cm-reply-icon svg{width:1.2em;height:1.2em;fill:#0a6fa8}
+.cm-reply p{color:#2e4a5e;font-size:.82em;line-height:1.45;font-weight:600}

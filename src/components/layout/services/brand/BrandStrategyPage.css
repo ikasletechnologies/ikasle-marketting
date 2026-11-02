@@ -1,0 +1,39 @@
+/* ---------- Hero: strategy board, book, compass ---------- */
+.bs-l-plant{left:7em;top:-1em}
+.bs-plant{display:block;width:6.5em}
+.bs-l-board{left:12em;top:0}
+.bs-board{width:22em;padding:1.1em 1.2em;border-radius:.4em;background:linear-gradient(160deg,#fff,#eef3f6);box-shadow:0 1.6em 2.6em -1em #0b2b4c55;transform:rotate(3deg)}
+.bs-board h5{margin:0 0 .8em;color:var(--navy);font-size:1.1em;font-weight:800;letter-spacing:.04em;text-transform:uppercase;line-height:1.1}
+.bs-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:.5em}
+.bs-tile{display:flex;flex-direction:column;align-items:center;gap:.25em;padding:.7em .3em;border-radius:.4em;background:#fff;box-shadow:0 .3em .7em #0b2b4c18;text-align:center}
+.bs-tile svg{width:1.8em;height:1.8em;color:#0a6fa8}
+.bs-tile b{color:var(--navy);font-size:.62em}
+.bs-tile small{color:#6a8396;font-size:.45em}
+.bs-l-book{left:6em;top:10em}
+.bs-book{width:13em;height:13em;transform:perspective(900px) rotateX(35deg) rotateZ(-18deg)}
+.bs-book .sa-book-cover{padding:1.4em 1.2em 1em 1.8em}
+.bs-book .sa-brand{font-size:.7em;margin-bottom:1.4em}
+.bs-book h4{font-size:1.15em;text-transform:uppercase;letter-spacing:.04em}
+.bs-l-strips{left:22.5em;top:11.5em}
+.bs-strips{display:grid;gap:.4em;transform:rotate(-8deg)}
+.bs-strip{display:block;width:9.5em;padding:.45em .8em;border-radius:.25em;background:#f6f7f5;box-shadow:0 .5em 1em -.5em #0b2b4c55;color:#4b6377;font-size:.6em}
+.bs-strip b{display:block;color:var(--navy);font-size:1.05em;letter-spacing:.06em;text-transform:uppercase}
+.bs-l-compass{left:30.5em;top:10.5em}
+.bs-compass{width:6.4em;height:6.4em}
+
+/* ---------- Deliverables: book + positioning framework ---------- */
+.bs-l-sprig{left:28em;top:-2em}
+.bs-sprig2{display:block;width:8em}
+.bs-l-frame{left:16.5em;top:1.5em}
+.bs-framework{width:18em;padding:1.2em;border-radius:.4em;background:#fff;box-shadow:0 1.6em 2.4em -1em #0b2b4c40;transform:rotate(5deg)}
+.bs-framework h5{margin:0 0 .6em;color:var(--navy);font-size:.8em;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.bs-venn{display:block;width:100%}
+.bs-venn text{fill:#1d3a52;font-size:7.5px;font-weight:600}
+.bs-venn text.c{fill:#06324d;font-weight:800}
+.bs-framework small{display:block;margin-top:.7em;color:var(--navy);font-size:.62em;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.bs-framework p{margin-top:.4em;padding:.6em .8em;border-radius:.3em;background:#e6f1f6;color:#2c4a60;font-size:.68em;font-style:italic}
+.bs-l-book2{left:1em;top:1.5em}
+.bs-book2{width:15em;height:20.5em}
+.bs-book2 .sa-brand{font-size:.85em;margin:3em 0 2em}
+.bs-book2 h4{font-size:1.4em;text-transform:uppercase;letter-spacing:.04em}
+.bs-book2 .bs-book-foot{position:absolute;left:2.2em;bottom:1.4em;z-index:2;margin:0;font-size:.55em;letter-spacing:.12em;text-transform:uppercase}

@@ -1,0 +1,53 @@
+.bx-circles{display:block;width:100%;height:100%}
+
+/* ---------- Hero: connected touchpoints ---------- */
+.bx-l-laptop{left:2em;top:1.5em}
+.bx-laptop{width:20em}
+.bx-laptop .sa-laptop-screen{height:12em}
+.bx-laptop.sm{width:15em}
+.bx-laptop.sm .sa-laptop-screen{height:9em}
+.bx-site{height:100%;padding:.6em .8em;background:#fff}
+.bx-site-nav{display:flex;align-items:center;gap:.5em;margin-bottom:.6em}
+.bx-site-nav .sa-brand{margin-right:auto;font-size:.45em}
+.bx-site-nav i{width:1.4em;height:.3em;border-radius:1em;background:#d0dbe4}
+.bx-site-hero{display:grid;grid-template-columns:1fr 1.1fr;gap:.6em;align-items:center;height:calc(100% - 1.4em)}
+.bx-site-hero b{color:var(--navy);font-size:.8em;line-height:1.15}
+.bx-site-art{position:relative;display:block;height:100%;overflow:hidden;border-radius:.3em}
+.bx-site-img{position:absolute;right:0;bottom:0;width:45%;height:70%}
+.bx-l-box{left:29.5em;top:0}
+.bx-box{position:relative;width:6em;height:11em;padding:.8em;overflow:hidden;border-radius:.2em;background:#fff;box-shadow:0 1.6em 2.4em -1em #0b2b4c55}
+.bx-box .sa-brand{position:relative;z-index:1;font-size:.6em}
+.bx-box .bx-circles{position:absolute;left:0;right:0;bottom:0;height:60%}
+.bx-l-phone{left:22em;top:3.5em}
+.bx-phone{font-size:.62em}
+.bx-phone.sm{font-size:.5em}
+.bx-profile{height:100%;padding:2.4em .7em .7em;background:#fff}
+.bx-avatar{display:grid;place-items:center;width:4.4em;height:4.4em;margin:0 auto .8em;border-radius:50%;background:#0b2b4c;font-size:.9em}
+.bx-avatar .sa-brand{font-size:.4em}
+.bx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.3em}
+.bx-tile{display:block;aspect-ratio:1;overflow:hidden;border-radius:.2em;background:#d5ecf3}
+.bx-tile:nth-child(3n){background:#0b4f6a}
+.bx-l-brochure{left:4em;top:15.5em}
+.bx-brochure{position:relative;width:15em;height:8em;overflow:hidden;border-radius:.3em;background:#fff;box-shadow:0 1.4em 2em -1em #0b2b4c55;transform:perspective(800px) rotateX(40deg) rotateZ(-10deg)}
+.bx-brochure .bx-circles{position:absolute;left:0;top:0;width:45%;height:100%}
+.bx-brochure b{position:absolute;left:52%;top:1.2em;color:var(--navy);font-size:.85em;font-style:italic;line-height:1.1}
+.bx-l-cards{left:24em;top:18em}
+.bx-cards{position:relative;width:8em;height:4em}
+.bx-cards span{position:absolute;display:grid;place-items:center;width:7em;height:3.8em;border-radius:.2em;background:#fff;box-shadow:0 .6em 1em -.5em #0b2b4c66;font-size:.9em}
+.bx-cards span+span{left:.6em;top:-.5em}
+.bx-cards .sa-brand{font-size:.5em}
+
+/* ---------- Deliverables: book + devices + stationery ---------- */
+.bx-l-plant{left:30em;top:5em}
+.bx-plant{display:block;width:6em}
+.bx-l-book{left:0;top:1.5em}
+.bx-book{width:14.5em;height:19.5em}
+.bx-book .sa-brand{font-size:.85em;margin-bottom:3em}
+.bx-book h4{font-size:1.35em;font-weight:600}
+.bx-book-circles{position:absolute;right:-3em;top:0;width:6em;height:100%}
+.bx-book h4{position:relative;z-index:2;max-width:7.5em}
+.bx-l-laptop2{left:16em;top:2em}
+.bx-l-phone2{left:28em;top:6em}
+.bx-l-stack{left:18em;top:15em}
+.bx-stack{display:grid;place-items:center;width:10em;height:5em;border-radius:.2em;background:#fff;box-shadow:0 .25em 0 #e6edf0,0 .5em 0 #dce5e9,0 .75em 0 #d0dbe0,0 1.6em 2em -1em #0b2b4c55;transform:perspective(800px) rotateX(40deg) rotateZ(-6deg)}
+.bx-stack .sa-brand{font-size:.7em}

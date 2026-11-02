@@ -1,0 +1,47 @@
+/* ---------- Hero: creator, ring light, tripod phone ---------- */
+.in-l-ring{left:8.5em;top:0}
+.in-ring{display:block;width:16em;height:16em;border-radius:50%;border:1.1em solid #fdfdfb;box-shadow:0 0 2.6em .8em #ffffffaa,inset 0 0 1.4em .3em #ffffff88,0 1.5em 3em -1em #0b2b4c33;background:radial-gradient(circle,#e9f4f6 0%,#dceef2 70%)}
+.in-l-creator{left:9.5em;top:3.4em}
+.in-creator{width:14em;height:16em}
+.in-l-desk{left:6.5em;top:17.4em}
+.in-desk{display:block;width:16em}
+.in-l-tripod{left:2em;top:6em}
+.in-tripod{display:flex;flex-direction:column;align-items:center}
+.in-phone{font-size:.62em}
+.in-rec{position:absolute;top:2.2em;right:1.2em;display:flex;align-items:center;gap:.4em;padding:.25em .6em;border-radius:1em;background:#0b2b4c99;color:#fff;font-size:.8em;font-weight:700}
+.in-rec i{width:.7em;height:.7em;border-radius:50%;background:#ff4d4d}
+.in-legs{display:block;width:6em;height:6em;margin-top:-.2em}
+.in-card{padding:.9em 1em;border-radius:.9em;background:#ffffffee;box-shadow:0 1.6em 2.6em -1em #0b2b4c44;backdrop-filter:blur(6px)}
+.in-card h5{display:flex;align-items:center;gap:.4em;margin:0 0 .6em;color:var(--navy);font-size:.82em;font-weight:800}
+.in-card h5 svg{width:1.3em;height:1.3em;color:#1a7fc0}
+.in-l-brief{left:25.5em;top:0}
+.in-brief{width:10.5em}
+.in-brief ul{list-style:none;margin:0;padding:0;display:grid;gap:.45em}
+.in-brief li{display:flex;align-items:center;gap:.5em;color:#3b5163;font-size:.66em}
+.in-tick{display:grid;place-items:center;width:1.5em;height:1.5em;border-radius:50%;background:#0aa5a3;color:#fff}
+.in-tick svg{width:1em;height:1em;stroke-width:3.5}
+.in-l-concept{left:24em;top:11.2em}
+.in-concept{width:11.5em}
+.in-concept-img{position:relative;display:block;height:5.4em;margin-bottom:.6em;overflow:hidden;border-radius:.4em}
+.in-bar{display:block;height:.3em;margin-bottom:.45em;border-radius:1em;background:#dbe7ec;overflow:hidden}
+.in-bar i{display:block;height:100%;border-radius:1em;background:#0aa5a3}
+.in-play{position:absolute;top:50%;left:50%;display:grid;place-items:center;width:2.2em;height:2.2em;margin:-1.1em 0 0 -1.1em;border-radius:50%;background:#0b2b4caa;color:#fff}
+.in-play svg{width:1em;height:1em;fill:#fff;margin-left:.1em}
+.in-play.sm{width:1.5em;height:1.5em;margin:-.75em 0 0 -.75em}
+.in-play.sm svg{width:.7em;height:.7em}
+
+/* ---------- Deliverables: brief book + storyboard + sample ---------- */
+.in-l-book{left:1.5em;top:1.5em}
+.in-book .sa-brand{font-size:.85em;margin-bottom:1.6em}
+.in-book p{font-size:.7em}
+.in-book-img{position:absolute;left:1.4em;right:1em;bottom:1.4em;height:8.5em;overflow:hidden;border-radius:.3em}
+.in-sheet{padding:1em;border-radius:.4em;background:#fff;box-shadow:0 1.6em 2.4em -1em #0b2b4c40}
+.in-sheet h5{margin:0 0 .7em;color:var(--navy);font-size:.8em;font-weight:800}
+.in-l-board{left:16.5em;top:.4em}
+.in-board{width:13em;transform:rotate(7deg)}
+.in-board-row{display:flex;gap:.6em;align-items:center;margin-bottom:.6em}
+.in-board-row .sa-lines{flex:1}
+.in-frame{position:relative;flex:none;width:4.6em;height:3em;overflow:hidden;border-radius:.25em}
+.in-l-sample{left:17.5em;top:13.4em}
+.in-sample{width:13em;transform:rotate(-4deg)}
+.in-sample-img{position:relative;display:block;height:6.6em;overflow:hidden;border-radius:.3em}

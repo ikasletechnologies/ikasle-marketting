@@ -40,6 +40,9 @@ export interface SocialMediaPageProps {
   onProfileClick?: () => void;
 
   onManagementClick?: () => void;
+  onPostsClick?: () => void;
+  /** Opens the detail page for a service card id; used when no specific handler is set. */
+  onServiceClick?: (id: string) => void;
 }
 
 export const SocialMediaPage: React.FC<SocialMediaPageProps> = ({
@@ -49,6 +52,8 @@ export const SocialMediaPage: React.FC<SocialMediaPageProps> = ({
   onStrategyClick,
   onProfileClick,
   onManagementClick,
+  onPostsClick,
+  onServiceClick,
 }) => {
   const root = useRef<HTMLElement>(null);
 
@@ -221,7 +226,7 @@ export const SocialMediaPage: React.FC<SocialMediaPageProps> = ({
                 <button
                   type="button"
                   className="sm-card-link"
-                  onClick={service.id === 'strategy' && onStrategyClick ? onStrategyClick : service.id === 'profile' && onProfileClick ? onProfileClick : service.id === 'management' && onManagementClick ? onManagementClick : onContactClick}
+                  onClick={service.id === 'strategy' && onStrategyClick ? onStrategyClick : service.id === 'profile' && onProfileClick ? onProfileClick : service.id === 'management' && onManagementClick ? onManagementClick : service.id === 'posts' && onPostsClick ? onPostsClick : onServiceClick ? () => onServiceClick(service.id) : onContactClick}
                 >
                   <span>View Service</span>
                   <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />

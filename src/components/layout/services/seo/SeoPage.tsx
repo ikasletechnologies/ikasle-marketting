@@ -49,9 +49,11 @@ export interface SeoPageProps {
   onHomeClick?: () => void;
   onServicesClick?: () => void;
   onContactClick?: () => void;
+  /** Opens the detail page for a service card id; return false to fall back to contact. */
+  onServiceClick?: (id: string) => boolean;
 }
 
-export const SeoPage: React.FC<SeoPageProps> = ({ onHomeClick, onServicesClick, onContactClick }) => {
+export const SeoPage: React.FC<SeoPageProps> = ({ onHomeClick, onServicesClick, onContactClick, onServiceClick }) => {
   const root = useRef<HTMLElement>(null);
 
   useGSAP(() => {
@@ -216,7 +218,7 @@ export const SeoPage: React.FC<SeoPageProps> = ({ onHomeClick, onServicesClick, 
                     <ul className="seo-tags" aria-label={`${title} includes`}>
                       {tags.map((tag) => <li className="seo-tag" key={tag}>{tag}</li>)}
                     </ul>
-                    <button type="button" className="seo-card-link" onClick={onContactClick}>
+                    <button type="button" className="seo-card-link" onClick={() => { if (!onServiceClick?.(id)) onContactClick?.(); }}>
                       <span>View Service</span>
                       <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />
                     </button>

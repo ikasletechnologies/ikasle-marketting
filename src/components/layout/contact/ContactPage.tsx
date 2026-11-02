@@ -1,24 +1,24 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { ArrowRight, Check, ChevronDown, Mail, MapPin, Phone } from 'lucide-react';
-import contactArtwork from '../../../assets/hero.png';
-import Crosshair from '../../effects/Crosshair';
 import ContactHero from './ContactHero';
+import CommunicationArtwork from './CommunicationArtwork';
+import { sendContactForm } from '../../../services/contactService';
 import './ContactPage.css';
 
 const CONTACT_ITEMS = [
   {
     title: 'Email Us',
-    detail: 'Your business email',
+    detail: 'ikaslemarketing@gmail.com',
     icon: Mail,
   },
   {
     title: 'Call Us',
-    detail: 'Your contact number',
+    detail: '+91 78451 32962',
     icon: Phone,
   },
   {
     title: 'Visit Us',
-    detail: 'Your office address',
+    detail: '1639/A, 2nd Floor, Hopes, Coimbatore, India-641004',
     icon: MapPin,
   },
 ];
@@ -29,27 +29,40 @@ interface ContactPageProps {
 
 export const ContactPage: React.FC<ContactPageProps> = ({ onHomeClick }) => {
   const [submitted, setSubmitted] = useState(false);
-  const contactRef = useRef<HTMLElement>(null);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    setIsSubmitting(true);
+    setSubmitted(false);
+    setSubmitError('');
+
+    try {
+      await sendContactForm({
+        fullName: String(formData.get('fullName') || ''),
+        email: String(formData.get('email') || ''),
+        phone: String(formData.get('phone') || ''),
+        company: String(formData.get('company') || ''),
+        service: String(formData.get('service') || ''),
+        budget: String(formData.get('budget') || ''),
+        message: String(formData.get('message') || ''),
+      });
+      setSubmitted(true);
+      form.reset();
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : 'We could not send your enquiry. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
-    <main ref={contactRef} className="contact-page" id="contact">
-      <Crosshair
-        containerRef={contactRef}
-        color="#00a99d"
-        thickness={0.8}
-        opacity={0.58}
-        lineStyle="solid"
-        gap={9}
-        fade={0.72}
-        smoothing={0.22}
-        showCoordinates={false}
-        targetEffect="lock"
-        targetSelector="button, a, input, select, textarea, .contact-method"
-        clickPulse
-        hideCursor={false}
-        blendMode="normal"
-        className="contact-crosshair"
-      />
+    <main className="contact-page" id="contact">
       <ContactHero onHomeClick={onHomeClick} />
       <section className="contact-body">
         <div className="contact-container">
@@ -62,7 +75,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onHomeClick }) => {
                 </h2>
                 <p className="contact-details-copy">
                   Whether you need a stronger brand, better visibility or your next campaign,
-                  letÃ¢â‚¬â„¢s talk.
+                  let's talk.
                 </p>
 
                 <div className="contact-methods">
@@ -82,34 +95,32 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onHomeClick }) => {
 
               <div className="contact-artwork-wrap" aria-hidden="true">
                 <div className="contact-artwork-glow" />
-                <img src={contactArtwork} alt="" className="contact-artwork" />
+                <CommunicationArtwork />
               </div>
             </aside>
 
             <form
               id="contact-form"
               className="contact-form-card"
-              onSubmit={(event) => {
-                event.preventDefault();
-                setSubmitted(true);
-              }}
+              onSubmit={handleSubmit}
+
             >
               <h2>Tell us what you have in mind.</h2>
 
               <div className="contact-form-grid">
                 <label className="contact-field">
                   <span>Full Name *</span>
-                  <input name="fullName" type="text" placeholder="Your name" required />
+                  <input name="fullName" type="text" placeholder="Your name" required minLength={2} maxLength={120} pattern="[A-Za-z][A-Za-z .'-]{1,119}" title="Please enter a valid name using letters and spaces." />
                 </label>
 
                 <label className="contact-field">
                   <span>Work Email *</span>
-                  <input name="email" type="email" placeholder="you@company.com" required />
+                  <input name="email" type="email" placeholder="you@company.com" required maxLength={254} />
                 </label>
 
                 <label className="contact-field">
-                  <span>Phone Number</span>
-                  <input name="phone" type="tel" placeholder="Your phone number" />
+                  <span>Phone Number *</span>
+                  <input name="phone" type="tel" inputMode="tel" placeholder="Your phone number" required maxLength={14} pattern="(?:\+91[\s-]?)?[6-9][0-9]{9}" title="Enter a valid 10-digit Indian phone number." />
                 </label>
 
                 <label className="contact-field">
@@ -132,14 +143,14 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onHomeClick }) => {
                 </label>
 
                 <label className="contact-field contact-field--wide">
-                  <span>Project Budget</span>
+                  <span>Project Budget *</span>
                   <span className="contact-select-wrap">
-                    <select name="budget" defaultValue="">
+                    <select name="budget" defaultValue="" required>
                       <option value="" disabled>Select a budget range</option>
-                      <option>Ã¢â€šÂ¹25,000 Ã¢â‚¬â€œ Ã¢â€šÂ¹50,000</option>
-                      <option>Ã¢â€šÂ¹50,000 Ã¢â‚¬â€œ Ã¢â€šÂ¹1,00,000</option>
-                      <option>Ã¢â€šÂ¹1,00,000 Ã¢â‚¬â€œ Ã¢â€šÂ¹2,50,000</option>
-                      <option>Ã¢â€šÂ¹2,50,000+</option>
+                      <option>&#8377;25,000 - &#8377;50,000</option>
+                      <option>&#8377;50,000 - &#8377;1,00,000</option>
+                      <option>&#8377;1,00,000 - &#8377;2,50,000</option>
+                      <option>&#8377;2,50,000+</option>
                     </select>
                     <ChevronDown size={20} aria-hidden="true" />
                   </span>
@@ -166,13 +177,15 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onHomeClick }) => {
                 </span>
               </label>
 
-              <button type="submit" className="contact-submit">
-                <span>{submitted ? 'Enquiry Sent' : 'Send Enquiry'}</span>
+              <button type="submit" className="contact-submit" disabled={isSubmitting}>
+                <span>{submitted ? 'Enquiry Sent' : isSubmitting ? 'Sending...' : 'Send Enquiry'}</span>
                 <ArrowRight size={20} className="contact-submit-arrow" />
               </button>
 
+              <p className="contact-error" role="alert" aria-live="polite">{submitError}</p>
+
               <p className={'contact-success' + (submitted ? ' is-visible' : '')} role="status">
-                Thanks Ã¢â‚¬â€ weÃ¢â‚¬â„¢ll get back to you shortly.
+                Thanks - we'll get back to you shortly.
               </p>
             </form>
           </div>

@@ -1,0 +1,56 @@
+.hand{font-family:'Segoe Print','Comic Sans MS',cursive}
+
+/* ---------- Hero: campaign moodboard ---------- */
+.cc-wanderer{position:relative;display:block;width:100%;height:100%}
+.cc-figure{position:absolute;left:42%;bottom:12%;width:12%;height:auto}
+.cc-card{padding:.7em;border-radius:.2em;background:#fbfaf7;box-shadow:0 1.2em 1.8em -1em #0b2b4c55}
+.cc-l-big{left:9em;top:0}
+.cc-big{width:8em}
+.cc-big b{display:block;margin-bottom:.4em;color:#0b2b4c;font-size:1em}
+.cc-big .cc-wanderer{height:9em}
+.cc-l-story{left:17.5em;top:.6em}
+.cc-story{width:7em;height:8em}
+.cc-story b{display:block;color:#0b2b4c;font-size:1em;font-weight:500;line-height:1.1}
+.cc-rule{display:block;width:2em;height:.15em;margin:.5em 0;background:#0b2b4c}
+.cc-l-video{left:25em;top:.2em}
+.cc-video{position:relative;width:11em;height:9.5em;padding:0;overflow:hidden}
+.cc-video b{position:absolute;left:.6em;top:1em;color:#fff;font-size:.85em;font-weight:500;line-height:1.1;text-shadow:0 .1em .4em #0006}
+.cc-play{position:absolute;right:.8em;bottom:.8em;display:grid;place-items:center;width:2.4em;height:2.4em;border-radius:50%;background:#ffffffcc;color:#0b2b4c}
+.cc-play svg{width:1em;height:1em;fill:#0b2b4c;margin-left:.1em}
+.cc-play.sm{width:1.8em;height:1.8em;right:50%;bottom:22%;margin-right:-.9em}
+.cc-l-swatch{left:25.5em;top:10.5em}
+.cc-swatch{display:flex;gap:.2em}
+.cc-swatch i{width:1.6em;height:3.2em;border-radius:.15em}
+.cc-l-assets{left:31em;top:10.5em}
+.cc-assets{color:#0b2b4c;font-size:.8em;transform:rotate(6deg)}
+.cc-l-laptop{left:10em;top:11em}
+.cc-laptop{width:17em}
+.cc-laptop .sa-laptop-screen{height:10em}
+.cc-slides{position:relative;height:100%}
+.cc-slide{position:absolute;inset:0;display:block;opacity:0}
+.cc-slide:first-child{opacity:1}
+.cc-slide b{position:absolute;left:.8em;top:1em;color:#fff;font-size:.95em;font-weight:500;line-height:1.1;text-shadow:0 .1em .4em #0006}
+
+/* ---------- Deliverables: campaign book + storyboard + phone ---------- */
+.cc-l-board{left:13em;top:0}
+.cc-board{width:16em;padding:1em;border-radius:.3em;background:#fff;box-shadow:0 1.4em 2em -1em #0b2b4c44;transform:rotate(-3deg)}
+.cc-board h5{margin:0 0 .6em;color:var(--navy);font-size:.75em;font-weight:800}
+.cc-frames{display:grid;grid-template-columns:repeat(4,1fr);gap:.4em}
+.cc-frame i{display:block;height:3em;margin-bottom:.3em;border:.08em solid #9aaab5;border-radius:.15em;background:repeating-linear-gradient(135deg,#f6f8f9 0 .3em,#eef2f4 .3em .6em)}
+.cc-l-print{left:15em;top:9.5em}
+.cc-print{position:relative;width:11em;height:9em;overflow:hidden;border-radius:.2em;box-shadow:0 1.4em 2em -1em #0b2b4c55;transform:rotate(-6deg)}
+.cc-print b{position:absolute;left:.7em;top:1em;color:#fff;font-size:.95em;font-weight:600;line-height:1.1;text-shadow:0 .1em .4em #0006}
+.cc-l-phone{left:25.5em;top:8em}
+.cc-phone{font-size:.72em;transform:rotate(6deg)}
+.cc-phone-text{position:absolute;left:1em;top:2.6em;color:#fff;font-size:1em;line-height:1.1;text-shadow:0 .1em .4em #0006}
+.cc-l-book{left:0;top:3em}
+.cc-book{width:14em;height:19em}
+.cc-book .sa-book-cover{background:linear-gradient(150deg,#14627a,#0b4058 70%,#082f42)}
+.cc-book h4{margin-top:2.6em;font-size:1.3em;text-transform:uppercase;letter-spacing:.04em}
+.cc-book p{margin-top:1.4em;font-size:.6em}
+.cc-book-brand{position:absolute;left:2.2em;bottom:1.4em;z-index:2;font-size:.7em}
+
+/* ---------- Related thumbnails ---------- */
+.cc-thumb-type{font-size:.42em}
+.cc-thumb-book{width:9em;height:12em;font-size:1em}
+.cc-thumb-book h4{font-size:1.4em;margin-top:1em}

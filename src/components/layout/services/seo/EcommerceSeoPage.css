@@ -1,0 +1,40 @@
+/* ---------- Hero: store monitor ---------- */
+.ec-l-monitor{left:8.5em;top:.6em}
+.ec-monitor{width:25em}
+.ec-monitor .sa-monitor-screen{height:15.5em}
+.ec-store{height:100%;padding:.8em 1em;background:#fbfcfd}
+.ec-nav{display:flex;align-items:center;gap:1em;margin-bottom:.8em;padding-bottom:.5em;border-bottom:.08em solid #e3eaef}
+.ec-nav b{margin-right:auto;color:var(--navy);font-size:.7em}
+.ec-nav span{color:#6a8396;font-size:.5em}
+.ec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.6em}
+.ec-product{display:grid;place-items:center;height:5.2em;border-radius:.5em;background:#f0f4f6;color:#30475b}
+.ec-product svg{width:2.2em;height:2.2em;stroke-width:1.6}
+.ec-chip{flex-wrap:wrap;width:9.5em;white-space:normal;align-items:flex-start}
+.ec-chip .sa-chip-label{flex:1}
+.ec-chip .sa-lines{width:100%;margin-top:.5em}
+.ec-l-c1{left:3.5em;top:2em}
+.ec-l-c2{left:3.5em;top:9.5em}
+.ec-l-c3{left:28em;top:7em}
+.ec-l-bag{left:29.5em;top:16em}
+.ec-bag{display:block;width:5.4em;height:6.3em;filter:drop-shadow(0 1em 1.2em #0b2b4c44)}
+.ec-l-mag{left:24.5em;top:17.5em}
+.ec-mag{width:6em;height:6em}
+
+/* ---------- Deliverables: store report + recommendations ---------- */
+.ec-l-book{left:1em;top:2em}
+.ec-book .sa-brand{font-size:.85em;margin-bottom:2em}
+.ec-book h4{text-transform:uppercase;font-size:1.45em;transform:rotate(-8deg);transform-origin:0 50%}
+.ec-book h4 span{text-transform:none}
+.ec-book p{max-width:11em;transform:rotate(-8deg);transform-origin:0 50%}
+.ec-book-shapes{position:absolute;left:0;right:0;bottom:0;width:100%;height:42%}
+.ec-rec{width:14em;padding:1em;border-radius:.7em;background:#fff;box-shadow:0 1.6em 2.4em -1em #0b2b4c44}
+.ec-rec h5{margin:0 0 .7em;color:var(--navy);font-size:.72em;font-weight:800}
+.ec-rec-row{display:flex;gap:.7em;align-items:center}
+.ec-rec-row .ec-product{flex:none;width:5em;height:4em}
+.ec-rec-row .sa-lines{flex:1}
+.ec-rec-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:.5em;margin-bottom:.7em}
+.ec-rec-tiles .ec-product{height:4em}
+.ec-l-r1{left:19.5em;top:1.5em}
+.ec-l-r1 .ec-rec{transform:rotate(3deg)}
+.ec-l-r2{left:20em;top:11.5em}
+.ec-l-r2 .ec-rec{transform:rotate(-2deg)}

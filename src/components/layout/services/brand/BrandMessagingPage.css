@@ -1,0 +1,52 @@
+/* ---------- Hero: brand voice monitor ---------- */
+.bm-l-monitor{left:9.5em;top:0}
+.bm-monitor{width:22em}
+.bm-monitor .sa-monitor-screen{height:14em}
+.bm-screen{display:flex;height:100%;background:linear-gradient(160deg,#fbfdff,#eaf3f8)}
+.bm-guide{flex:1;padding:1em 1.2em}
+.bm-brand{display:block;font-size:.55em;margin-bottom:1em}
+.bm-guide h5{margin:0 0 .4em;color:var(--navy);font-size:1.2em;font-weight:800;line-height:1.05}
+.bm-guide small{display:block;margin-bottom:.8em;color:#4b6377;font-size:.55em}
+.bm-guide .sa-lines{width:55%}
+.bm-side{width:4.6em;padding:1em .6em;background:#fff;color:#2c4a60;font-size:.55em;font-weight:700;line-height:1.35}
+.bm-bubble{position:relative;display:inline-flex;align-items:center;gap:.5em;padding:.65em 1.2em;border-radius:.6em;color:#fff;font-size:.9em;font-weight:700;box-shadow:0 1em 1.6em -.8em #0b2b4c88}
+.bm-bubble:after{content:"";position:absolute;left:1em;bottom:-.5em;border:.3em solid transparent;border-top-color:inherit}
+.bm-bubble svg{width:1.2em;height:1.2em}
+.bm-bubble.blue{background:linear-gradient(140deg,#1a8fd0,#0a5f96);border-color:#0a5f96}
+.bm-bubble.teal{background:linear-gradient(140deg,#14b3ad,#0a8f9c);border-color:#0a8f9c}
+.bm-l-b0{left:19em;top:1.6em}
+.bm-l-b1{left:19.6em;top:5.2em}
+.bm-l-b2{left:20.2em;top:8.8em}
+.bm-l-books{left:4em;top:12em}
+.bm-books{display:grid;gap:.12em;transform:rotate(-4deg)}
+.bm-books span{width:11.5em;padding:.4em .9em;border-radius:.2em .5em .5em .2em;background:linear-gradient(90deg,#1d3d63,#2c5a86);color:#dbe9f6;font-size:.62em;font-weight:700;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 .4em .8em -.4em #0b2b4c88}
+.bm-books span:nth-child(2n){background:linear-gradient(90deg,#e6edf2,#f6f9fb);color:#2c4a60}
+.bm-l-mug{left:31em;top:11em}
+.bm-mug{width:5.6em;height:5.9em;filter:drop-shadow(0 1em 1.2em #0b2b4c44)}
+.bm-l-card{left:13.5em;top:18.2em}
+.bm-hand,.bm-card{padding:.9em 1.2em;border-radius:.3em;background:#fbfbf8;box-shadow:0 1em 1.6em -.8em #0b2b4c55;color:#2c4a60;font-size:.85em;line-height:1.35}
+.bm-hand{font-family:'Segoe Print','Comic Sans MS',cursive;transform:rotate(-8deg)}
+.bm-l-type{left:22em;top:17.5em}
+.bm-type{transform:rotate(-6deg)}
+
+/* ---------- Deliverables: messaging book + cards ---------- */
+.bm-l-sprig{left:28em;top:-2em}
+.bm-sprig{display:block;width:8em}
+.bm-l-book{left:1em;top:1.5em}
+.bm-book{width:15em;height:20.5em}
+.bm-book .sa-brand{font-size:.8em;margin-bottom:2.6em}
+.bm-book h4{font-size:1.6em;text-transform:uppercase}
+.bm-book .bm-book-foot{position:absolute;left:2.2em;bottom:1.4em;z-index:2;margin:0;font-size:.6em}
+.bm-book-circles{position:absolute;right:0;bottom:0;width:9em;height:9em}
+.bm-card{font-weight:700;font-size:1em}
+.bm-card.hand{font-family:'Segoe Print','Comic Sans MS',cursive;font-weight:700;color:#0b2b4c}
+.bm-l-c1{left:18.5em;top:1em}
+.bm-l-c1 .bm-card{transform:rotate(-4deg)}
+.bm-l-c2{left:27em;top:3.5em}
+.bm-l-c2 .bm-card{transform:rotate(8deg)}
+.bm-l-c3{left:19.5em;top:11.5em}
+.bm-type2{font-size:1.15em;transform:rotate(6deg)}
+.bm-l-c4{left:29em;top:16em}
+.bm-dots{display:flex;gap:.4em;padding:1em;border-radius:.4em;background:#fff;box-shadow:0 1em 1.6em -.8em #0b2b4c55;transform:rotate(-6deg)}
+.bm-dots i{width:1.8em;height:1.8em;border-radius:50%;background:#0b2b4c}
+.bm-dots i+i{background:#0aa5a3}

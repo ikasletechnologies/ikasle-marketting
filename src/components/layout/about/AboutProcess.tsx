@@ -1,60 +1,95 @@
-import React, { useRef } from 'react';
-import { ClipboardList, Pencil, Search, Settings } from 'lucide-react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
+import React from 'react';
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Gauge,
+  Handshake,
+  Layers3,
+  Palette,
+  Sparkles,
+  TrendingUp,
+} from 'lucide-react';
 import './AboutProcess.css';
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
-
-const steps = [
-  { title: 'Discover', copy: 'Understand your goals', icon: Search },
-  { title: 'Plan', copy: 'Build the direction', icon: ClipboardList },
-  { title: 'Create', copy: 'Bring ideas to life', icon: Pencil },
-  { title: 'Refine', copy: 'Review and improve', icon: Settings },
+const milestones = [
+  {
+    year: '2020',
+    title: 'The Spark',
+    copy: 'IKASLE begins with a clear belief: ambitious brands deserve thoughtful digital direction.',
+    icon: Sparkles,
+  },
+  {
+    year: '2021',
+    title: 'First Momentum',
+    copy: 'Our first partnerships turn strategy into measurable campaigns and lasting working relationships.',
+    icon: TrendingUp,
+  },
+  {
+    year: '2022',
+    title: 'Stronger Systems',
+    copy: 'We bring social, SEO and brand thinking together so every channel works toward one goal.',
+    icon: Layers3,
+    featured: true,
+  },
+  {
+    year: '2023',
+    title: 'Creative Reach',
+    copy: 'New ideas, richer content and sharper storytelling help more brands find their audience.',
+    icon: Palette,
+  },
+  {
+    year: '2024',
+    title: 'Better Partnerships',
+    copy: 'We grow through collaboration, building a more connected team around every client challenge.',
+    icon: Handshake,
+  },
+  {
+    year: '2025',
+    title: 'Smarter Growth',
+    copy: 'Performance, insight and creativity meet in a more focused approach to sustainable growth.',
+    icon: Gauge,
+  },
+  {
+    year: '2026',
+    title: 'The Next Chapter',
+    copy: 'Seven years in, we keep moving forward with the same curiosity and a bigger view of what is possible.',
+    icon: ArrowUpRight,
+  },
 ];
 
 export const AboutProcess: React.FC = () => {
-  const root = useRef<HTMLElement>(null);
-
-  // Scroll-scrubbed timeline: the connector line draws and lights each step as it passes.
-  useGSAP(() => {
-    const mm = gsap.matchMedia();
-    mm.add('(prefers-reduced-motion: no-preference)', () => {
-      const items = gsap.utils.toArray<HTMLElement>('.about-process-step');
-      const tl = gsap.timeline({
-        defaults: { ease: 'none' },
-        scrollTrigger: { trigger: '.about-process-steps', start: 'top 80%', end: 'bottom 55%', scrub: 0.6 },
-      });
-
-      tl.fromTo('.about-process-steps', { '--line': 0 }, { '--line': 1, duration: items.length - 1 }, 0);
-      items.forEach((step, i) => {
-        const icon = step.querySelector('.about-process-icon');
-        tl.from(step, { opacity: 0.25, y: 24, duration: 0.6, ease: 'power2.out' }, i)
-          .fromTo(icon, { scale: 0.7, backgroundColor: '#f9fdfd', color: '#0781b1' }, {
-            scale: 1, backgroundColor: '#0781b1', color: '#ffffff', duration: 0.6, ease: 'back.out(2)',
-          }, i);
-      });
-    });
-  }, { scope: root });
-
   return (
-    <section ref={root} className="about-process" aria-labelledby="about-process-title">
+    <section className="about-process" aria-labelledby="about-process-title">
       <div className="about-process-inner">
-        <span className="about-process-eyebrow">OUR PROCESS</span>
-        <h2 id="about-process-title">A connected way of working.</h2>
+        <span className="about-process-eyebrow">OUR JOURNEY</span>
+        <h2 id="about-process-title">Seven years of moving brands forward.</h2>
+        <p className="about-process-intro">
+          Every milestone has shaped how we think, create and grow alongside the brands we work with.
+        </p>
 
-        <ol className="about-process-steps">
-          {steps.map(({ title, copy, icon: Icon }) => (
-            <li className="about-process-step cursor-target" data-cursor-label={`Step ${steps.findIndex((s) => s.title === title) + 1}`} key={title}>
-              <span className="about-process-icon" aria-hidden="true">
-                <Icon size={34} strokeWidth={1.6} />
-              </span>
-              <h3>{title}</h3>
-              <p>{copy}</p>
+        <div className="about-process-scroll">
+          <ol className="about-process-steps">
+            {milestones.map(({ year, title, copy, icon: Icon, featured }) => (
+              <li
+                className={'about-process-step cursor-target' + (featured ? ' is-featured' : '')}
+                data-cursor-label={year}
+                key={year}
+              >
+                <span className="about-process-year">{year}</span>
+                <span className="about-process-marker" aria-hidden="true">
+                  <Icon className="about-process-marker-icon" size={featured ? 26 : 18} strokeWidth={1.9} />
+                </span>
+                <div className="about-process-copy">
+                  <h3>{title}</h3>
+                  <p>{copy}</p>
+                </div>
+              </li>
+            ))}
+            <li className="about-process-arrow" aria-hidden="true">
+              <ArrowRight size={24} strokeWidth={2.1} />
             </li>
-          ))}
-        </ol>
+          </ol>
+        </div>
       </div>
     </section>
   );

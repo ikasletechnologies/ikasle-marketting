@@ -8,6 +8,8 @@ interface ProfileSetupPageProps {
   onServicesClick?: () => void;
   onSocialClick?: () => void;
   onContactClick?: () => void;
+  /** Opens an app section by name; used by the related-service cards. */
+  onNavigate?: (section: string) => void;
 }
 
 const SCOPE_ITEMS = [
@@ -83,6 +85,7 @@ const RELATED_SERVICES = [
   },
   {
     title: 'Content Planning & Calendars',
+    section: 'Content Planning',
     desc: 'Plan relevant content that connects.',
   },
 ];
@@ -92,6 +95,7 @@ export const ProfileSetupPage: React.FC<ProfileSetupPageProps> = ({
   onServicesClick,
   onSocialClick,
   onContactClick,
+  onNavigate,
 }) => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -313,7 +317,7 @@ export const ProfileSetupPage: React.FC<ProfileSetupPageProps> = ({
               <article key={service.title} className="ps-related-card">
                 <h3 className="ps-related-title">{service.title}</h3>
                 <p className="ps-related-desc">{service.desc}</p>
-                <button type="button" className="ps-related-link" onClick={onContactClick}>
+                <button type="button" className="ps-related-link" onClick={() => (onNavigate ? onNavigate((service as { section?: string }).section ?? service.title) : onContactClick?.())}>
                   View Service
                   <ArrowRight size={14} strokeWidth={2} aria-hidden="true" />
                 </button>

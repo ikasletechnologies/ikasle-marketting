@@ -1,0 +1,48 @@
+/* ---------- Hero: identity board and stationery ---------- */
+.lv-l-plant{left:8.5em;top:-1.5em}
+.lv-plant{display:block;width:7em}
+.lv-l-board{left:15.5em;top:0}
+.lv-board{display:flex;gap:1em;width:19.5em;height:13.5em;padding:1.2em;border-radius:.4em;background:linear-gradient(160deg,#fff,#eef2f4);box-shadow:0 1.6em 2.6em -1em #0b2b4c55;transform:rotate(3deg)}
+.lv-board-mark{flex:none;width:8.5em;height:8.5em;margin-top:1.4em}
+.lv-board-side{flex:1}
+.lv-board-side h5{margin:0 0 .6em;color:var(--navy);font-size:1em;font-weight:600;line-height:1.1}
+.lv-board-type{padding:0;background:none;box-shadow:none;font-size:.75em}
+.lv-dots{display:flex;gap:.3em;margin-top:.6em}
+.lv-dots i{width:1.3em;height:1.3em;border-radius:50%}
+.lv-l-letter{left:3.5em;top:11.5em}
+.lv-letter{width:10em;padding:1em;border-radius:.2em;background:#fff;box-shadow:0 1em 1.6em -.8em #0b2b4c55;transform:rotate(-10deg)}
+.lv-letter-mark{display:block;width:2em;height:2em;margin-bottom:.8em}
+.lv-l-cards{left:8.5em;top:6em}
+.lv-bcards{position:relative;width:8em;height:6em}
+.lv-bcards span{position:absolute;display:grid;place-items:center;width:7.5em;height:4.5em;padding:1em 2.5em;border-radius:.25em;background:#fff;box-shadow:0 .6em 1em -.5em #0b2b4c66}
+.lv-bcards span:nth-child(1){top:1.4em;left:.4em;transform:rotate(-8deg)}
+.lv-bcards span:nth-child(2){top:.7em;left:.2em;transform:rotate(-4deg)}
+.lv-bcards span:nth-child(3){top:0;left:0}
+.lv-bcards svg{width:100%;height:100%}
+.lv-l-notebook{left:16em;top:14.5em}
+.lv-notebook{display:grid;place-items:center;width:10em;height:7.5em;padding:1.5em 3em;border-radius:.4em;background:linear-gradient(150deg,#0e5a73,#0a3c52);box-shadow:0 1.4em 2em -1em #0b2b4c88;transform:rotate(-6deg)}
+.lv-notebook svg{width:100%;height:100%;opacity:.35;filter:grayscale(1) brightness(.6)}
+.lv-l-strip{left:28.5em;top:12em}
+.lv-strip{display:grid;gap:.4em;width:5.5em;transform:rotate(8deg)}
+.lv-strip-sw{grid-template-columns:1fr;gap:.25em}
+.lv-strip-sw i{aspect-ratio:auto;height:1.2em}
+.lv-wave{position:relative;display:block;height:3.6em;overflow:hidden;border-radius:.2em;background:#0b4f6a}
+.lv-wave .sa-wave-cover{height:100%}
+
+/* ---------- Deliverables: open identity book ---------- */
+.lv-l-spread{left:2em;top:.5em}
+.lv-spread{display:flex;width:28em;height:18em;transform:perspective(1100px) rotateX(18deg) rotateZ(-4deg);filter:drop-shadow(0 1.8em 2em #0b2b4c44)}
+.lv-page{position:relative;flex:1;padding:1.3em 1.2em;background:linear-gradient(90deg,#fff 0%,#f6f8f8 88%,#e3e8ea 100%)}
+.lv-page+.lv-page{background:linear-gradient(90deg,#e3e8ea 0%,#f6f8f8 12%,#fff 100%)}
+.lv-page h5{margin:0;color:var(--navy);font-size:.95em;font-weight:600;line-height:1.15}
+.lv-page-mark{position:absolute;left:1.5em;bottom:1.5em;width:9em;height:9em}
+.lv-page-cols{display:grid;grid-template-columns:1fr 1fr;gap:.6em}
+.lv-page small{display:block;margin-bottom:.4em;color:var(--navy);font-size:.55em;font-weight:700}
+.lv-page-sw{width:6em;margin-top:.5em}
+.lv-page-type{padding:0;background:none;box-shadow:none;font-size:.8em}
+.lv-page-wave{position:relative;display:block;height:4.6em;margin-top:.8em;overflow:hidden;border-radius:.2em;background:#0b4f6a}
+.lv-page-wave .sa-wave-cover{height:100%}
+.lv-page p{margin-top:.6em;color:#2c4a60;font-size:.55em;font-style:italic}
+.lv-l-cards2{left:1.5em;top:17em}
+.lv-l-nb2{left:23em;top:16.5em}
+.lv-notebook.lg{width:11em;height:7em}

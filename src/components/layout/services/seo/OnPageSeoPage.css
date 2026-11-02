@@ -1,0 +1,38 @@
+/* ---------- Hero: page monitor + element cards ---------- */
+.op-l-monitor{left:7em;top:2.4em}
+.op-monitor{width:22em}
+.op-monitor .sa-monitor-screen{height:14.5em}
+.op-screen{position:relative;height:100%;overflow:hidden;background:#f6f9fb}
+.op-browser{display:flex;align-items:center;gap:.3em;height:1.5em;padding:0 .7em;background:#e4ebf0}
+.op-browser i{width:.45em;height:.45em;border-radius:50%;background:#c3cfd8}
+.op-browser span{flex:1;height:.6em;margin-left:.6em;border-radius:1em;background:#fff}
+.op-page{padding:.9em 1.2em}
+.op-page h5{margin:0 0 .6em;color:var(--navy);font-size:.95em;font-weight:800}
+.op-line{display:block;height:.4em;margin-bottom:.45em;border-radius:1em;background:#d5e0e8}
+.w90{width:90%}.w80{width:80%}.w75{width:75%}.w70{width:70%}.w60{width:60%}
+.op-hero-img{width:55%;height:4.4em;margin:.6em 0;overflow:hidden;border-radius:.4em}
+.op-mag{position:absolute;left:12em;top:4.6em;width:6em;height:6em}
+.op-cursor{position:absolute;left:16em;top:9.5em;width:1.4em;height:1.8em}
+.op-chip{flex-wrap:wrap;width:10em;white-space:normal;align-items:flex-start}
+.op-chip .sa-chip-label{flex:1}
+.op-chip .sa-lines{width:100%;margin-top:.5em}
+.op-l-c1{left:3.5em;top:.5em}
+.op-l-c2{left:25.5em;top:1.5em}
+.op-l-c3{left:4em;top:11em}
+.op-l-c4{left:26em;top:10.5em}
+.op-l-mug{left:30em;top:18em}
+.op-mug{width:5.4em;height:6.2em}
+
+/* ---------- Deliverables: report book + recommendations sheet ---------- */
+.op-l-sheet{left:14em;top:1em}
+.op-sheet{width:15em;padding:1.2em 1.2em 1.4em 3.4em;border-radius:.5em;background:linear-gradient(90deg,#e7edf0 0%,#fff 18%);box-shadow:0 1.6em 2.4em -1em #0b2b4c40;transform:rotate(3deg)}
+.op-sheet h5{margin:0 0 .9em;color:var(--navy);font-size:.8em;font-weight:800}
+.op-rec{display:flex;align-items:center;gap:.6em;margin-bottom:.6em;padding:.6em .7em;border-radius:.5em;background:#f3f7fa;box-shadow:0 .3em .7em #0b2b4c14}
+.op-rec svg{flex:none;width:1.3em;height:1.3em;color:#0a6fa8}
+.op-rec span{color:#2c4a60;font-size:.66em;font-weight:600}
+.op-l-book{left:0;top:2em}
+.op-book{width:15em;height:20em}
+.op-book .sa-book-cover{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.op-book .sa-brand{font-size:.9em;margin-bottom:1.6em;align-items:center}
+.op-book h4{text-transform:uppercase;font-size:1.6em}
+.op-book .sa-book-rule{margin-left:auto;margin-right:auto}
