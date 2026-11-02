@@ -11,6 +11,11 @@ const CONTACT_FROM = process.env.CONTACT_FROM || SMTP_USER;
 const CONTACT_RECIPIENT = process.env.CONTACT_RECIPIENT || 'ikaslemarketing@gmail.com';
 const CAREERS_RECIPIENT = process.env.CAREERS_RECIPIENT || CONTACT_RECIPIENT;
 const CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:3045';
+const NVIDIA_API_KEY = process.env.NVIDIA_API_KEY;
+const NVIDIA_API_URL = process.env.NVIDIA_API_URL || 'https://integrate.api.nvidia.com/v1/chat/completions';
+const NVIDIA_MODEL = process.env.NVIDIA_MODEL || 'meta/llama-3.2-1b-instruct';
+const NVIDIA_REASONING_BUDGET = Number(process.env.NVIDIA_REASONING_BUDGET || 64);
+const NVIDIA_TIMEOUT_MS = Number(process.env.NVIDIA_TIMEOUT_MS || 15000);
 
 const transporter = SMTP_HOST && SMTP_USER && SMTP_PASS
   ? nodemailer.createTransport({
@@ -87,11 +92,79 @@ const server = http.createServer(async (request, response) => {
     return;
   }
 
-  if (request.method !== 'POST' || !['/api/contact', '/api/careers'].includes(request.url)) {
+  if (request.method !== 'POST' || !['/api/contact', '/api/careers', '/api/chat'].includes(request.url)) {
     sendJson(response, 404, { ok: false, message: 'Not found.' });
     return;
   }
 
+  if (request.url === '/api/chat') {
+    if (!NVIDIA_API_KEY) {
+      sendJson(response, 503, { ok: false, message: 'Chat service is not configured yet.' });
+      return;
+    }
+
+    try {
+      const body = await readBody(request);
+      const incomingMessages = Array.isArray(body.messages) ? body.messages : [];
+      const messages = incomingMessages
+        .filter((message) => message && (message.role === 'user' || message.role === 'assistant') && typeof message.content === 'string')
+        .map((message) => ({ role: message.role, content: text(message.content, 4000) }))
+        .filter((message) => message.content)
+        .slice(-12);
+
+      if (!messages.length || messages[messages.length - 1].role !== 'user') {
+        sendJson(response, 400, { ok: false, message: 'Please send a valid chat message.' });
+        return;
+      }
+
+      const nvidiaResponse = await fetch(NVIDIA_API_URL, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${NVIDIA_API_KEY}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          model: NVIDIA_MODEL,
+          messages: [
+            {
+              role: 'system',
+              content: 'You are the helpful Ikasle Marketing website assistant. Explain our digital marketing, social media, SEO and branding services clearly and briefly. Do not invent pricing, guarantees or company facts. If a visitor wants a quote or has a detailed project, direct them to the Contact page.',
+            },
+            ...messages,
+          ],
+          temperature: 0.3,
+          max_tokens: 600,
+          reasoning_budget: NVIDIA_REASONING_BUDGET,
+          stream: false,
+        }),
+        signal: AbortSignal.timeout(NVIDIA_TIMEOUT_MS),
+      });
+      const data = await nvidiaResponse.json().catch(() => ({}));
+
+      if (!nvidiaResponse.ok) {
+        console.error('NVIDIA chat request failed:', nvidiaResponse.status, data?.detail || data?.message || 'Unknown error');
+        sendJson(response, 502, { ok: false, message: 'The assistant is unavailable right now. Please try again.' });
+        return;
+      }
+
+      const answer = text(data?.choices?.[0]?.message?.content, 4000);
+      if (!answer) {
+        sendJson(response, 502, { ok: false, message: 'The assistant returned an empty response.' });
+        return;
+      }
+
+      sendJson(response, 200, { ok: true, message: answer });
+    } catch (error) {
+      console.error('Chat request failed:', error);
+      if (error?.name === 'TimeoutError' || error?.name === 'AbortError') {
+        sendJson(response, 504, { ok: false, message: 'The assistant took too long to respond. Please try again.' });
+      } else {
+        sendJson(response, 500, { ok: false, message: 'The assistant could not respond right now.' });
+      }
+    }
+    return;
+  }
   if (!transporter || !CONTACT_FROM) {
     sendJson(response, 503, { ok: false, message: 'Email service is not configured yet.' });
     return;

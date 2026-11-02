@@ -43,6 +43,7 @@ import { JourneySection } from './components/layout/home/JourneySection';
 import { WhyChooseUs } from './components/layout/home/WhyChooseUs';
 import { Footer } from './components/layout/shared/Footer';
 import PageLoader from './components/ui/PageLoader';
+import ChatBot from './components/ui/ChatBot';
 import { pathFromSection, sectionFromPath } from './routes';
 
 export const App: React.FC = () => {
@@ -317,6 +318,7 @@ const isCareersPage = activeSection === 'Careers';
       )}
 
       <Footer onNavigate={openSection} />
+      <ChatBot />
     </div>
     </ClickSpark>
   );

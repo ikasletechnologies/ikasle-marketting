@@ -36,7 +36,16 @@ class ApiClient {
     });
 
     if (!res.ok) {
-      throw new Error(`API Error: ${res.statusText} (${res.status})`);
+      let message = `API Error: ${res.statusText} (${res.status})`;
+      try {
+        const errorBody = await res.json();
+        if (typeof errorBody?.message === 'string' && errorBody.message) {
+          message = errorBody.message;
+        }
+      } catch {
+        // Keep the HTTP status message when the server does not return JSON.
+      }
+      throw new Error(message);
     }
 
     return res.json();
@@ -58,7 +67,16 @@ class ApiClient {
     });
 
     if (!res.ok) {
-      throw new Error(`API Error: ${res.statusText} (${res.status})`);
+      let message = `API Error: ${res.statusText} (${res.status})`;
+      try {
+        const errorBody = await res.json();
+        if (typeof errorBody?.message === 'string' && errorBody.message) {
+          message = errorBody.message;
+        }
+      } catch {
+        // Keep the HTTP status message when the server does not return JSON.
+      }
+      throw new Error(message);
     }
 
     return res.json();
