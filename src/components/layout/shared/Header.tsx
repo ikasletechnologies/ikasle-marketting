@@ -24,8 +24,9 @@ const SERVICE_GROUPS: ServiceGroup[] = [
   {
     title: 'Social Media Marketing', target: 'Social Media Marketing', items: [
       { label: 'Social Media Strategy', target: 'Social Media Strategy' },
+      { label: 'Profile Setup & Optimisation', target: 'Profile Setup & Optimisation' },
+      { label: 'Social Media Management', target: 'Social Media Management' },
       ...[
-        'Profile Setup & Optimisation', 'Social Media Management',
         'Content Planning & Calendars', 'Creative Posts & Carousels', 'Reels & Short-Form Video',
         'Community Management', 'Social Media Advertising', 'Influencer & Creator Campaigns', 'Social Analytics & Reporting',
       ].map((label) => ({ label, target: 'Social Media Marketing' })),
@@ -54,6 +55,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange, onCtaCli
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileCategoryOpen, setMobileCategoryOpen] = useState<string | null>(null);
+  const [desktopServicesDismissed, setDesktopServicesDismissed] = useState(false);
   const navLinks = ['Home', 'About', 'Services', 'Blogs', 'Contact'];
 
   const currentPath = typeof window !== 'undefined' ? normalise(window.location.pathname) : '/';
@@ -116,8 +118,8 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange, onCtaCli
           {navLinks.map((link) => link !== 'Services' ? (
             <button key={link} type="button" className={`nav-link ${isLinkActive(link) ? 'active' : ''}`} onClick={() => handleNavClick(link)}>{link}</button>
           ) : (
-            <div className={`services-nav-item ${mobileServicesOpen ? 'mobile-expanded' : ''}`} key={link}>
-              <div className="services-nav-trigger-row">
+            <div className={`services-nav-item ${mobileServicesOpen ? 'mobile-expanded' : ''} ${desktopServicesDismissed ? 'desktop-dismissed' : ''}`} key={link}>
+              <div className="services-nav-trigger-row" onMouseEnter={() => setDesktopServicesDismissed(false)}>
                 <button type="button" className={`nav-link services-trigger ${isLinkActive('Services') ? 'active' : ''}`} onClick={() => handleNavClick('Services')} aria-haspopup="true">
                   Services <ChevronDown aria-hidden="true" />
                 </button>

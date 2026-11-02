@@ -18,12 +18,15 @@ export const ROUTES: Record<string, string> = {
   'Analytics & Conversion Tracking': '/services/digital-marketing/analytics-conversion-tracking',
   'Social Media Marketing': '/services/social-media-marketing',
   'Social Media Strategy': '/services/social-media-marketing/strategy',
+  'Profile Setup & Optimisation': '/services/social-media-marketing/profile-setup',
+  'Social Media Management': '/services/social-media-marketing/management',
   'SEO & Search Growth': '/services/seo-search-growth',
   'Brand Growth & Creative': '/services/brand-growth-creative',
   'Privacy Policy': '/privacy-policy',
   'Terms & Conditions': '/terms-and-conditions',
   FAQ: '/faq',
   Shop: '/shop',
+  Careers: '/careers',
 };
 
 export const normalise = (path: string): string => {

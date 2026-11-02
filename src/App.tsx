@@ -17,6 +17,8 @@ import { BrandPage } from './components/layout/services/brand/BrandPage';
 import { SeoPage } from './components/layout/services/seo/SeoPage';
 import { SocialMediaPage } from './components/layout/services/social/SocialMediaPage';
 import { SocialMediaStrategyPage } from './components/layout/services/social/SocialMediaStrategyPage';
+import { ProfileSetupPage } from './components/layout/services/social/ProfileSetupPage';
+import { SocialMediaManagementPage } from './components/layout/services/social/SocialMediaManagementPage';
 import { ServicesCta } from './components/layout/services/ServicesCta';
 import { ServicesListing } from './components/layout/services/ServicesListing';
 import { ServicesHero } from './components/layout/services/ServicesHero';
@@ -28,10 +30,12 @@ import { AboutProcess } from './components/layout/about/AboutProcess';
 import { AboutCta } from './components/layout/about/AboutCta';
 import { ContactPage } from './components/layout/contact/ContactPage';
 import { BlogComingSoon } from './components/layout/blog/BlogComingSoon';
+import { CareersPage } from './components/layout/careers/CareersPage';
 import ClickSpark from './components/effects/ClickSpark';
 import TargetCursor from './components/effects/TargetCursor';
 import { PrivacyPolicyPage, TermsPage, FaqPage } from './components/layout/legal/LegalPages';
 import { JourneySection } from './components/layout/home/JourneySection';
+import { WhyChooseUs } from './components/layout/home/WhyChooseUs';
 import { Footer } from './components/layout/shared/Footer';
 import { pathFromSection, sectionFromPath } from './routes';
 
@@ -57,10 +61,11 @@ export const App: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const isContactPage = activeSection === 'Contact';
-  const isServicesPage = activeSection === 'Services';
-  const isAboutPage = activeSection === 'About';
-  const isBlogsPage = activeSection === 'Blogs';
+const isContactPage = activeSection === 'Contact';
+const isServicesPage = activeSection === 'Services';
+const isAboutPage = activeSection === 'About';
+const isBlogsPage = activeSection === 'Blogs';
+const isCareersPage = activeSection === 'Careers';
   const goHome = () => openSection('Home');
   const goContact = () => openSection('Contact');
 
@@ -177,6 +182,22 @@ export const App: React.FC = () => {
           onServicesClick={() => openSection('Services')}
           onContactClick={goContact}
           onStrategyClick={() => openSection('Social Media Strategy')}
+          onProfileClick={() => openSection('Profile Setup & Optimisation')}
+          onManagementClick={() => openSection('Social Media Management')}
+        />
+       ) : activeSection === 'Social Media Management' ? (
+        <SocialMediaManagementPage
+          onHomeClick={goHome}
+          onServicesClick={() => openSection('Services')}
+          onSocialClick={() => openSection('Social Media Marketing')}
+          onContactClick={goContact}
+        />
+      ) : activeSection === 'Profile Setup & Optimisation' ? (
+        <ProfileSetupPage
+          onHomeClick={goHome}
+          onServicesClick={() => openSection('Services')}
+          onSocialClick={() => openSection('Social Media Marketing')}
+          onContactClick={goContact}
         />
       ) : activeSection === 'Digital Marketing' ? (
         <DigitalMarketingPage
@@ -204,6 +225,8 @@ export const App: React.FC = () => {
         <ContactPage onHomeClick={() => openSection('Home')} />
       ) : isBlogsPage ? (
         <BlogComingSoon onContactClick={goContact} />
+      ) : isCareersPage ? (
+        <CareersPage onHomeClick={goHome} onContactClick={goContact} />
       ) : isAboutPage ? (
         <main ref={aboutMainRef}>
           <TargetCursor spinDuration={2} hideDefaultCursor parallaxOn container={aboutMainRef} />
@@ -231,6 +254,8 @@ export const App: React.FC = () => {
             onServiceClick={() => openSection('Services')}
             onViewAllClick={() => openSection('Services')}
           />
+
+          <WhyChooseUs />
 
           <JourneySection />
         </main>

@@ -5,6 +5,7 @@ import targetIcon from '../../../assets/service-target.png';
 import socialIcon from '../../../assets/service-social.png';
 import seoIcon from '../../../assets/service-seo.png';
 import brandIcon from '../../../assets/service-brand.png';
+import Antigravity from '../../effects/Antigravity';
 import './ServicesSection.css';
 
 interface ServiceItem {
@@ -145,6 +146,23 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
       className={'services-section' + (isVisible ? ' is-visible' : '')}
       id="services"
     >
+      <div className="services-section-antigravity" aria-hidden="true">
+        <Antigravity
+          colors={['#2178A7', '#00A99D', '#0781b1', '#35d7d0']}
+          count={700}
+          magnetRadius={10}
+          ringRadius={7.5}
+          particleSize={0.9}
+          autoAnimate={true}
+          colorMode="radial"
+          particleShape="capsule"
+          waveAmplitude={3}
+          waveCount={4}
+          lightMode={true}
+          opacity={0.42}
+        />
+      </div>
+
       <div className="services-container">
         <div className="services-header">
           <span className="services-overline">WHAT WE DO</span>

@@ -37,6 +37,9 @@ export interface SocialMediaPageProps {
   onServicesClick?: () => void;
   onContactClick?: () => void;
   onStrategyClick?: () => void;
+  onProfileClick?: () => void;
+
+  onManagementClick?: () => void;
 }
 
 export const SocialMediaPage: React.FC<SocialMediaPageProps> = ({
@@ -44,6 +47,8 @@ export const SocialMediaPage: React.FC<SocialMediaPageProps> = ({
   onServicesClick,
   onContactClick,
   onStrategyClick,
+  onProfileClick,
+  onManagementClick,
 }) => {
   const root = useRef<HTMLElement>(null);
 
@@ -216,7 +221,7 @@ export const SocialMediaPage: React.FC<SocialMediaPageProps> = ({
                 <button
                   type="button"
                   className="sm-card-link"
-                  onClick={service.id === 'strategy' && onStrategyClick ? onStrategyClick : onContactClick}
+                  onClick={service.id === 'strategy' && onStrategyClick ? onStrategyClick : service.id === 'profile' && onProfileClick ? onProfileClick : service.id === 'management' && onManagementClick ? onManagementClick : onContactClick}
                 >
                   <span>View Service</span>
                   <ArrowRight size={16} strokeWidth={2} aria-hidden="true" />

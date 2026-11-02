@@ -8,7 +8,7 @@ interface FooterProps {
   onNavigate?: (section: string) => void;
 }
 
-const QUICK_LINKS = ['Home', 'About', 'Services', 'Blogs', 'Contact'];
+const QUICK_LINKS = ['Home', 'About', 'Services', 'Blogs', 'Careers', 'Contact'];
 const SERVICES = [
   'Digital Marketing',
   'Social Media Marketing',

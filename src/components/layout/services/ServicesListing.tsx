@@ -22,6 +22,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
+import WebThreads from '../../effects/WebThreads';
 import digitalArt from '../../../assets/listing-digital.png';
 import socialArt from '../../../assets/listing-social.png';
 import seoArt from '../../../assets/listing-seo.png';
@@ -215,6 +216,26 @@ export const ServicesListing: React.FC<ServicesListingProps> = ({ onServiceClick
 
   return (
     <section ref={root} className="services-listing" id="services-listing" aria-labelledby="listing-title">
+      <div className="services-listing-webthreads" aria-hidden="true">
+        <WebThreads
+          colors={['#2178A7', '#00A99D', '#0781b1', '#1aa6b7', '#35d7d0', '#071D35']}
+          coreColor="#00A99D"
+          backgroundColor="transparent"
+          lightMode={true}
+          threadCount={8}
+          speed={0.16}
+          frequency={4.5}
+          spread={0.18}
+          position={0.52}
+          pinch={0.5}
+          glow={0.02}
+          thickness={1.2}
+          opacity={0.45}
+          mouseInteraction={true}
+          pulseOnClick={true}
+        />
+      </div>
+
       <div className="listing-inner">
         <header className="listing-header">
           <span className="listing-eyebrow">SERVICES LISTING</span>
