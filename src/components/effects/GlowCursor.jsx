@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 
 import './GlowCursor.css';
 
@@ -320,8 +320,7 @@ const GlowCursor = ({
 }) => {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
-  const settingsRef = useRef(null);
-  settingsRef.current = {
+  const settings = {
     color: String(color),
     secondaryColor: secondaryColor ? String(secondaryColor) : '',
     intensity: Math.max(0, intensity),
@@ -337,6 +336,10 @@ const GlowCursor = ({
     maxDevicePixelRatio,
     enabled
   };
+  const settingsRef = useRef(settings);
+  useLayoutEffect(() => {
+    settingsRef.current = settings;
+  });
 
   useEffect(() => {
     const container = containerRef.current;

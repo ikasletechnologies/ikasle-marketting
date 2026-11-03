@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
+import { splitReveal } from '../../../lib/splitReveal';
 import { useGSAP } from '@gsap/react';
 import storyImage from '../../../assets/about-story-workspace.png';
 import './AboutStory.css';
@@ -35,7 +36,7 @@ export const AboutStory: React.FC = () => {
         type: 'lines',
         mask: 'lines',
         autoSplit: true,
-        onSplit: (self) => tl.from(self.lines, { yPercent: 110, duration: 1, stagger: 0.12, ease: 'expo.out' }, 0.1),
+        onSplit: (self) => splitReveal(self.lines, { yPercent: 110, duration: 1, stagger: 0.12, ease: 'expo.out' }, tl, 0.1),
       });
       tl.from('.about-story-copy p', { opacity: 0, y: 24, duration: 0.9, stagger: 0.15 }, 0.5)
         .from('.about-story-tags li', { opacity: 0, scale: 0.6, y: 12, duration: 0.7, stagger: 0.09, ease: 'back.out(2)' }, 0.9);

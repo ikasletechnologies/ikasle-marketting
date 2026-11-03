@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import './GhostCursor.css';
 
 export interface GhostCursorProps {
@@ -490,7 +490,9 @@ const GhostCursor = ({
     budget: Math.max(5e4, targetPixels ?? (touch ? 3e5 : 6e5))
   };
   const settingsRef = useRef(settings);
-  settingsRef.current = settings;
+  useLayoutEffect(() => {
+    settingsRef.current = settings;
+  });
 
   useEffect(() => {
     wakeRef.current?.();

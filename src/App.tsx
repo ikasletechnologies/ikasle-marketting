@@ -1,56 +1,78 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Header } from './components/layout/shared/Header';
-import { HeroSection } from './components/layout/home/HeroSection';
-import { ServicesSection } from './components/layout/services/ServicesSection';
-import { DigitalMarketingPage } from './components/layout/services/digital/DigitalMarketingPage';
-import { DigitalStrategyPage } from './components/layout/services/digital/DigitalStrategyPage';
-import { AudienceResearchPage } from './components/layout/services/digital/AudienceResearchPage';
-import { GoogleSearchAdsPage } from './components/layout/services/digital/GoogleSearchAdsPage';
-import { DisplayYoutubePage } from './components/layout/services/digital/DisplayYoutubePage';
-import { MetaAdsPage } from './components/layout/services/digital/MetaAdsPage';
-import { ContentMarketingPage } from './components/layout/services/digital/ContentMarketingPage';
-import { EmailMarketingPage } from './components/layout/services/digital/EmailMarketingPage';
-import { LeadGenerationPage } from './components/layout/services/digital/LeadGenerationPage';
-import { LandingCroPage } from './components/layout/services/digital/LandingCroPage';
-import { AnalyticsTrackingPage } from './components/layout/services/digital/AnalyticsTrackingPage';
-import { BrandPage } from './components/layout/services/brand/BrandPage';
-import { SeoPage } from './components/layout/services/seo/SeoPage';
-import { SocialMediaPage } from './components/layout/services/social/SocialMediaPage';
-import { SocialMediaStrategyPage } from './components/layout/services/social/SocialMediaStrategyPage';
-import { ProfileSetupPage } from './components/layout/services/social/ProfileSetupPage';
-import { ContentPlanningPage } from './components/layout/services/social/ContentPlanningPage';
-import { CreativePostsPage } from './components/layout/services/social/CreativePostsPage';
+import { Footer } from './components/layout/shared/Footer';
+import ClickSpark from './components/effects/ClickSpark';
+import PageLoader from './components/ui/PageLoader';
+import ChatBot from './components/ui/ChatBot';
+import { RouteErrorBoundary } from './components/ui/RouteErrorBoundary';
 import { SOCIAL_SECTION_BY_ID, SOCIAL_TEMPLATE_PAGES } from './components/layout/services/social/socialTemplatePages';
 import { SEO_SECTION_BY_ID, SEO_TEMPLATE_PAGES } from './components/layout/services/seo/seoTemplatePages';
 import { BRAND_SECTION_BY_ID, BRAND_TEMPLATE_PAGES } from './components/layout/services/brand/brandTemplatePages';
 import { DIGITAL_RELATED_SECTIONS } from './components/layout/services/digital/digitalRelated';
-import { ServicesCta } from './components/layout/services/ServicesCta';
-import { ServicesListing } from './components/layout/services/ServicesListing';
-import { ServicesHero } from './components/layout/services/ServicesHero';
-import { AboutHero } from './components/layout/about/AboutHero';
-import { AboutStory } from './components/layout/about/AboutStory';
-import { AboutPurpose } from './components/layout/about/AboutPurpose';
-import { AboutValues } from './components/layout/about/AboutValues';
-import { AboutProcess } from './components/layout/about/AboutProcess';
-import { AboutCta } from './components/layout/about/AboutCta';
-import { ContactPage } from './components/layout/contact/ContactPage';
-import { BlogComingSoon } from './components/layout/blog/BlogComingSoon';
-import { CareersPage } from './components/layout/careers/CareersPage';
-import ClickSpark from './components/effects/ClickSpark';
-import TargetCursor from './components/effects/TargetCursor';
-import { PrivacyPolicyPage, TermsPage, FaqPage } from './components/layout/legal/LegalPages';
-import { JourneySection } from './components/layout/home/JourneySection';
-import { WhyChooseUs } from './components/layout/home/WhyChooseUs';
-import { Footer } from './components/layout/shared/Footer';
-import PageLoader from './components/ui/PageLoader';
-import ChatBot from './components/ui/ChatBot';
-import { pathFromSection, sectionFromPath } from './routes';
+import { lazyNamed } from './lib/lazyNamed';
+import { NOT_FOUND_SECTION, normalise, pathFromSection, sectionFromPath } from './routes';
+import { getSectionMeta } from './seo/meta';
+import { applyPageMeta } from './seo/applyMeta';
+
+// Every page is its own chunk, so the first visit only downloads the page it lands on (IKAS-502).
+const HomePage = lazyNamed(() => import('./components/layout/home/HomePage'), 'HomePage');
+const AboutPage = lazyNamed(() => import('./components/layout/about/AboutPage'), 'AboutPage');
+const ServicesPage = lazyNamed(() => import('./components/layout/services/ServicesPage'), 'ServicesPage');
+const ContactPage = lazyNamed(() => import('./components/layout/contact/ContactPage'), 'ContactPage');
+const CareersPage = lazyNamed(() => import('./components/layout/careers/CareersPage'), 'CareersPage');
+const BlogPage = lazyNamed(() => import('./components/layout/blog/BlogPage'), 'BlogPage');
+const BlogPostPage = lazyNamed(() => import('./components/layout/blog/BlogPostPage'), 'BlogPostPage');
+const LeadsPage = lazyNamed(() => import('./components/layout/dashboard/LeadsPage'), 'LeadsPage');
+const CampaignsPage = lazyNamed(() => import('./components/layout/dashboard/CampaignsPage'), 'CampaignsPage');
+const NotFoundPage = lazyNamed(() => import('./components/layout/shared/NotFoundPage'), 'NotFoundPage');
+const PrivacyPolicyPage = lazyNamed(() => import('./components/layout/legal/LegalPages'), 'PrivacyPolicyPage');
+const TermsPage = lazyNamed(() => import('./components/layout/legal/LegalPages'), 'TermsPage');
+const FaqPage = lazyNamed(() => import('./components/layout/legal/LegalPages'), 'FaqPage');
+const DigitalMarketingPage = lazyNamed(() => import('./components/layout/services/digital/DigitalMarketingPage'), 'DigitalMarketingPage');
+const DigitalStrategyPage = lazyNamed(() => import('./components/layout/services/digital/DigitalStrategyPage'), 'DigitalStrategyPage');
+const AudienceResearchPage = lazyNamed(() => import('./components/layout/services/digital/AudienceResearchPage'), 'AudienceResearchPage');
+const GoogleSearchAdsPage = lazyNamed(() => import('./components/layout/services/digital/GoogleSearchAdsPage'), 'GoogleSearchAdsPage');
+const DisplayYoutubePage = lazyNamed(() => import('./components/layout/services/digital/DisplayYoutubePage'), 'DisplayYoutubePage');
+const MetaAdsPage = lazyNamed(() => import('./components/layout/services/digital/MetaAdsPage'), 'MetaAdsPage');
+const ContentMarketingPage = lazyNamed(() => import('./components/layout/services/digital/ContentMarketingPage'), 'ContentMarketingPage');
+const EmailMarketingPage = lazyNamed(() => import('./components/layout/services/digital/EmailMarketingPage'), 'EmailMarketingPage');
+const LeadGenerationPage = lazyNamed(() => import('./components/layout/services/digital/LeadGenerationPage'), 'LeadGenerationPage');
+const LandingCroPage = lazyNamed(() => import('./components/layout/services/digital/LandingCroPage'), 'LandingCroPage');
+const AnalyticsTrackingPage = lazyNamed(() => import('./components/layout/services/digital/AnalyticsTrackingPage'), 'AnalyticsTrackingPage');
+const BrandPage = lazyNamed(() => import('./components/layout/services/brand/BrandPage'), 'BrandPage');
+const SeoPage = lazyNamed(() => import('./components/layout/services/seo/SeoPage'), 'SeoPage');
+const SocialMediaPage = lazyNamed(() => import('./components/layout/services/social/SocialMediaPage'), 'SocialMediaPage');
+const SocialMediaStrategyPage = lazyNamed(() => import('./components/layout/services/social/SocialMediaStrategyPage'), 'SocialMediaStrategyPage');
+const ProfileSetupPage = lazyNamed(() => import('./components/layout/services/social/ProfileSetupPage'), 'ProfileSetupPage');
+const ContentPlanningPage = lazyNamed(() => import('./components/layout/services/social/ContentPlanningPage'), 'ContentPlanningPage');
+const CreativePostsPage = lazyNamed(() => import('./components/layout/services/social/CreativePostsPage'), 'CreativePostsPage');
+
+/** Digital sub-pages that share one prop signature. */
+const DIGITAL_DETAIL_PAGES: Record<string, typeof AnalyticsTrackingPage> = {
+  'Analytics & Conversion Tracking': AnalyticsTrackingPage,
+  'Landing Pages & CRO': LandingCroPage,
+  'Lead Generation & Nurturing': LeadGenerationPage,
+  'Email Marketing': EmailMarketingPage,
+  'Content Marketing': ContentMarketingPage,
+  'Meta Advertising': MetaAdsPage,
+  'Display & YouTube Advertising': DisplayYoutubePage,
+  'Google Search Ads': GoogleSearchAdsPage,
+  'Audience & Competitor Research': AudienceResearchPage,
+};
+
+const currentLocation = () => normalise(window.location.pathname);
 
 export const App: React.FC = () => {
-  const [activeSection, setActiveSection] = useState<string>(() => sectionFromPath(window.location.pathname));
+  const [path, setPath] = useState<string>(currentLocation);
   const [isPageLoading, setIsPageLoading] = useState(true);
   const loaderTimerRef = useRef<number | null>(null);
-  const aboutMainRef = useRef<HTMLElement>(null);
+  const pathRef = useRef(path);
+  useLayoutEffect(() => {
+    pathRef.current = path;
+  }, [path]);
+
+  const activeSection = sectionFromPath(path);
+  const blogSlug = activeSection === 'Blogs' && path.startsWith('/blogs/') ? decodeURIComponent(path.slice('/blogs/'.length)) : '';
 
   const startPageTransition = (duration = 520) => {
     if (loaderTimerRef.current !== null) window.clearTimeout(loaderTimerRef.current);
@@ -60,15 +82,20 @@ export const App: React.FC = () => {
       loaderTimerRef.current = null;
     }, duration);
   };
+
   useEffect(() => {
     const initialTimer = window.setTimeout(() => setIsPageLoading(false), 760);
     return () => window.clearTimeout(initialTimer);
   }, []);
-  // Keep the address bar in sync, and support the browser's back/forward buttons.
+
+  // Keep the view in sync with the browser's back/forward buttons.
   useEffect(() => {
     const onPopState = () => {
+      const next = currentLocation();
+      // Fragment-only changes (#anchor jumps) also fire popstate; they are not page changes.
+      if (next === pathRef.current) return;
       startPageTransition();
-      setActiveSection(sectionFromPath(window.location.pathname));
+      setPath(next);
     };
     window.addEventListener('popstate', onPopState);
     return () => {
@@ -77,249 +104,156 @@ export const App: React.FC = () => {
     };
   }, []);
 
+  // Title, description, canonical and social-card tags per route (IKAS-501).
+  // Blog posts set their own (BlogPostPage), so they are skipped here.
   useEffect(() => {
-    document.title = activeSection === 'Home' ? 'IKASLÄ’ Marketing' : `${activeSection} | IKASLÄ’ Marketing`;
-  }, [activeSection]);
+    if (blogSlug) return;
+    applyPageMeta(getSectionMeta(activeSection));
+  }, [activeSection, blogSlug]);
 
-  const openSection = (section: string) => {
+  /** Navigate to an in-app URL (may include ?query). */
+  const navigate = (to: string) => {
     startPageTransition();
-    const path = pathFromSection(section);
-    if (window.location.pathname !== path) window.history.pushState({}, '', path);
-    setActiveSection(section);
+    if (window.location.pathname + window.location.search !== to) window.history.pushState({}, '', to);
+    setPath(normalise(to));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+  const openSection = (section: string) => navigate(pathFromSection(section));
 
-const isContactPage = activeSection === 'Contact';
-const isServicesPage = activeSection === 'Services';
-const isAboutPage = activeSection === 'About';
-const isBlogsPage = activeSection === 'Blogs';
-const isCareersPage = activeSection === 'Careers';
   const goHome = () => openSection('Home');
+  const goServices = () => openSection('Services');
   const goContact = () => openSection('Contact');
   const openDigitalRelated = (id: string) => openSection(DIGITAL_RELATED_SECTIONS[id] ?? 'Digital Marketing');
+  const openFromMap = (map: Record<string, string>) => (id: string) => {
+    const section = map[id];
+    if (section) openSection(section);
+    return Boolean(section);
+  };
+
   const DetailTemplatePage = SOCIAL_TEMPLATE_PAGES[activeSection] ?? SEO_TEMPLATE_PAGES[activeSection] ?? BRAND_TEMPLATE_PAGES[activeSection];
+  const DigitalDetailPage = DIGITAL_DETAIL_PAGES[activeSection];
+
+  const renderPage = (): React.ReactNode => {
+    if (DigitalDetailPage) {
+      return (
+        <DigitalDetailPage
+          onHomeClick={goHome}
+          onServicesClick={goServices}
+          onDigitalClick={() => openSection('Digital Marketing')}
+          onContactClick={goContact}
+          onRelatedClick={openDigitalRelated}
+        />
+      );
+    }
+    if (DetailTemplatePage) return <DetailTemplatePage onNavigate={openSection} />;
+
+    switch (activeSection) {
+      case 'Home':
+        return <HomePage onNavigate={openSection} />;
+      case 'About':
+        return <AboutPage onNavigate={openSection} />;
+      case 'Services':
+        return <ServicesPage onNavigate={openSection} />;
+      case 'Contact':
+        return <ContactPage onHomeClick={goHome} />;
+      case 'Careers':
+        return <CareersPage onHomeClick={goHome} onContactClick={goContact} />;
+      case 'Blogs':
+        return blogSlug ? <BlogPostPage slug={blogSlug} onNavigate={navigate} /> : <BlogPage onNavigate={navigate} onContactClick={goContact} />;
+      case 'Leads Dashboard':
+        return <LeadsPage onNavigate={openSection} />;
+      case 'Campaigns Dashboard':
+        return <CampaignsPage onNavigate={openSection} />;
+      case 'Privacy Policy':
+        return <PrivacyPolicyPage onHomeClick={goHome} onContactClick={goContact} />;
+      case 'Terms & Conditions':
+        return <TermsPage onHomeClick={goHome} onContactClick={goContact} />;
+      case 'FAQ':
+        return <FaqPage onHomeClick={goHome} onContactClick={goContact} />;
+      case 'Digital Marketing Strategy':
+        return <DigitalStrategyPage onHomeClick={goHome} onServicesClick={goServices} onDigitalClick={() => openSection('Digital Marketing')} onContactClick={goContact} />;
+      case 'Digital Marketing':
+        return (
+          <DigitalMarketingPage
+            onHomeClick={goHome}
+            onServicesClick={goServices}
+            onContactClick={goContact}
+            onStrategyClick={() => openSection('Digital Marketing Strategy')}
+            onResearchClick={() => openSection('Audience & Competitor Research')}
+            onGoogleAdsClick={() => openSection('Google Search Ads')}
+            onDisplayYoutubeClick={() => openSection('Display & YouTube Advertising')}
+            onMetaAdsClick={() => openSection('Meta Advertising')}
+            onContentClick={() => openSection('Content Marketing')}
+            onEmailClick={() => openSection('Email Marketing')}
+            onLeadsClick={() => openSection('Lead Generation & Nurturing')}
+            onLandingClick={() => openSection('Landing Pages & CRO')}
+            onAnalyticsClick={() => openSection('Analytics & Conversion Tracking')}
+          />
+        );
+      case 'Brand Growth & Creative':
+        return <BrandPage onHomeClick={goHome} onServicesClick={goServices} onContactClick={goContact} onServiceClick={openFromMap(BRAND_SECTION_BY_ID)} />;
+      case 'SEO & Search Growth':
+        return <SeoPage onHomeClick={goHome} onServicesClick={goServices} onContactClick={goContact} onServiceClick={openFromMap(SEO_SECTION_BY_ID)} />;
+      case 'Social Media Marketing':
+        return (
+          <SocialMediaPage
+            onHomeClick={goHome}
+            onServicesClick={goServices}
+            onContactClick={goContact}
+            onStrategyClick={() => openSection('Social Media Strategy')}
+            onProfileClick={() => openSection('Profile Setup & Optimisation')}
+            onManagementClick={() => openSection('Social Media Management')}
+            onPostsClick={() => openSection('Creative Posts & Carousels')}
+            onServiceClick={(id) => openSection(SOCIAL_SECTION_BY_ID[id] ?? 'Contact')}
+          />
+        );
+      case 'Social Media Strategy':
+        return <SocialMediaStrategyPage onHomeClick={goHome} onServicesClick={goServices} onSocialClick={() => openSection('Social Media Marketing')} onContactClick={goContact} />;
+      case 'Profile Setup & Optimisation':
+        return <ProfileSetupPage onHomeClick={goHome} onServicesClick={goServices} onSocialClick={() => openSection('Social Media Marketing')} onContactClick={goContact} onNavigate={openSection} />;
+      case 'Content Planning':
+        return (
+          <ContentPlanningPage
+            onHomeClick={goHome}
+            onServicesClick={goServices}
+            onSocialClick={() => openSection('Social Media Marketing')}
+            onContactClick={goContact}
+            onRelatedClick={(target) => openSection(
+              target === 'management' ? 'Social Media Management'
+                : target === 'creative' ? 'Creative Posts & Carousels'
+                  : target === 'reels' ? 'Reels & Short-Form Video'
+                    : target === 'profile' ? 'Profile Setup & Optimisation'
+                      : 'Social Media Strategy',
+            )}
+          />
+        );
+      case 'Creative Posts & Carousels':
+        return (
+          <CreativePostsPage
+            onHomeClick={goHome}
+            onServicesClick={goServices}
+            onSocialClick={() => openSection('Social Media Marketing')}
+            onContactClick={goContact}
+            onRelatedClick={(target) => openSection(target === 'planning' ? 'Content Planning' : target === 'management' ? 'Social Media Management' : 'Meta Advertising')}
+          />
+        );
+      case NOT_FOUND_SECTION:
+      default:
+        return <NotFoundPage onHomeClick={goHome} onServicesClick={goServices} onContactClick={goContact} />;
+    }
+  };
 
   return (
     <ClickSpark sparkColor={['#0781b1', '#1aa6b7', '#35d7d0']} shape="line" sparkCount={10} sparkSize={12} sparkRadius={34} duration={550} style={{ height: 'auto' }}>
-    <PageLoader visible={isPageLoading} />
-    <div style={{ minHeight: '100vh', backgroundColor: '#ffffff' }}>
-      <Header
-        activeTab={activeSection}
-        onTabChange={openSection}
-        onCtaClick={() => openSection('Contact')}
-      />
-
-      {activeSection === 'Analytics & Conversion Tracking' ? (
-        <AnalyticsTrackingPage
-          onHomeClick={goHome}
-          onServicesClick={() => openSection('Services')}
-          onDigitalClick={() => openSection('Digital Marketing')}
-          onContactClick={goContact}
-          onRelatedClick={openDigitalRelated}
-        />
-      ) : activeSection === 'Landing Pages & CRO' ? (
-        <LandingCroPage
-          onHomeClick={goHome}
-          onServicesClick={() => openSection('Services')}
-          onDigitalClick={() => openSection('Digital Marketing')}
-          onContactClick={goContact}
-          onRelatedClick={openDigitalRelated}
-        />
-      ) : activeSection === 'Lead Generation & Nurturing' ? (
-        <LeadGenerationPage
-          onHomeClick={goHome}
-          onServicesClick={() => openSection('Services')}
-          onDigitalClick={() => openSection('Digital Marketing')}
-          onContactClick={goContact}
-          onRelatedClick={openDigitalRelated}
-        />
-      ) : activeSection === 'Email Marketing' ? (
-        <EmailMarketingPage
-          onHomeClick={goHome}
-          onServicesClick={() => openSection('Services')}
-          onDigitalClick={() => openSection('Digital Marketing')}
-          onContactClick={goContact}
-          onRelatedClick={openDigitalRelated}
-        />
-      ) : activeSection === 'Content Marketing' ? (
-        <ContentMarketingPage
-          onHomeClick={goHome}
-          onServicesClick={() => openSection('Services')}
-          onDigitalClick={() => openSection('Digital Marketing')}
-          onContactClick={goContact}
-          onRelatedClick={openDigitalRelated}
-        />
-      ) : activeSection === 'Meta Advertising' ? (
-        <MetaAdsPage
-          onHomeClick={goHome}
-          onServicesClick={() => openSection('Services')}
-          onDigitalClick={() => openSection('Digital Marketing')}
-          onContactClick={goContact}
-          onRelatedClick={openDigitalRelated}
-        />
-      ) : activeSection === 'Display & YouTube Advertising' ? (
-        <DisplayYoutubePage
-          onHomeClick={goHome}
-          onServicesClick={() => openSection('Services')}
-          onDigitalClick={() => openSection('Digital Marketing')}
-          onContactClick={goContact}
-          onRelatedClick={openDigitalRelated}
-        />
-      ) : activeSection === 'Google Search Ads' ? (
-        <GoogleSearchAdsPage
-          onHomeClick={goHome}
-          onServicesClick={() => openSection('Services')}
-          onDigitalClick={() => openSection('Digital Marketing')}
-          onContactClick={goContact}
-          onRelatedClick={openDigitalRelated}
-        />
-      ) : activeSection === 'Audience & Competitor Research' ? (
-        <AudienceResearchPage
-          onHomeClick={goHome}
-          onServicesClick={() => openSection('Services')}
-          onDigitalClick={() => openSection('Digital Marketing')}
-          onContactClick={goContact}
-          onRelatedClick={openDigitalRelated}
-        />
-      ) : activeSection === 'Digital Marketing Strategy' ? (
-        <DigitalStrategyPage
-          onHomeClick={goHome}
-          onServicesClick={() => openSection('Services')}
-          onDigitalClick={() => openSection('Digital Marketing')}
-          onContactClick={goContact}
-        />
-      ) : activeSection === 'Brand Growth & Creative' ? (
-        <BrandPage
-          onHomeClick={goHome}
-          onServicesClick={() => openSection('Services')}
-          onContactClick={goContact}
-          onServiceClick={(id) => {
-            const section = BRAND_SECTION_BY_ID[id];
-            if (section) openSection(section);
-            return Boolean(section);
-          }}
-        />
-      ) : activeSection === 'SEO & Search Growth' ? (
-        <SeoPage
-          onHomeClick={goHome}
-          onServicesClick={() => openSection('Services')}
-          onContactClick={goContact}
-          onServiceClick={(id) => {
-            const section = SEO_SECTION_BY_ID[id];
-            if (section) openSection(section);
-            return Boolean(section);
-          }}
-        />
-      ) : activeSection === 'Social Media Strategy' ? (
-        <SocialMediaStrategyPage
-          onHomeClick={goHome}
-          onServicesClick={() => openSection('Services')}
-          onSocialClick={() => openSection('Social Media Marketing')}
-          onContactClick={goContact}
-        />
-      ) : activeSection === 'Content Planning' ? (
-        <ContentPlanningPage
-          onHomeClick={goHome}
-          onServicesClick={() => openSection('Services')}
-          onSocialClick={() => openSection('Social Media Marketing')}
-          onContactClick={goContact}
-          onRelatedClick={(target) => openSection(target === 'management' ? 'Social Media Management' : target === 'creative' ? 'Creative Posts & Carousels' : target === 'reels' ? 'Reels & Short-Form Video' : target === 'profile' ? 'Profile Setup & Optimisation' : 'Social Media Strategy')}
-        />
-      ) : DetailTemplatePage ? (
-        <DetailTemplatePage onNavigate={openSection} />
-      ) : activeSection === 'Creative Posts & Carousels' ? (
-        <CreativePostsPage
-          onHomeClick={goHome}
-          onServicesClick={() => openSection('Services')}
-          onSocialClick={() => openSection('Social Media Marketing')}
-          onContactClick={goContact}
-          onRelatedClick={(target) => openSection(target === 'planning' ? 'Content Planning' : target === 'management' ? 'Social Media Management' : 'Meta Advertising')}
-        />
-      ) : activeSection === 'Social Media Marketing' ? (
-        <SocialMediaPage
-          onHomeClick={goHome}
-          onServicesClick={() => openSection('Services')}
-          onContactClick={goContact}
-          onStrategyClick={() => openSection('Social Media Strategy')}
-          onProfileClick={() => openSection('Profile Setup & Optimisation')}
-          onManagementClick={() => openSection('Social Media Management')}
-          onPostsClick={() => openSection('Creative Posts & Carousels')}
-          onServiceClick={(id) => openSection(SOCIAL_SECTION_BY_ID[id] ?? 'Contact')}
-        />
-      ) : activeSection === 'Profile Setup & Optimisation' ? (
-        <ProfileSetupPage
-          onHomeClick={goHome}
-          onServicesClick={() => openSection('Services')}
-          onSocialClick={() => openSection('Social Media Marketing')}
-          onContactClick={goContact}
-          onNavigate={openSection}
-        />
-      ) : activeSection === 'Digital Marketing' ? (
-        <DigitalMarketingPage
-          onHomeClick={goHome}
-          onServicesClick={() => openSection('Services')}
-          onContactClick={goContact}
-          onStrategyClick={() => openSection('Digital Marketing Strategy')}
-          onResearchClick={() => openSection('Audience & Competitor Research')}
-          onGoogleAdsClick={() => openSection('Google Search Ads')}
-          onDisplayYoutubeClick={() => openSection('Display & YouTube Advertising')}
-          onMetaAdsClick={() => openSection('Meta Advertising')}
-          onContentClick={() => openSection('Content Marketing')}
-          onEmailClick={() => openSection('Email Marketing')}
-          onLeadsClick={() => openSection('Lead Generation & Nurturing')}
-          onLandingClick={() => openSection('Landing Pages & CRO')}
-          onAnalyticsClick={() => openSection('Analytics & Conversion Tracking')}
-        />
-      ) : activeSection === 'Privacy Policy' ? (
-        <PrivacyPolicyPage onHomeClick={goHome} onContactClick={goContact} />
-      ) : activeSection === 'Terms & Conditions' ? (
-        <TermsPage onHomeClick={goHome} onContactClick={goContact} />
-      ) : activeSection === 'FAQ' ? (
-        <FaqPage onHomeClick={goHome} onContactClick={goContact} />
-      ) : isContactPage ? (
-        <ContactPage onHomeClick={() => openSection('Home')} />
-      ) : isBlogsPage ? (
-        <BlogComingSoon onContactClick={goContact} />
-      ) : isCareersPage ? (
-        <CareersPage onHomeClick={goHome} onContactClick={goContact} />
-      ) : isAboutPage ? (
-        <main ref={aboutMainRef}>
-          <TargetCursor spinDuration={2} hideDefaultCursor parallaxOn container={aboutMainRef} />
-          <AboutHero onHomeClick={() => openSection('Home')} />
-          <AboutStory />
-          <AboutPurpose />
-          <AboutProcess />
-          <AboutValues />
-          <AboutCta onCtaClick={() => openSection('Contact')} />
-        </main>
-      ) : isServicesPage ? (
-        <main>
-          <ServicesHero onHomeClick={() => openSection('Home')} />
-          <ServicesListing onServiceClick={(id) => openSection(id === 'digital-marketing' ? 'Digital Marketing' : id === 'social-media' ? 'Social Media Marketing' : id === 'seo-search' ? 'SEO & Search Growth' : id === 'brand-growth' ? 'Brand Growth & Creative' : 'Contact')} />
-          <ServicesCta onCtaClick={() => openSection('Contact')} />
-        </main>
-      ) : (
-        <main>
-          <HeroSection
-            onStartJourney={() => openSection('Contact')}
-            onExploreServices={() => openSection('Services')}
-          />
-
-          <ServicesSection
-            onServiceClick={(id) => openSection(id === 'digital-marketing' ? 'Digital Marketing' : id === 'social-media' ? 'Social Media Marketing' : id === 'seo-search' ? 'SEO & Search Growth' : id === 'brand-growth' ? 'Brand Growth & Creative' : 'Services')}
-            onNavigate={openSection}
-            onViewAllClick={() => openSection('Services')}
-          />
-
-          <WhyChooseUs />
-
-          <JourneySection />
-        </main>
-      )}
-
-      <Footer onNavigate={openSection} />
-      <ChatBot />
-    </div>
+      <PageLoader visible={isPageLoading} />
+      <div style={{ minHeight: '100vh', backgroundColor: '#ffffff' }}>
+        <Header activeTab={activeSection} onTabChange={openSection} onCtaClick={goContact} />
+        <RouteErrorBoundary key={path}>
+          <Suspense fallback={<div style={{ minHeight: '100vh' }} aria-busy="true" />}>{renderPage()}</Suspense>
+        </RouteErrorBoundary>
+        <Footer onNavigate={openSection} />
+        <ChatBot />
+      </div>
     </ClickSpark>
   );
 };

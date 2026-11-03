@@ -52,9 +52,16 @@ export const ROUTES: Record<string, string> = {
   'Privacy Policy': '/privacy-policy',
   'Terms & Conditions': '/terms-and-conditions',
   FAQ: '/faq',
-  Shop: '/shop',
   Careers: '/careers',
+  'Leads Dashboard': '/dashboard/leads',
+  'Campaigns Dashboard': '/dashboard/campaigns',
 };
+
+/** Shown for any URL that does not match a page. */
+export const NOT_FOUND_SECTION = 'Not Found';
+
+/** Internal pages that must not be indexed or listed in the sitemap. */
+export const PRIVATE_SECTIONS = new Set(['Leads Dashboard', 'Campaigns Dashboard']);
 
 export const normalise = (path: string): string => {
   if (!path) return '/';
@@ -80,9 +87,9 @@ export const sectionFromPath = (path: string): string => {
   if (clean === '/about' || clean.startsWith('/about/')) return 'About';
   if (clean === '/contact' || clean.startsWith('/contact/')) return 'Contact';
   if (clean === '/blogs' || clean.startsWith('/blogs/')) return 'Blogs';
-  if (clean === '/shop' || clean.startsWith('/shop/')) return 'Shop';
+  if (clean === '/dashboard') return 'Leads Dashboard';
 
-  return 'Home';
+  return NOT_FOUND_SECTION;
 };
 
 export const pathFromSection = (section: string): string => ROUTES[section] ?? '/';

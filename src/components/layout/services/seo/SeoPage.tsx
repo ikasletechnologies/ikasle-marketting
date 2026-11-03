@@ -17,6 +17,7 @@ import {
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
+import { splitReveal } from '../../../../lib/splitReveal';
 import { useGSAP } from '@gsap/react';
 import heroArt from '../../../../assets/seo-hero-art.png';
 import { ServicesCta } from '../ServicesCta';
@@ -70,7 +71,7 @@ export const SeoPage: React.FC<SeoPageProps> = ({ onHomeClick, onServicesClick, 
         type: 'lines',
         mask: 'lines',
         autoSplit: true,
-        onSplit: (self) => tl.from(self.lines, { yPercent: 115, duration: 1.2, stagger: 0.14 }, 0.3),
+        onSplit: (self) => splitReveal(self.lines, { yPercent: 115, duration: 1.2, stagger: 0.14 }, tl, 0.3),
       });
       gsap.to('.seo-hero-art img', { y: -8, x: 6, duration: 3.4, repeat: -1, yoyo: true, ease: 'sine.inOut' });
     });
@@ -163,7 +164,7 @@ export const SeoPage: React.FC<SeoPageProps> = ({ onHomeClick, onServicesClick, 
         type: 'words',
         mask: 'words',
         autoSplit: true,
-        onSplit: (self) => tl.from(self.words, { yPercent: 110, duration: 0.9, stagger: 0.07, ease: 'expo.out' }),
+        onSplit: (self) => splitReveal(self.words, { yPercent: 110, duration: 0.9, stagger: 0.07, ease: 'expo.out' }, tl),
       });
       tl.from('.seo-ready-button', { opacity: 0, y: 20, scale: 0.9, duration: 0.8, ease: 'back.out(1.8)' }, 0.45);
     });

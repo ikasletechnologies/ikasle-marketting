@@ -1,28 +1,19 @@
-import type React from 'react';
+import type { ComponentType } from 'react';
+import { lazyNamed } from '../../../../lib/lazyNamed';
 import type { ServicePageProps } from '../template/ServiceDetailTemplate';
-import { BrandDiscoveryPage } from './BrandDiscoveryPage';
-import { BrandStrategyPage } from './BrandStrategyPage';
-import { BrandMessagingPage } from './BrandMessagingPage';
-import { LogoIdentityPage } from './LogoIdentityPage';
-import { BrandGuidelinesPage } from './BrandGuidelinesPage';
-import { MarketingCollateralPage } from './MarketingCollateralPage';
-import { WebsiteDesignPage } from './WebsiteDesignPage';
-import { CreativeCampaignsPage } from './CreativeCampaignsPage';
-import { BrandExperiencePage } from './BrandExperiencePage';
-import { BrandLaunchPage } from './BrandLaunchPage';
 
 /** Brand Growth & Creative detail pages built on ServiceDetailTemplate, keyed by app section name. */
-export const BRAND_TEMPLATE_PAGES: Record<string, React.FC<ServicePageProps> | undefined> = {
-  'Brand Discovery & Audit': BrandDiscoveryPage,
-  'Brand Strategy & Positioning': BrandStrategyPage,
-  'Brand Messaging & Voice': BrandMessagingPage,
-  'Logo & Visual Identity': LogoIdentityPage,
-  'Brand Guidelines & Templates': BrandGuidelinesPage,
-  'Marketing Collateral Design': MarketingCollateralPage,
-  'Website & Landing Page Design': WebsiteDesignPage,
-  'Creative Campaigns & Storytelling': CreativeCampaignsPage,
-  'Brand Experience & Consistency': BrandExperiencePage,
-  'Brand Launch & Refresh': BrandLaunchPage,
+export const BRAND_TEMPLATE_PAGES: Record<string, ComponentType<ServicePageProps> | undefined> = {
+  'Brand Discovery & Audit': lazyNamed(() => import('./BrandDiscoveryPage'), 'BrandDiscoveryPage'),
+  'Brand Strategy & Positioning': lazyNamed(() => import('./BrandStrategyPage'), 'BrandStrategyPage'),
+  'Brand Messaging & Voice': lazyNamed(() => import('./BrandMessagingPage'), 'BrandMessagingPage'),
+  'Logo & Visual Identity': lazyNamed(() => import('./LogoIdentityPage'), 'LogoIdentityPage'),
+  'Brand Guidelines & Templates': lazyNamed(() => import('./BrandGuidelinesPage'), 'BrandGuidelinesPage'),
+  'Marketing Collateral Design': lazyNamed(() => import('./MarketingCollateralPage'), 'MarketingCollateralPage'),
+  'Website & Landing Page Design': lazyNamed(() => import('./WebsiteDesignPage'), 'WebsiteDesignPage'),
+  'Creative Campaigns & Storytelling': lazyNamed(() => import('./CreativeCampaignsPage'), 'CreativeCampaignsPage'),
+  'Brand Experience & Consistency': lazyNamed(() => import('./BrandExperiencePage'), 'BrandExperiencePage'),
+  'Brand Launch & Refresh': lazyNamed(() => import('./BrandLaunchPage'), 'BrandLaunchPage'),
 };
 
 /** Brand Growth & Creative overview card ids → app section names. */

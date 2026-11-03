@@ -178,7 +178,7 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onHomeClick, onContact
             <div className="careers-form-grid">
               <label className="careers-field">
                 <span>Full Name *</span>
-                <input name="fullName" type="text" placeholder="Your name" required minLength={2} maxLength={120} pattern="[A-Za-z][A-Za-z .'-]{1,119}" title="Please enter a valid name using letters and spaces." />
+                <input name="fullName" type="text" placeholder="Your name" required minLength={2} maxLength={120} pattern="[A-Za-z][A-Za-z .'\-]{1,119}" title="Please enter a valid name using letters and spaces." />
               </label>
               <label className="careers-field">
                 <span>Email Address *</span>
@@ -186,7 +186,7 @@ export const CareersPage: React.FC<CareersPageProps> = ({ onHomeClick, onContact
               </label>
               <label className="careers-field">
                 <span>Phone Number *</span>
-                <input name="phone" type="tel" inputMode="tel" placeholder="Your phone number" required maxLength={14} pattern="(?:\+91[\s-]?)?[6-9][0-9]{9}" title="Enter a valid 10-digit Indian phone number." />
+                <input name="phone" type="tel" inputMode="tel" placeholder="Your phone number" required maxLength={14} pattern="(?:\+91[\s\-]?)?[6-9][0-9]{9}" title="Enter a valid 10-digit Indian phone number." />
               </label>
               <label className="careers-field">
                 <span>Experience *</span>

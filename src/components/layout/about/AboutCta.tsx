@@ -3,6 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
+import { splitReveal } from '../../../lib/splitReveal';
 import { useGSAP } from '@gsap/react';
 import ctaBackground from '../../../assets/about-cta-blue-flow.png';
 import './AboutCta.css';
@@ -29,7 +30,7 @@ export const AboutCta: React.FC<AboutCtaProps> = ({ onCtaClick }) => {
         type: 'words',
         mask: 'words',
         autoSplit: true,
-        onSplit: (self) => tl.from(self.words, { yPercent: 110, rotation: 4, duration: 1, stagger: 0.07, ease: 'expo.out' }, 0.1),
+        onSplit: (self) => splitReveal(self.words, { yPercent: 110, rotation: 4, duration: 1, stagger: 0.07, ease: 'expo.out' }, tl, 0.1),
       });
       tl.from('.about-cta-button', { opacity: 0, scale: 0.85, duration: 0.9, ease: 'back.out(1.8)' }, 0.6);
     });

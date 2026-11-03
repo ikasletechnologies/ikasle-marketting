@@ -54,4 +54,5 @@ function Button({
   )
 }
 
+// oxlint-disable-next-line react/only-export-components -- shadcn convention: variants exported with the component
 export { Button, buttonVariants }

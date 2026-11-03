@@ -1,0 +1,71 @@
+# CI (IKAS-505): lint, typecheck, production build and E2E tests on every pull request.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Lint, typecheck & build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run build
+        env:
+          SITE_URL: ${{ vars.SITE_URL || 'https://www.ikaslemarketing.com' }}
+      - name: Server syntax check
+        run: node --check server/index.mjs
+
+  e2e:
+    name: Playwright E2E
+    runs-on: ubuntu-latest
+    needs: verify
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: npx playwright test
+        env:
+          CI: 'true'
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report
+          retention-days: 7
+
+  docker:
+    name: Docker image builds
+    runs-on: ubuntu-latest
+    needs: verify
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build --build-arg SITE_URL=https://www.ikaslemarketing.com -t ikasle-marketing:ci .
+      - name: Smoke-test the container
+        run: |
+          docker run -d --name ikasle -p 5000:5000 ikasle-marketing:ci
+          for i in $(seq 1 20); do curl -fsS http://localhost:5000/api/health && break; sleep 1; done
+          curl -fsS http://localhost:5000/ | grep -q '<div id="root">'
+          curl -fsS http://localhost:5000/sitemap.xml | grep -q '<urlset'
+          docker rm -f ikasle

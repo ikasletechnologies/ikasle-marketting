@@ -27,3 +27,10 @@ dist-ssr
 .env
 .env.*
 !server/.env.example
+
+# Local submission database (IKAS-401)
+server/data/
+
+# Playwright
+test-results/
+playwright-report/

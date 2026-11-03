@@ -3,6 +3,7 @@ import { Rocket } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
+import { splitReveal } from '../../../lib/splitReveal';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { useGSAP } from '@gsap/react';
 import step1 from '../../../assets/journey-1.png';
@@ -50,7 +51,7 @@ export const JourneySection: React.FC = () => {
         type: 'lines',
         mask: 'lines',
         autoSplit: true,
-        onSplit: (self) => tl.from(self.lines, { yPercent: 115, duration: 1.1, stagger: 0.14, ease: 'expo.out' }),
+        onSplit: (self) => splitReveal(self.lines, { yPercent: 115, duration: 1.1, stagger: 0.14, ease: 'expo.out' }, tl),
       });
       tl.from('.jr-subtitle', { opacity: 0, y: 18, duration: 0.9 }, 0.4)
         .from('.jr-rule', { scaleX: 0, transformOrigin: '0% 50%', duration: 0.9, ease: 'expo.out' }, 0.7);

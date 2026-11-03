@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, Send } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
+import { splitReveal } from '../../../../lib/splitReveal';
 import { useGSAP } from '@gsap/react';
 import heroArt from '../../../../assets/digital-hero-art.png';
 import motionBackground from '../../../../assets/about-cta-blue-flow.png';
@@ -94,7 +95,7 @@ export const DigitalMarketingPage: React.FC<DigitalMarketingPageProps> = ({
         type: 'lines',
         mask: 'lines',
         autoSplit: true,
-        onSplit: (self) => tl.from(self.lines, { yPercent: 115, duration: 1.2, stagger: 0.14 }, 0.3),
+        onSplit: (self) => splitReveal(self.lines, { yPercent: 115, duration: 1.2, stagger: 0.14 }, tl, 0.3),
       });
 
       // Art floats, and drifts a little with the pointer.
@@ -199,7 +200,7 @@ export const DigitalMarketingPage: React.FC<DigitalMarketingPageProps> = ({
         type: 'words',
         mask: 'words',
         autoSplit: true,
-        onSplit: (self) => tl.from(self.words, { yPercent: 110, duration: 0.9, stagger: 0.07, ease: 'expo.out' }, 0.35),
+        onSplit: (self) => splitReveal(self.words, { yPercent: 110, duration: 0.9, stagger: 0.07, ease: 'expo.out' }, tl, 0.35),
       });
       tl.from('.dm-motion-button', { opacity: 0, scale: 0.85, duration: 0.8, ease: 'back.out(1.8)' }, 0.7);
       gsap.to('.dm-motion-plane svg', { x: 6, y: -6, rotation: 4, duration: 2, repeat: -1, yoyo: true, ease: 'sine.inOut' });

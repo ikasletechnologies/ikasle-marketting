@@ -235,3 +235,13 @@ h1, h2, h3, h4, h5, h6 {
     @apply font-sans;
   }
 }
+/*
+ * GSAP SplitText masks (inline `overflow: clip` wrappers) clip at the line box. With the
+ * tight line-heights used on display headings that cut off descenders (g, y, p) and,
+ * with background-clip text, the bottom of gradient words. Extend the clip box without
+ * changing layout.
+ */
+:where(h1, h2, h3, h4) div[style*='overflow: clip'] {
+  padding-block: 0.14em;
+  margin-block: -0.14em;
+}

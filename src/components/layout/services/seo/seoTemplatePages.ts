@@ -1,28 +1,19 @@
-import type React from 'react';
+import type { ComponentType } from 'react';
+import { lazyNamed } from '../../../../lib/lazyNamed';
 import type { ServicePageProps } from '../template/ServiceDetailTemplate';
-import { SeoAuditPage } from './SeoAuditPage';
-import { KeywordResearchPage } from './KeywordResearchPage';
-import { TechnicalSeoPage } from './TechnicalSeoPage';
-import { OnPageSeoPage } from './OnPageSeoPage';
-import { LocalSeoPage } from './LocalSeoPage';
-import { GoogleBusinessProfilePage } from './GoogleBusinessProfilePage';
-import { ContentTopicPlanningPage } from './ContentTopicPlanningPage';
-import { OffPageSeoPage } from './OffPageSeoPage';
-import { EcommerceSeoPage } from './EcommerceSeoPage';
-import { SearchAnalyticsPage } from './SearchAnalyticsPage';
 
 /** SEO detail pages built on ServiceDetailTemplate, keyed by app section name. */
-export const SEO_TEMPLATE_PAGES: Record<string, React.FC<ServicePageProps> | undefined> = {
-  'SEO Audit & Strategy': SeoAuditPage,
-  'Keyword & Search Intent Research': KeywordResearchPage,
-  'Technical SEO': TechnicalSeoPage,
-  'On-Page SEO': OnPageSeoPage,
-  'Local SEO': LocalSeoPage,
-  'Google Business Profile': GoogleBusinessProfilePage,
-  'SEO Content & Topic Planning': ContentTopicPlanningPage,
-  'Off-Page SEO & Digital PR': OffPageSeoPage,
-  'E-Commerce SEO': EcommerceSeoPage,
-  'Search Analytics & Reporting': SearchAnalyticsPage,
+export const SEO_TEMPLATE_PAGES: Record<string, ComponentType<ServicePageProps> | undefined> = {
+  'SEO Audit & Strategy': lazyNamed(() => import('./SeoAuditPage'), 'SeoAuditPage'),
+  'Keyword & Search Intent Research': lazyNamed(() => import('./KeywordResearchPage'), 'KeywordResearchPage'),
+  'Technical SEO': lazyNamed(() => import('./TechnicalSeoPage'), 'TechnicalSeoPage'),
+  'On-Page SEO': lazyNamed(() => import('./OnPageSeoPage'), 'OnPageSeoPage'),
+  'Local SEO': lazyNamed(() => import('./LocalSeoPage'), 'LocalSeoPage'),
+  'Google Business Profile': lazyNamed(() => import('./GoogleBusinessProfilePage'), 'GoogleBusinessProfilePage'),
+  'SEO Content & Topic Planning': lazyNamed(() => import('./ContentTopicPlanningPage'), 'ContentTopicPlanningPage'),
+  'Off-Page SEO & Digital PR': lazyNamed(() => import('./OffPageSeoPage'), 'OffPageSeoPage'),
+  'E-Commerce SEO': lazyNamed(() => import('./EcommerceSeoPage'), 'EcommerceSeoPage'),
+  'Search Analytics & Reporting': lazyNamed(() => import('./SearchAnalyticsPage'), 'SearchAnalyticsPage'),
 };
 
 /** SEO & Search Growth overview card ids → app section names. */

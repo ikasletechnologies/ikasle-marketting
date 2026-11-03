@@ -49,7 +49,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <h2>Our Services</h2>
           <nav aria-label="Our services">
             {SERVICES.map((service) => (
-              <button type="button" key={service} onClick={() => onNavigate?.('Services')}>
+              <button type="button" key={service} onClick={() => onNavigate?.(service)}>
                 <img src={faviconImg} alt="" aria-hidden="true" />{service}
               </button>
             ))}

@@ -21,6 +21,7 @@ import {
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
+import { splitReveal } from '../../../lib/splitReveal';
 import { useGSAP } from '@gsap/react';
 import WebThreads from '../../effects/WebThreads';
 import digitalArt from '../../../assets/listing-digital.png';
@@ -128,7 +129,7 @@ export const ServicesListing: React.FC<ServicesListingProps> = ({ onServiceClick
         type: 'lines',
         mask: 'lines',
         autoSplit: true,
-        onSplit: (self) => head.from(self.lines, { yPercent: 110, duration: 1.1, ease: 'expo.out' }, 0.1),
+        onSplit: (self) => splitReveal(self.lines, { yPercent: 110, duration: 1.1, ease: 'expo.out' }, head, 0.1),
       });
       head.from('.listing-subtitle', { opacity: 0, y: 18, duration: 0.9 }, 0.5);
 

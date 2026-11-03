@@ -1,6 +1,6 @@
 'use client';
 
-import { forwardRef, useEffect, useImperativeHandle, useRef, type CSSProperties, type ReactNode } from 'react';
+import { forwardRef, useEffect, useLayoutEffect, useImperativeHandle, useRef, type CSSProperties, type ReactNode } from 'react';
 
 export type ClickSparkShape = 'line' | 'streak' | 'dot' | 'star';
 
@@ -180,7 +180,9 @@ const ClickSpark = forwardRef<ClickSparkHandle, ClickSparkProps>(
       disabled
     };
     const settingsRef = useRef(settings);
-    settingsRef.current = settings;
+    useLayoutEffect(() => {
+      settingsRef.current = settings;
+    });
 
     useEffect(() => {
       const root = rootRef.current;

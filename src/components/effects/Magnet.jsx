@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 
 const DEFAULT_SPRING = { stiffness: 170, damping: 16, mass: 1 };
 
@@ -106,7 +106,9 @@ const Magnet = ({
     onActiveChange
   };
   const settingsRef = useRef(settings);
-  settingsRef.current = settings;
+  useLayoutEffect(() => {
+    settingsRef.current = settings;
+  });
 
   useEffect(() => {
     const wrapper = wrapperRef.current;

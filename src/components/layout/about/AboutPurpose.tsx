@@ -3,6 +3,7 @@ import { Eye, Target } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
+import { splitReveal } from '../../../lib/splitReveal';
 import { useGSAP } from '@gsap/react';
 import './AboutPurpose.css';
 
@@ -36,7 +37,7 @@ export const AboutPurpose: React.FC = () => {
       SplitText.create('.about-purpose h2', {
         type: 'words',
         autoSplit: true,
-        onSplit: (self) => tl.from(self.words, { opacity: 0, y: 18, filter: 'blur(10px)', duration: 0.9, stagger: 0.08 }, 0.1),
+        onSplit: (self) => splitReveal(self.words, { opacity: 0, y: 18, filter: 'blur(10px)', duration: 0.9, stagger: 0.08 }, tl, 0.1),
       });
       tl.from('.about-purpose-card', { opacity: 0, y: 60, rotationX: -12, transformPerspective: 900, duration: 1.1, stagger: 0.18, ease: 'expo.out' }, 0.4)
         .from('.about-purpose-icon', { scale: 0, rotation: -120, duration: 0.9, stagger: 0.18, ease: 'back.out(1.8)' }, 0.7);

@@ -111,8 +111,9 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange, onCtaCli
   };
 
   const isSubItemActive = (item: { label: string; target: string }): boolean => {
-    if (effectiveSection === item.label) return true;
-    const itemPath = ROUTES[item.label];
+    // Match on target (the route key), not label: e.g. "Content Planning & Calendars" → "Content Planning".
+    if (effectiveSection === item.target) return true;
+    const itemPath = ROUTES[item.target];
     if (itemPath && (currentPath === itemPath || currentPath === `${itemPath}/`)) return true;
     return false;
   };

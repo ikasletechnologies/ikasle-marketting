@@ -12,7 +12,8 @@ class ApiClient {
   }
 
   private buildUrl(endpoint: string, params?: Record<string, string | number>): string {
-    const url = new URL(`${this.baseUrl}${endpoint}`);
+    // The second argument lets a relative base such as '/api' resolve against the current origin.
+    const url = new URL(`${this.baseUrl}${endpoint}`, window.location.origin);
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
         url.searchParams.append(key, String(value));

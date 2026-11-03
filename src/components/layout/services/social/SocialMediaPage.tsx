@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
+import { splitReveal } from '../../../../lib/splitReveal';
 import { useGSAP } from '@gsap/react';
 import heroArt from '../../../../assets/social-hero-art.png';
 import { ServicesCta } from '../ServicesCta';
@@ -71,7 +72,7 @@ export const SocialMediaPage: React.FC<SocialMediaPageProps> = ({
         type: 'lines',
         mask: 'lines',
         autoSplit: true,
-        onSplit: (self) => tl.from(self.lines, { yPercent: 115, duration: 1.2, stagger: 0.14 }, 0.3),
+        onSplit: (self) => splitReveal(self.lines, { yPercent: 115, duration: 1.2, stagger: 0.14 }, tl, 0.3),
       });
       gsap.to('.sm-hero-art img', { y: -12, rotation: 0.6, duration: 3.2, repeat: -1, yoyo: true, ease: 'sine.inOut' });
     });
@@ -169,7 +170,7 @@ export const SocialMediaPage: React.FC<SocialMediaPageProps> = ({
         type: 'words',
         mask: 'words',
         autoSplit: true,
-        onSplit: (self) => tl.from(self.words, { yPercent: 110, duration: 0.9, stagger: 0.08, ease: 'expo.out' }),
+        onSplit: (self) => splitReveal(self.words, { yPercent: 110, duration: 0.9, stagger: 0.08, ease: 'expo.out' }, tl),
       });
       tl.from('.sm-ready-button', { opacity: 0, scale: 0.85, duration: 0.8, ease: 'back.out(1.8)' }, 0.4);
     });

@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { gsap } from 'gsap';
 import { SplitText } from 'gsap/SplitText';
+import { splitReveal } from '../../../lib/splitReveal';
 import { useGSAP } from '@gsap/react';
 import aboutHeroImage from '../../../assets/about-hero-team.png';
 import './AboutHero.css';
@@ -29,7 +30,7 @@ export const AboutHero: React.FC<AboutHeroProps> = ({ onHomeClick }) => {
         type: 'lines',
         mask: 'lines',
         autoSplit: true,
-        onSplit: (self) => tl.from(self.lines, { yPercent: 115, duration: 1.2, stagger: 0.14 }, 0.4),
+        onSplit: (self) => splitReveal(self.lines, { yPercent: 115, duration: 1.2, stagger: 0.14 }, tl, 0.4),
       });
     });
   }, { scope: root });

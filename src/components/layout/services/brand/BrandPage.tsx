@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
+import { splitReveal } from '../../../../lib/splitReveal';
 import { useGSAP } from '@gsap/react';
 import heroArt from '../../../../assets/brand-hero-art.png';
 import { BRAND_ICONS } from './BrandIcons';
@@ -56,7 +57,7 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onHomeClick, onServicesCli
         type: 'lines',
         mask: 'lines',
         autoSplit: true,
-        onSplit: (self) => tl.from(self.lines, { yPercent: 115, duration: 1.2, stagger: 0.14 }, 0.3),
+        onSplit: (self) => splitReveal(self.lines, { yPercent: 115, duration: 1.2, stagger: 0.14 }, tl, 0.3),
       });
     });
 

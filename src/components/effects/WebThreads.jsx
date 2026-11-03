@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import './WebThreads.css';
+import { isSoftwareRenderer } from './gpu';
 
 const ROOT = 'web-threads-container';
 const CANVAS = 'web-threads-canvas';
@@ -379,7 +380,9 @@ export default function WebThreads({
     dpr: Math.max(0.5, dpr)
   };
   const settingsRef = useRef(settings);
-  settingsRef.current = settings;
+  useLayoutEffect(() => {
+    settingsRef.current = settings;
+  });
 
   useEffect(() => {
     const container = containerRef.current;
@@ -399,6 +402,9 @@ export default function WebThreads({
       canvas.remove();
       return undefined;
     }
+    // On CPU-rendered WebGL a single frame of this shader can take hundreds of ms, so
+    // draw a static, low-resolution frame (like reduced motion) to keep the page responsive.
+    const software = isSoftwareRenderer(gl);
 
     const vertex = compile(gl, gl.VERTEX_SHADER, VERTEX);
     const fragment = compile(gl, gl.FRAGMENT_SHADER, FRAGMENT);
@@ -490,7 +496,7 @@ export default function WebThreads({
 
     const resize = () => {
       const s = settingsRef.current;
-      const ratio = Math.min(window.devicePixelRatio || 1, s.dpr);
+      const ratio = Math.min(window.devicePixelRatio || 1, s.dpr, software ? 0.5 : Infinity);
       const width = Math.max(1, Math.round(container.clientWidth * ratio));
       const height = Math.max(1, Math.round(container.clientHeight * ratio));
       if (width === state.width && height === state.height) return;
@@ -594,11 +600,11 @@ export default function WebThreads({
       const s = settingsRef.current;
       const dt = state.last ? Math.min((now - state.last) / 1000, 0.1) : 1 / 60;
       state.last = now;
-      const reduced = prefersReduced();
+      const reduced = software || prefersReduced();
       state.clock += dt;
       if (state.introAt < 0) state.introAt = state.clock;
       if (!s.paused && !reduced) state.phase += dt * s.speed;
-      const focusing = updateFocus(s, dt, reduced);
+      const focusing = software ? false : updateFocus(s, dt, reduced);
       state.surges = state.surges.filter(
         surge => state.clock - surge.at < SURGE_SECONDS + (s.count - 1) * SURGE_STAGGER
       );

@@ -110,7 +110,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onHomeClick }) => {
               <div className="contact-form-grid">
                 <label className="contact-field">
                   <span>Full Name *</span>
-                  <input name="fullName" type="text" placeholder="Your name" required minLength={2} maxLength={120} pattern="[A-Za-z][A-Za-z .'-]{1,119}" title="Please enter a valid name using letters and spaces." />
+                  <input name="fullName" type="text" placeholder="Your name" required minLength={2} maxLength={120} pattern="[A-Za-z][A-Za-z .'\-]{1,119}" title="Please enter a valid name using letters and spaces." />
                 </label>
 
                 <label className="contact-field">
@@ -120,7 +120,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onHomeClick }) => {
 
                 <label className="contact-field">
                   <span>Phone Number *</span>
-                  <input name="phone" type="tel" inputMode="tel" placeholder="Your phone number" required maxLength={14} pattern="(?:\+91[\s-]?)?[6-9][0-9]{9}" title="Enter a valid 10-digit Indian phone number." />
+                  <input name="phone" type="tel" inputMode="tel" placeholder="Your phone number" required maxLength={14} pattern="(?:\+91[\s\-]?)?[6-9][0-9]{9}" title="Enter a valid 10-digit Indian phone number." />
                 </label>
 
                 <label className="contact-field">
