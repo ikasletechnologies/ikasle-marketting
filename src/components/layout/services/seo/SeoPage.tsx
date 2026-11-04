@@ -166,7 +166,9 @@ export const SeoPage: React.FC<SeoPageProps> = ({ onHomeClick, onServicesClick, 
         autoSplit: true,
         onSplit: (self) => splitReveal(self.words, { yPercent: 110, duration: 0.9, stagger: 0.07, ease: 'expo.out' }, tl),
       });
-      tl.from('.seo-ready-button', { opacity: 0, y: 20, scale: 0.9, duration: 0.8, ease: 'back.out(1.8)' }, 0.45);
+      // The CSS transform transition must be off while GSAP reads the end state; cleared for hover.
+      gsap.set('.seo-ready-button', { transition: 'none' });
+      tl.from('.seo-ready-button', { opacity: 0, y: 20, scale: 0.9, duration: 0.8, ease: 'back.out(1.8)', clearProps: 'transform,opacity,transition' }, 0.45);
     });
   }, { scope: root });
 

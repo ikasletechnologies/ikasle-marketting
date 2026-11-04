@@ -218,25 +218,10 @@
 .ps-hero-actions {
   display: flex;
   gap: 14px;
-  margin-bottom: 26px;
+  margin-bottom: 0;
   flex-wrap: wrap;
 }
 
-.ps-social-badges {
-  display: flex;
-  gap: 14px;
-}
-
-.ps-social-badge {
-  width: 20px;
-  height: 20px;
-  color: #071d35;
-  transition: color 0.2s ease;
-}
-
-.ps-social-badge:hover {
-  color: #00a99d;
-}
 
 .ps-hero-art {
   position: relative;

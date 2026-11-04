@@ -135,13 +135,15 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onHomeClick, onServicesCli
 
     // CTA card.
     mm.add('(prefers-reduced-motion: no-preference)', () => {
+      // The CSS transform transition must be off while GSAP reads the end state; cleared for hover.
+      gsap.set('.br-cta-button', { transition: 'none' });
       gsap.timeline({
         defaults: { ease: 'power3.out' },
         scrollTrigger: { trigger: '.br-cta', start: 'top 88%', once: true },
       })
         .from('.br-cta-card', { opacity: 0, y: 40, duration: 0.9, ease: 'expo.out' })
         .from('.br-cta-copy h2, .br-cta-copy p', { opacity: 0, x: -22, duration: 0.8, stagger: 0.12 }, 0.3)
-        .from('.br-cta-button', { opacity: 0, scale: 0.85, duration: 0.8, ease: 'back.out(1.8)' }, 0.5)
+        .from('.br-cta-button', { opacity: 0, scale: 0.85, duration: 0.8, ease: 'back.out(1.8)', clearProps: 'transform,opacity,transition' }, 0.5)
         .from('.br-cta-back', { opacity: 0, y: 10, duration: 0.6 }, 0.7);
     });
   }, { scope: root });

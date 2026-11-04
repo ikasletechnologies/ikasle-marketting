@@ -1,5 +1,5 @@
 .ss-page{--navy:#0b2b4c;--blue:#087eb7;--teal:#0aa5a3;--ink:#4b6377;--line:#dbe8ed;color:var(--navy);background:#fff;overflow:hidden}
-.ss-page button{font:inherit}
+:where(.ss-page) button{font:inherit}
 .ss-page h1,.ss-page h2,.ss-page h3,.ss-page h4{color:var(--navy);letter-spacing:-.025em;margin:0}
 .ss-page p,.ss-page ul{margin:0}
 .ss-page em{font-style:normal;color:var(--teal)}
@@ -22,7 +22,7 @@
 .ss-title-plain h1 em{color:var(--navy)}
 .ss-hero-copy>p{max-width:470px;color:var(--ink);font-size:16px;line-height:1.55}
 .ss-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
-.ss-button{display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:0 20px;border-radius:6px;border:1.5px solid var(--blue);font-weight:700;font-size:13px;cursor:pointer;transition:transform .25s,box-shadow .25s,background .25s}
+.ss-button{display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:0 20px;border-radius:6px;border:1.5px solid var(--blue);font-weight:700;font-size:14px;cursor:pointer;transition:transform .25s,box-shadow .25s,background .25s}
 .ss-button svg{width:15px;transition:transform .25s}
 .ss-button.primary{color:#fff;background:var(--blue);box-shadow:0 9px 22px #087eb733}
 .ss-button.primary:hover{transform:translateY(-2px);box-shadow:0 14px 28px #087eb744}
@@ -154,11 +154,11 @@
 .ss-cta h2 em{color:#3fe0d0}
 .ss-cta-copy p{margin-top:8px;color:#d9eef7;font-size:15px}
 .ss-cta-copy p em{color:#3fe0d0}
-.ss-cta-actions{display:flex;flex-direction:column;align-items:center;gap:14px}
-.ss-cta-button{display:inline-flex;align-items:center;gap:9px;min-height:46px;padding:0 24px;border:0;border-radius:6px;background:#fff;color:var(--navy);font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 10px 24px #00000026;transition:transform .25s}
+.ss-cta-actions{display:flex;flex:0 0 min(100%,310px);flex-direction:column;align-items:stretch;gap:12px}
+.ss-cta-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:46px;padding:0 24px;border:0;border-radius:6px;background:#fff;color:var(--navy);font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 10px 24px #00000026;transition:transform .25s}
 .ss-cta-button:hover{transform:translateY(-2px)}
 .ss-cta-button svg{width:15px}
-.ss-cta-back{display:inline-flex;align-items:center;gap:7px;border:0;background:none;color:#fff;font-size:12.5px;font-weight:600;cursor:pointer;opacity:.92}
+.ss-cta-back{display:inline-flex;align-items:center;justify-content:center;gap:7px;width:100%;min-height:24px;border:0;background:none;color:#fff;font-size:12.5px;font-weight:600;cursor:pointer;opacity:.92}
 .ss-cta-back:hover{opacity:1;text-decoration:underline}
 .ss-cta-back svg{width:14px}
 
@@ -247,7 +247,7 @@
   .ss-deliver-cols2 .ss-deliver-inner{grid-template-columns:1fr}
   .ss-faq-layout-split .ss-faq-inner,.ss-paired-inner{grid-template-columns:1fr;gap:20px}
   .ss-cta-inner{flex-direction:column;align-items:flex-start}
-  .ss-cta-actions{align-items:flex-start}
+  .ss-cta-actions{flex-basis:auto;width:min(100%,340px);align-items:stretch}
 }
 @media(max-width:620px){
   .ss-container{width:calc(100% - 32px)}

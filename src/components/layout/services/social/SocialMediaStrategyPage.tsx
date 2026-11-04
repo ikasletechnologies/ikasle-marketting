@@ -82,8 +82,6 @@ export const SocialMediaStrategyPage: React.FC<SocialMediaStrategyPageProps> = (
   onSocialClick,
   onContactClick,
 }) => {
-  void onHomeClick;
-  void onSocialClick;
   return (
     <main className="sms-page" id="sms-page-content">
       {/* 1. HERO SECTION */}
@@ -91,13 +89,13 @@ export const SocialMediaStrategyPage: React.FC<SocialMediaStrategyPageProps> = (
         <div className="sms-container sms-hero-container">
           <div className="sms-hero-content">
             <nav className="sms-breadcrumbs" aria-label="Breadcrumb">
-              <button type="button" onClick={onServicesClick} className="sms-breadcrumb-link">
-                Services
-              </button>
+              <button type="button" onClick={onHomeClick} className="sms-breadcrumb-link">Home</button>
               <ChevronRight size={13} className="sms-breadcrumb-sep" aria-hidden="true" />
-              <span className="sms-breadcrumb-current" aria-current="page">
-                Social Media Strategy
-              </span>
+              <button type="button" onClick={onServicesClick} className="sms-breadcrumb-link">Services</button>
+              <ChevronRight size={13} className="sms-breadcrumb-sep" aria-hidden="true" />
+              <button type="button" onClick={onSocialClick} className="sms-breadcrumb-link">Social Media Marketing</button>
+              <ChevronRight size={13} className="sms-breadcrumb-sep" aria-hidden="true" />
+              <span className="sms-breadcrumb-current" aria-current="page">Social Media Strategy</span>
             </nav>
 
             <h1 id="sms-hero-heading" className="sms-hero-title">
@@ -163,7 +161,7 @@ export const SocialMediaStrategyPage: React.FC<SocialMediaStrategyPageProps> = (
               <span className="sms-teal-text">Customers</span>
             </h2>
             <p className="sms-overview-description">
-              We don't just post content — we build a purposeful social media strategy
+              We don’t just post content — we build a purposeful social media strategy
               tailored to your brand, audience and goals. From platform selection to content
               planning, we help you show up, stand out and grow consistently.
             </p>
@@ -269,7 +267,7 @@ export const SocialMediaStrategyPage: React.FC<SocialMediaStrategyPageProps> = (
 
             <div className="sms-why-cta">
               <button type="button" className="sms-primary-btn" onClick={onContactClick}>
-                <span>Let's Build Your Social Presence</span>
+                <span>Let’s Build Your Social Presence</span>
                 <ArrowRight size={16} strokeWidth={2.2} className="sms-btn-arrow" aria-hidden="true" />
               </button>
             </div>

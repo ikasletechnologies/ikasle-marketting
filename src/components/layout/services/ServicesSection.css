@@ -1,7 +1,7 @@
 /* ===================== Home: What we do (interactive showcase) ===================== */
 .services-section{--hs-navy:#0b2b4c;--hs-blue:#0781b1;--hs-teal:#0aa5a3;--hs-ink:#4b6377;--hs-cycle:6s;position:relative;width:100%;padding:70px 0 100px;overflow:hidden;isolation:isolate;background:#fff}
 .services-container{position:relative;z-index:2;max-width:1380px;margin:0 auto;padding:0 48px}
-.services-section button{font:inherit}
+:where(.services-section) button{font:inherit}
 
 /* Header */
 .hs-header{max-width:760px;margin:0 auto 46px;text-align:center}
@@ -97,15 +97,15 @@
 .hs-typed{overflow:hidden;font-size:13px;font-weight:600;white-space:nowrap}
 .hs-caret{width:1.5px;height:17px;background:var(--hs-blue)}
 .hs-results{display:grid;gap:8px;margin:0;padding:0;list-style:none}
-.hs-results li{position:relative;display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:rgba(255,255,255,.08)}
+.hs-results li{position:relative;display:grid;grid-template-columns:26px minmax(0,1fr) 20px;align-items:center;column-gap:12px;min-height:48px;padding:10px 12px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:rgba(255,255,255,.08)}
 .hs-results li.hs-you{z-index:1;border-color:rgba(53,215,208,.6);background:linear-gradient(135deg,rgba(53,215,208,.28),rgba(7,129,177,.3));box-shadow:0 10px 24px -12px rgba(53,215,208,.7)}
-.hs-rank{display:grid;place-items:center;flex:none;width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.12);color:#fff;font-size:12px}
+.hs-rank{display:grid;place-items:center;width:26px;height:26px;margin:0;border-radius:8px;background:rgba(255,255,255,.12);color:#fff;font-size:12px;font-weight:800;line-height:1}
 .hs-you .hs-rank{background:var(--hs-teal)}
-.hs-results li>span{display:grid;flex:1;gap:4px}
-.hs-results strong{color:#fff;font-size:12.5px}
+.hs-results li>span{display:grid;min-width:0;gap:4px}
+.hs-results strong{color:#fff;font-size:12.5px;line-height:1.25}
 .hs-results em{display:block;height:4px;border-radius:9px;background:rgba(255,255,255,.18)}
 .hs-results em+em{width:60%}
-.hs-up{width:20px;color:#7fe3dc}
+.hs-up{display:block;width:20px;height:20px;margin:0;color:#7fe3dc}
 
 /* ---------- Scene: Brand ---------- */
 .hs-brand{position:relative;width:280px;height:280px}

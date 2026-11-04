@@ -135,17 +135,21 @@ export const ServicesListing: React.FC<ServicesListingProps> = ({ onServiceClick
 
       gsap.utils.toArray<HTMLElement>('.listing-card').forEach((card, i) => {
         const q = gsap.utils.selector(card);
+        // These carry CSS transform transitions, which would make GSAP capture the offset start
+        // position as final. Clearing afterwards restores the hover effects.
+        const clearProps = 'transform,opacity,transition';
+        gsap.set([card, ...q('.listing-feature'), ...q('.listing-button')], { transition: 'none' });
         const tl = gsap.timeline({
           defaults: { ease: 'power3.out' },
           scrollTrigger: { trigger: card, start: 'top 88%', once: true },
         });
-        tl.from(card, { opacity: 0, y: 60, duration: 1, delay: (i % 2) * 0.15, ease: 'expo.out' })
+        tl.from(card, { opacity: 0, y: 60, duration: 1, delay: (i % 2) * 0.15, ease: 'expo.out', clearProps })
           .from(q('.listing-number'), { opacity: 0, x: -18, duration: 0.7 }, 0.25)
           .from(q('.listing-art'), { opacity: 0, scale: 0.7, rotation: -8, filter: 'blur(14px)', duration: 1.2, ease: 'back.out(1.5)', clearProps: 'filter' }, 0.2)
           .from(q('.listing-card-title, .listing-card-desc'), { opacity: 0, y: 16, duration: 0.8, stagger: 0.1 }, 0.45)
-          .from(q('.listing-feature'), { opacity: 0, x: -18, duration: 0.6, stagger: 0.09 }, 0.65)
+          .from(q('.listing-feature'), { opacity: 0, x: -18, duration: 0.6, stagger: 0.09, clearProps }, 0.65)
           .from(q('.listing-feature-icon'), { scale: 0, rotation: -90, duration: 0.6, stagger: 0.09, ease: 'back.out(2.4)' }, 0.7)
-          .from(q('.listing-button'), { opacity: 0, y: 14, scale: 0.92, duration: 0.7, ease: 'back.out(1.8)' }, 1);
+          .from(q('.listing-button'), { opacity: 0, y: 14, scale: 0.92, duration: 0.7, ease: 'back.out(1.8)', clearProps }, 1);
       });
     });
 

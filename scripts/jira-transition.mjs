@@ -91,7 +91,7 @@ async function transitionIssue(issueKey, targetStatusName = 'Retest') {
             }
           })
         });
-      } catch (_) {}
+      } catch {}
 
       return true;
     } else {

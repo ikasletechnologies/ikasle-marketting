@@ -122,15 +122,42 @@ function text(value, maxLength = 2000) {
 }
 
 function isValidEmail(value) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) && value.length <= 254;
+  if (!value || typeof value !== 'string') return false;
+  const trimmed = value.trim();
+  if (/\s/.test(trimmed) || trimmed.length > 254) return false;
+  return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/.test(trimmed);
 }
 
 function isValidName(value) {
-  return /^[A-Za-z][A-Za-z .'-]{1,119}$/.test(value);
+  if (!value || typeof value !== 'string') return false;
+  const trimmed = value.trim();
+  return trimmed.length >= 2 && trimmed.length <= 120 && /^[A-Za-z\s]+$/.test(trimmed);
 }
 
 function isValidPhone(value) {
-  return !value || /^(?:\+91[\s-]?)?[6-9][0-9]{9}$/.test(value);
+  if (!value || typeof value !== 'string') return true;
+  const trimmed = value.trim();
+  if (!trimmed) return true;
+  if (/[^0-9+\s-]/.test(trimmed)) return false;
+  const plusCount = (trimmed.match(/\+/g) || []).length;
+  if (plusCount > 1 || (plusCount === 1 && !trimmed.startsWith('+'))) return false;
+  let digits = trimmed;
+  if (digits.startsWith('+91')) digits = digits.slice(3);
+  else if (digits.startsWith('91') && digits.replace(/[\s-]/g, '').length === 12) digits = digits.slice(2);
+  digits = digits.replace(/[\s-]/g, '');
+  return /^[6-9]\d{9}$/.test(digits);
+}
+
+function isValidMessage(value) {
+  if (!value || typeof value !== 'string') return false;
+  const trimmed = value.trim();
+  return trimmed.length >= 20 && trimmed.length <= 5000 && !/^(.)\1{19,}$/.test(trimmed);
+}
+
+function isValidBudget(value) {
+  if (!value || typeof value !== 'string') return false;
+  const trimmed = value.trim();
+  return trimmed.length > 0 && trimmed !== 'Select a budget range';
 }
 
 function isValidUrl(value) {
@@ -203,8 +230,24 @@ async function handleContact(request, response) {
     message: text(body.message, 5000),
   };
 
-  if (!isValidName(enquiry.fullName) || !isValidEmail(enquiry.email) || !enquiry.message || !enquiry.budget || !isValidPhone(enquiry.phone)) {
-    sendJson(response, 400, { ok: false, message: 'Please provide a valid name, email, phone number, budget, and message.' });
+  if (!isValidName(enquiry.fullName)) {
+    sendJson(response, 400, { ok: false, message: 'Please provide a valid full name (letters and spaces only, minimum 2 characters).' });
+    return;
+  }
+  if (!isValidEmail(enquiry.email)) {
+    sendJson(response, 400, { ok: false, message: 'Please provide a valid email address (e.g. name@gmail.com).' });
+    return;
+  }
+  if (!isValidPhone(enquiry.phone)) {
+    sendJson(response, 400, { ok: false, message: 'Please provide a valid 10-digit Indian phone number (e.g. 9876543210).' });
+    return;
+  }
+  if (!isValidBudget(enquiry.budget)) {
+    sendJson(response, 400, { ok: false, message: 'Please select a valid budget range.' });
+    return;
+  }
+  if (!isValidMessage(enquiry.message)) {
+    sendJson(response, 400, { ok: false, message: 'Please provide a message with at least 20 characters.' });
     return;
   }
 

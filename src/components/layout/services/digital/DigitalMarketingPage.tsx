@@ -202,7 +202,9 @@ export const DigitalMarketingPage: React.FC<DigitalMarketingPageProps> = ({
         autoSplit: true,
         onSplit: (self) => splitReveal(self.words, { yPercent: 110, duration: 0.9, stagger: 0.07, ease: 'expo.out' }, tl, 0.35),
       });
-      tl.from('.dm-motion-button', { opacity: 0, scale: 0.85, duration: 0.8, ease: 'back.out(1.8)' }, 0.7);
+      // The CSS transform transition must be off while GSAP reads the end state; cleared for hover.
+      gsap.set('.dm-motion-button', { transition: 'none' });
+      tl.from('.dm-motion-button', { opacity: 0, scale: 0.85, duration: 0.8, ease: 'back.out(1.8)', clearProps: 'transform,opacity,transition' }, 0.7);
       gsap.to('.dm-motion-plane svg', { x: 6, y: -6, rotation: 4, duration: 2, repeat: -1, yoyo: true, ease: 'sine.inOut' });
     });
   }, { scope: root });

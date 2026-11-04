@@ -172,7 +172,9 @@ export const SocialMediaPage: React.FC<SocialMediaPageProps> = ({
         autoSplit: true,
         onSplit: (self) => splitReveal(self.words, { yPercent: 110, duration: 0.9, stagger: 0.08, ease: 'expo.out' }, tl),
       });
-      tl.from('.sm-ready-button', { opacity: 0, scale: 0.85, duration: 0.8, ease: 'back.out(1.8)' }, 0.4);
+      // The CSS transform transition must be off while GSAP reads the end state; cleared for hover.
+      gsap.set('.sm-ready-button', { transition: 'none' });
+      tl.from('.sm-ready-button', { opacity: 0, scale: 0.85, duration: 0.8, ease: 'back.out(1.8)', clearProps: 'transform,opacity,transition' }, 0.4);
     });
   }, { scope: root });
 

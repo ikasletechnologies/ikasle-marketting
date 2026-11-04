@@ -122,6 +122,8 @@ export const WhyChooseUs: React.FC = () => {
       const mm = gsap.matchMedia();
 
       mm.add('(prefers-reduced-motion: no-preference)', () => {
+        // The CSS transform transition must be off while GSAP reads the end state; cleared for hover.
+        gsap.set('.why-feature-item', { transition: 'none' });
         const tl = gsap.timeline({
           defaults: { ease: 'power3.out' },
           scrollTrigger: {
@@ -143,6 +145,7 @@ export const WhyChooseUs: React.FC = () => {
               duration: 0.75,
               stagger: 0.1,
               ease: 'back.out(1.4)',
+              clearProps: 'transform,opacity,transition',
             },
             0.4
           );

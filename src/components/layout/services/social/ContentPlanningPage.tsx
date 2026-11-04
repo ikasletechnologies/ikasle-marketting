@@ -43,7 +43,7 @@ export const ContentPlanningPage: React.FC<Props> = (props) => {
   return <main className="cp-page">
     <section className="cp-hero"><img src={heroImg} alt="Laptop showing a content calendar" className="cp-hero-image" />
       <div className="cp-container cp-hero-inner"><div className="cp-hero-copy">
-        <nav className="cp-breadcrumb"><button onClick={props.onHomeClick}>Home</button><span>/</span><button onClick={props.onServicesClick}>Services</button><span>/</span><button onClick={props.onSocialClick}>Social Media</button><span>/ Content Planning</span></nav>
+        <nav className="cp-breadcrumb"><button onClick={props.onHomeClick}>Home</button><span>/</span><button onClick={props.onServicesClick}>Services</button><span>/</span><button onClick={props.onSocialClick}>Social Media Marketing</button><span>/</span><span aria-current="page">Content Planning &amp; Calendars</span></nav>
         <span className="cp-eyebrow">CONTENT PLANNING &amp; CALENDARS</span><h1>A clear plan.<br/><em>A consistent brand story.</em></h1>
         <p>Bring your ideas, campaigns and publishing schedule together in a practical content calendar.</p>
         <div className="cp-actions"><button className="cp-button primary" onClick={props.onContactClick}>Discuss Your Content Calendar <ArrowRight/></button><button className="cp-button ghost" onClick={props.onServicesClick}>Explore the Service</button></div>

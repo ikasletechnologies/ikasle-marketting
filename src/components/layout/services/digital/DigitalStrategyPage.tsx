@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   ArrowRight, BarChart3, Check, ChevronDown, CircleCheck, ClipboardCheck,
   Coins, FileSearch, Mail, MessageSquareText, Play,
-  Search, Send, Settings2, Target, Users, Waypoints
+  Search, Settings2, Target, Users
 } from 'lucide-react';
 import './DigitalStrategyPage.css';
 
@@ -114,8 +114,6 @@ export const DigitalStrategyPage: React.FC<DigitalStrategyPageProps> = ({ onHome
           <div className="faq-list">{FAQS.map((faq, i) => <article className={openFaq === i ? 'is-open' : ''} key={faq.q}><button onClick={() => setOpenFaq(openFaq === i ? -1 : i)} aria-expanded={openFaq === i}><span><b>{openFaq === i ? '−' : '+'}</b>{faq.q}</span><ChevronDown /></button><div className="faq-answer"><p>{faq.a}</p></div></article>)}</div>
         </div>
       </section>
-
-      <section className="strategy-final" data-reveal><div className="strategy-shell"><Waypoints /><div><p className="strategy-eyebrow">READY FOR A CLEARER DIRECTION?</p><h2>Turn your next move into a focused plan.</h2></div><button className="strategy-primary" onClick={onContactClick}>Start a Conversation <Send /></button></div></section>
     </main>
   );
 };

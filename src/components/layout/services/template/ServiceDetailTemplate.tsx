@@ -120,7 +120,7 @@ export const ServiceDetailTemplate: React.FC<{ data: ServiceTemplateData; onNavi
   const HelpIcon = d.helpIcon;
   const CtaIcon = d.ctaIcon;
   const toggleLeft = d.faqStyle === 'plus-left' || d.faqStyle === 'chevron-left';
-  const parent = d.parent ?? { crumb: 'Social Media', section: 'Social Media Marketing' };
+  const parent = d.parent ?? { crumb: 'Social Media Marketing', section: 'Social Media Marketing' };
   const label = (k: SectionKey) => d.labels?.[k] ?? DEFAULT_LABELS[k];
   const eyebrow = (k: SectionKey) => (label(k) ? <span className="ss-eyebrow">{label(k)}</span> : null);
   const relatedStyle = d.relatedStyle ?? 'default';
@@ -140,9 +140,12 @@ export const ServiceDetailTemplate: React.FC<{ data: ServiceTemplateData; onNavi
       gsap.to('.ss-float', { y: -10, duration: 2.8, stagger: { each: 0.55, from: 'start' }, ...loop });
       gsap.to('.ss-hero-glow', { scale: 1.08, duration: 5, ...loop });
 
+      // CSS transform transitions must be off while GSAP reads the end state, or it captures
+      // the offset start position as final. Clearing afterwards restores hover effects.
       const reveal = (targets: string, trigger: string, vars: gsap.TweenVars = {}) => {
         if (!root.current?.querySelector(trigger)) return;
-        gsap.from(targets, { y: 34, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08, ...vars, scrollTrigger: once(trigger) });
+        gsap.set(targets, { transition: 'none' });
+        gsap.from(targets, { y: 34, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08, clearProps: 'transform,opacity,transition', ...vars, scrollTrigger: once(trigger) });
       };
 
       reveal('.ss-highlights article', '.ss-highlights', { stagger: 0.12 });
@@ -166,8 +169,9 @@ export const ServiceDetailTemplate: React.FC<{ data: ServiceTemplateData; onNavi
       reveal('.ss-process > .ss-container > :not(.ss-steps)', '.ss-process');
       // Step layouts differ, so only animate the pieces this layout renders.
       const has = (sel: string) => Boolean(root.current?.querySelector(sel));
+      gsap.set('.ss-steps article', { transition: 'none' });
       const steps = gsap.timeline({ scrollTrigger: once('.ss-steps') })
-        .from('.ss-steps article', { y: 26, opacity: 0, duration: 0.8, stagger: 0.18, ease: 'power3.out' })
+        .from('.ss-steps article', { y: 26, opacity: 0, duration: 0.8, stagger: 0.18, ease: 'power3.out', clearProps: 'transform,opacity,transition' })
         .from('.ss-steps b', { scale: 0, duration: 0.6, stagger: 0.18, ease: 'back.out(3)' }, 0.1);
       if (has('.ss-step-icon')) steps.from('.ss-step-icon', { scale: 0, rotation: -45, duration: 0.6, stagger: 0.18, ease: 'back.out(2.5)' }, 0.25);
       if (has('.ss-connector')) steps.from('.ss-connector', { scaleX: 0, transformOrigin: '0% 50%', duration: 0.7, stagger: 0.18, ease: 'power2.inOut' }, 0.35);
@@ -262,7 +266,7 @@ export const ServiceDetailTemplate: React.FC<{ data: ServiceTemplateData; onNavi
               <button onClick={() => onNavigate('Home')}>Home</button><span>/</span>
               <button onClick={() => onNavigate('Services')}>Services</button><span>/</span>
               <button onClick={() => onNavigate(parent.section)}>{parent.crumb}</button><span>/</span>
-              <span className="ss-current">{d.crumb}</span>
+              <span className="ss-current" aria-current="page">{d.crumb}</span>
             </nav>
             <span className="ss-eyebrow">{d.eyebrow}</span>
             <h1>{d.title[0]}<br /><em>{d.title[1]}</em></h1>

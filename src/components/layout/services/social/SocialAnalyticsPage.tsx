@@ -123,7 +123,7 @@ const data: ServiceTemplateData = {
     { icon: Megaphone, title: 'Social Media Advertising', text: 'Reach the right audience with targeted social campaigns.', target: 'Social Media Advertising' },
   ],
   ctaTitle: <>Make your next social decision<br /><em>better informed.</em></>,
-  ctaText: <>Let’s discuss your <em>channels</em>, <em>goals</em> and <em>reporting</em> needs.</>,
+  ctaText: <>Let&apos;s discuss your <em>channels</em>, <em>goals</em> and <em>reporting</em> needs.</>,
   ctaTone: 'dark',
   animate: () => {
     gsap.timeline({ repeat: -1, repeatDelay: 1.2, delay: 0.8 })

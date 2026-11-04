@@ -5,6 +5,7 @@ import ClickSpark from './components/effects/ClickSpark';
 import PageLoader from './components/ui/PageLoader';
 import ChatBot from './components/ui/ChatBot';
 import { RouteErrorBoundary } from './components/ui/RouteErrorBoundary';
+import { ServicesCta } from './components/layout/services/ServicesCta';
 import { SOCIAL_SECTION_BY_ID, SOCIAL_TEMPLATE_PAGES } from './components/layout/services/social/socialTemplatePages';
 import { SEO_SECTION_BY_ID, SEO_TEMPLATE_PAGES } from './components/layout/services/seo/seoTemplatePages';
 import { BRAND_SECTION_BY_ID, BRAND_TEMPLATE_PAGES } from './components/layout/services/brand/brandTemplatePages';
@@ -59,6 +60,23 @@ const DIGITAL_DETAIL_PAGES: Record<string, typeof AnalyticsTrackingPage> = {
   'Google Search Ads': GoogleSearchAdsPage,
   'Audience & Competitor Research': AudienceResearchPage,
 };
+/** Custom detail pages that do not already render their own closing CTA. */
+const DETAIL_PAGES_NEED_CTA = new Set([
+  'Digital Marketing Strategy',
+  'Display & YouTube Advertising',
+  'Email Marketing',
+  'Analytics & Conversion Tracking',
+  'Landing Pages & CRO',
+  'Lead Generation & Nurturing',
+  'Content Marketing',
+  'Meta Advertising',
+  'Google Search Ads',
+  'Audience & Competitor Research',
+  'Social Media Strategy',
+  'Profile Setup & Optimisation',
+  'Content Planning',
+  'Creative Posts & Carousels',
+]);
 
 const currentLocation = () => normalise(window.location.pathname);
 
@@ -249,7 +267,17 @@ export const App: React.FC = () => {
       <div style={{ minHeight: '100vh', backgroundColor: '#ffffff' }}>
         <Header activeTab={activeSection} onTabChange={openSection} onCtaClick={goContact} />
         <RouteErrorBoundary key={path}>
-          <Suspense fallback={<div style={{ minHeight: '100vh' }} aria-busy="true" />}>{renderPage()}</Suspense>
+          <Suspense fallback={<div style={{ minHeight: '100vh' }} aria-busy="true" />}>
+            {renderPage()}
+            {DETAIL_PAGES_NEED_CTA.has(activeSection) && (
+              <ServicesCta
+                title="Ready to turn your next idea into action?"
+                subtitle="Tell us what you want to achieve. We'll help you shape the right next step."
+                buttonLabel="Start a Conversation"
+                onCtaClick={goContact}
+              />
+            )}
+          </Suspense>
         </RouteErrorBoundary>
         <Footer onNavigate={openSection} />
         <ChatBot />

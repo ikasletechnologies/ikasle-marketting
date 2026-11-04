@@ -111,9 +111,9 @@ export const ProfileSetupPage: React.FC<ProfileSetupPageProps> = ({
                 <span aria-hidden="true">/</span>
                 <button type="button" onClick={onServicesClick}>Services</button>
                 <span aria-hidden="true">/</span>
-                <button type="button" onClick={onSocialClick}>Social Media</button>
+                <button type="button" onClick={onSocialClick}>Social Media Marketing</button>
                 <span aria-hidden="true">/</span>
-                <span aria-current="page">Profile Setup</span>
+                <span aria-current="page">Profile Setup &amp; Optimisation</span>
               </nav>
 
               <span className="ps-eyebrow">PROFILE SETUP & OPTIMISATION</span>
@@ -138,20 +138,6 @@ export const ProfileSetupPage: React.FC<ProfileSetupPageProps> = ({
                 <button type="button" className="ps-btn-outline" onClick={onServicesClick}>
                   Explore the Service
                 </button>
-              </div>
-
-              <div className="ps-social-badges">
-                <svg viewBox="0 0 24 24" aria-hidden="true" className="ps-social-badge ps-social-instagram">
-                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5" fill="none" stroke="currentColor" strokeWidth="2"/>
-                  <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" strokeWidth="2"/>
-                  <circle cx="16.5" cy="7.5" r="1.5" fill="currentColor"/>
-                </svg>
-                <svg viewBox="0 0 24 24" aria-hidden="true" className="ps-social-badge ps-social-facebook">
-                  <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987H5.916v-2.838h2.417v-1.978c0-1.397.125-2.347 1.138-2.347 1.05 0 1.261.722 1.261 1.309v1.846h3.357l-.546 2.838H13.13v6.987C17.542 21.128 21 16.991 21 12c0-5.523-4.477-10-10-10z"/>
-                </svg>
-                <svg viewBox="0 0 24 24" aria-hidden="true" className="ps-social-badge ps-social-linkedin">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.06 2.06 0 0 1 2.062-2.062c1.137 0 2.062.925 2.062 2.062 0 1.136-.925 2.063-2.062 2.063a2.063 2.063 0 0 1-2.062-2.063zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .777 0 1.75v20.5c0 .974.792 1.75 1.771 1.75h20.451C23.2 24 24 23.223 24 22.25v-20.5C24 .777 23.2 0 22.225 0z"/>
-                </svg>
               </div>
             </div>
             <div className="ps-hero-art" aria-hidden="true">

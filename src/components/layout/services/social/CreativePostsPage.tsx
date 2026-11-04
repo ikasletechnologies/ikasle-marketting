@@ -196,8 +196,10 @@ export const CreativePostsPage: React.FC<Props> = (props) => {
       gsap.to('.cr-hero-glow', { scale: 1.08, duration: 5, ...loop });
 
       /* Scroll reveals */
-      const reveal = (targets: string, trigger: string, vars: gsap.TweenVars = {}) =>
-        gsap.from(targets, { y: 34, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08, ...vars, scrollTrigger: { trigger, start: 'top 82%', once: true } });
+      const reveal = (targets: string, trigger: string, vars: gsap.TweenVars = {}) => {
+        gsap.set(targets, { transition: 'none' });
+        gsap.from(targets, { y: 34, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08, clearProps: 'transform,opacity,transition', ...vars, scrollTrigger: { trigger, start: 'top 82%', once: true } });
+      };
 
       reveal('.cr-overview-copy > *', '.cr-overview');
       reveal('.cr-help', '.cr-overview', { x: 30, y: 0, delay: 0.15 });
@@ -264,8 +266,8 @@ export const CreativePostsPage: React.FC<Props> = (props) => {
             <nav className="cr-breadcrumb" aria-label="Breadcrumb">
               <button onClick={props.onHomeClick}>Home</button><span>/</span>
               <button onClick={props.onServicesClick}>Services</button><span>/</span>
-              <button onClick={props.onSocialClick}>Social Media</button><span>/</span>
-              <span className="cr-current">Creative Posts</span>
+              <button onClick={props.onSocialClick}>Social Media Marketing</button><span>/</span>
+              <span className="cr-current" aria-current="page">Creative Posts &amp; Carousels</span>
             </nav>
             <span className="cr-eyebrow">CREATIVE POSTS &amp; CAROUSELS</span>
             <h1>Make the scroll pause.<br /><em>Make your message clear.</em></h1>
