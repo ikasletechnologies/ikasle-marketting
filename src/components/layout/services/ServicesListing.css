@@ -6,17 +6,6 @@
   isolation: isolate;
 }
 
-.services-listing-webthreads {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-  overflow: hidden;
-  opacity: 0.55;
-}
-
 .listing-inner {
   position: relative;
   z-index: 2;

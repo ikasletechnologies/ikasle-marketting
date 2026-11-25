@@ -6,10 +6,10 @@ import PageLoader from './components/ui/PageLoader';
 import ChatBot from './components/ui/ChatBot';
 import { RouteErrorBoundary } from './components/ui/RouteErrorBoundary';
 import { ServicesCta } from './components/layout/services/ServicesCta';
-import { SOCIAL_SECTION_BY_ID, SOCIAL_TEMPLATE_PAGES } from './components/layout/services/social/socialTemplatePages';
-import { SEO_SECTION_BY_ID, SEO_TEMPLATE_PAGES } from './components/layout/services/seo/seoTemplatePages';
-import { BRAND_SECTION_BY_ID, BRAND_TEMPLATE_PAGES } from './components/layout/services/brand/brandTemplatePages';
-import { DIGITAL_RELATED_SECTIONS } from './components/layout/services/digital/digitalRelated';
+import { SOCIAL_SECTION_BY_ID } from './components/layout/services/social/socialTemplatePages';
+import { SEO_SECTION_BY_ID } from './components/layout/services/seo/seoTemplatePages';
+import { BRAND_SECTION_BY_ID } from './components/layout/services/brand/brandTemplatePages';
+import { landingPageFor } from './components/layout/services/landing/landingPages';
 import { lazyNamed } from './lib/lazyNamed';
 import { NOT_FOUND_SECTION, normalise, pathFromSection, sectionFromPath } from './routes';
 import { getSectionMeta } from './seo/meta';
@@ -30,53 +30,10 @@ const PrivacyPolicyPage = lazyNamed(() => import('./components/layout/legal/Lega
 const TermsPage = lazyNamed(() => import('./components/layout/legal/LegalPages'), 'TermsPage');
 const FaqPage = lazyNamed(() => import('./components/layout/legal/LegalPages'), 'FaqPage');
 const DigitalMarketingPage = lazyNamed(() => import('./components/layout/services/digital/DigitalMarketingPage'), 'DigitalMarketingPage');
-const DigitalStrategyPage = lazyNamed(() => import('./components/layout/services/digital/DigitalStrategyPage'), 'DigitalStrategyPage');
-const AudienceResearchPage = lazyNamed(() => import('./components/layout/services/digital/AudienceResearchPage'), 'AudienceResearchPage');
-const GoogleSearchAdsPage = lazyNamed(() => import('./components/layout/services/digital/GoogleSearchAdsPage'), 'GoogleSearchAdsPage');
-const DisplayYoutubePage = lazyNamed(() => import('./components/layout/services/digital/DisplayYoutubePage'), 'DisplayYoutubePage');
-const MetaAdsPage = lazyNamed(() => import('./components/layout/services/digital/MetaAdsPage'), 'MetaAdsPage');
-const ContentMarketingPage = lazyNamed(() => import('./components/layout/services/digital/ContentMarketingPage'), 'ContentMarketingPage');
-const EmailMarketingPage = lazyNamed(() => import('./components/layout/services/digital/EmailMarketingPage'), 'EmailMarketingPage');
-const LeadGenerationPage = lazyNamed(() => import('./components/layout/services/digital/LeadGenerationPage'), 'LeadGenerationPage');
-const LandingCroPage = lazyNamed(() => import('./components/layout/services/digital/LandingCroPage'), 'LandingCroPage');
-const AnalyticsTrackingPage = lazyNamed(() => import('./components/layout/services/digital/AnalyticsTrackingPage'), 'AnalyticsTrackingPage');
 const BrandPage = lazyNamed(() => import('./components/layout/services/brand/BrandPage'), 'BrandPage');
 const SeoPage = lazyNamed(() => import('./components/layout/services/seo/SeoPage'), 'SeoPage');
 const SocialMediaPage = lazyNamed(() => import('./components/layout/services/social/SocialMediaPage'), 'SocialMediaPage');
-const SocialMediaStrategyPage = lazyNamed(() => import('./components/layout/services/social/SocialMediaStrategyPage'), 'SocialMediaStrategyPage');
-const ProfileSetupPage = lazyNamed(() => import('./components/layout/services/social/ProfileSetupPage'), 'ProfileSetupPage');
-const ContentPlanningPage = lazyNamed(() => import('./components/layout/services/social/ContentPlanningPage'), 'ContentPlanningPage');
-const CreativePostsPage = lazyNamed(() => import('./components/layout/services/social/CreativePostsPage'), 'CreativePostsPage');
 
-/** Digital sub-pages that share one prop signature. */
-const DIGITAL_DETAIL_PAGES: Record<string, typeof AnalyticsTrackingPage> = {
-  'Analytics & Conversion Tracking': AnalyticsTrackingPage,
-  'Landing Pages & CRO': LandingCroPage,
-  'Lead Generation & Nurturing': LeadGenerationPage,
-  'Email Marketing': EmailMarketingPage,
-  'Content Marketing': ContentMarketingPage,
-  'Meta Advertising': MetaAdsPage,
-  'Display & YouTube Advertising': DisplayYoutubePage,
-  'Google Search Ads': GoogleSearchAdsPage,
-  'Audience & Competitor Research': AudienceResearchPage,
-};
-/** Custom detail pages that do not already render their own closing CTA. */
-const DETAIL_PAGES_NEED_CTA = new Set([
-  'Digital Marketing Strategy',
-  'Display & YouTube Advertising',
-  'Email Marketing',
-  'Analytics & Conversion Tracking',
-  'Landing Pages & CRO',
-  'Lead Generation & Nurturing',
-  'Content Marketing',
-  'Meta Advertising',
-  'Google Search Ads',
-  'Audience & Competitor Research',
-  'Social Media Strategy',
-  'Profile Setup & Optimisation',
-  'Content Planning',
-  'Creative Posts & Carousels',
-]);
 
 const currentLocation = () => normalise(window.location.pathname);
 
@@ -141,29 +98,17 @@ export const App: React.FC = () => {
   const goHome = () => openSection('Home');
   const goServices = () => openSection('Services');
   const goContact = () => openSection('Contact');
-  const openDigitalRelated = (id: string) => openSection(DIGITAL_RELATED_SECTIONS[id] ?? 'Digital Marketing');
   const openFromMap = (map: Record<string, string>) => (id: string) => {
     const section = map[id];
     if (section) openSection(section);
     return Boolean(section);
   };
 
-  const DetailTemplatePage = SOCIAL_TEMPLATE_PAGES[activeSection] ?? SEO_TEMPLATE_PAGES[activeSection] ?? BRAND_TEMPLATE_PAGES[activeSection];
-  const DigitalDetailPage = DIGITAL_DETAIL_PAGES[activeSection];
+  const LandingPage = landingPageFor(activeSection);
 
   const renderPage = (): React.ReactNode => {
-    if (DigitalDetailPage) {
-      return (
-        <DigitalDetailPage
-          onHomeClick={goHome}
-          onServicesClick={goServices}
-          onDigitalClick={() => openSection('Digital Marketing')}
-          onContactClick={goContact}
-          onRelatedClick={openDigitalRelated}
-        />
-      );
-    }
-    if (DetailTemplatePage) return <DetailTemplatePage onNavigate={openSection} />;
+    // Service detail pages share one landing template; keyed so state resets between services.
+    if (LandingPage) return <LandingPage key={activeSection} section={activeSection} onNavigate={openSection} />;
 
     switch (activeSection) {
       case 'Home':
@@ -188,8 +133,6 @@ export const App: React.FC = () => {
         return <TermsPage onHomeClick={goHome} onContactClick={goContact} />;
       case 'FAQ':
         return <FaqPage onHomeClick={goHome} onContactClick={goContact} />;
-      case 'Digital Marketing Strategy':
-        return <DigitalStrategyPage onHomeClick={goHome} onServicesClick={goServices} onDigitalClick={() => openSection('Digital Marketing')} onContactClick={goContact} />;
       case 'Digital Marketing':
         return (
           <DigitalMarketingPage
@@ -225,36 +168,6 @@ export const App: React.FC = () => {
             onServiceClick={(id) => openSection(SOCIAL_SECTION_BY_ID[id] ?? 'Contact')}
           />
         );
-      case 'Social Media Strategy':
-        return <SocialMediaStrategyPage onHomeClick={goHome} onServicesClick={goServices} onSocialClick={() => openSection('Social Media Marketing')} onContactClick={goContact} />;
-      case 'Profile Setup & Optimisation':
-        return <ProfileSetupPage onHomeClick={goHome} onServicesClick={goServices} onSocialClick={() => openSection('Social Media Marketing')} onContactClick={goContact} onNavigate={openSection} />;
-      case 'Content Planning':
-        return (
-          <ContentPlanningPage
-            onHomeClick={goHome}
-            onServicesClick={goServices}
-            onSocialClick={() => openSection('Social Media Marketing')}
-            onContactClick={goContact}
-            onRelatedClick={(target) => openSection(
-              target === 'management' ? 'Social Media Management'
-                : target === 'creative' ? 'Creative Posts & Carousels'
-                  : target === 'reels' ? 'Reels & Short-Form Video'
-                    : target === 'profile' ? 'Profile Setup & Optimisation'
-                      : 'Social Media Strategy',
-            )}
-          />
-        );
-      case 'Creative Posts & Carousels':
-        return (
-          <CreativePostsPage
-            onHomeClick={goHome}
-            onServicesClick={goServices}
-            onSocialClick={() => openSection('Social Media Marketing')}
-            onContactClick={goContact}
-            onRelatedClick={(target) => openSection(target === 'planning' ? 'Content Planning' : target === 'management' ? 'Social Media Management' : 'Meta Advertising')}
-          />
-        );
       case NOT_FOUND_SECTION:
       default:
         return <NotFoundPage onHomeClick={goHome} onServicesClick={goServices} onContactClick={goContact} />;
@@ -269,7 +182,7 @@ export const App: React.FC = () => {
         <RouteErrorBoundary key={path}>
           <Suspense fallback={<div style={{ minHeight: '100vh' }} aria-busy="true" />}>
             {renderPage()}
-            {DETAIL_PAGES_NEED_CTA.has(activeSection) && (
+            {LandingPage && (
               <ServicesCta
                 title="Ready to turn your next idea into action?"
                 subtitle="Tell us what you want to achieve. We'll help you shape the right next step."

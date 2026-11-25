@@ -49,7 +49,8 @@ test('article page renders markdown, code, callouts, share links and meta', asyn
   await expect(page.locator('meta[property="og:type"]')).toHaveAttribute('content', 'article');
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', /\/blogs\/local-seo-for-coaching-centres$/);
 
-  const linkedin = page.getByRole('link', { name: 'LinkedIn' });
+  // Scoped to the article: the footer also has a LinkedIn profile link.
+  const linkedin = page.locator('main').getByRole('link', { name: 'LinkedIn' });
   await expect(linkedin).toHaveAttribute('href', /linkedin\.com\/sharing\/share-offsite\/\?url=http/);
   await expect(linkedin).toHaveAttribute('rel', /noopener/);
 

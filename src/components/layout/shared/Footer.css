@@ -7,7 +7,7 @@
 
 .footer-main {
   display: grid;
-  grid-template-columns: 1.25fr 0.76fr 0.95fr 0.88fr;
+  grid-template-columns: 1.25fr 0.76fr 0.95fr 0.88fr 1.25fr;
   gap: clamp(42px, 5vw, 88px);
   width: min(100% - 112px, 1480px);
   margin: 0 auto;
@@ -140,8 +140,19 @@
   transform: translateX(5px);
 }
 
+.footer-contact-details { display: grid; gap: 13px; }
+.footer-contact-details a,
+.footer-contact-details address { display: flex; align-items: flex-start; gap: 11px; color: #405973; font-size: 15px; line-height: 1.55; text-decoration: none; }
+.footer-contact-details a:hover { color: var(--color-growth-teal); }
+.footer-contact-details svg { flex: 0 0 auto; margin-top: 2px; color: #078cf0; stroke-width: 1.8; }
+.footer-contact-details address { font-style: normal; }
+.footer-socials { display: flex; gap: 10px; margin-top: 15px; }
+.footer-socials a { display: grid; width: 36px; height: 36px; place-items: center; border: 1px solid #78bfff; border-radius: 50%; color: #123b59; transition: background 180ms ease, color 180ms ease, transform 180ms ease; }
+.footer-socials a:hover { background: #eaf6ff; color: #087caf; transform: translateY(-2px); }
+
 .footer-bottom {
   display: flex;
+  position: relative;
   width: min(100% - 56px, 1535px);
   min-height: 67px;
   align-items: center;
@@ -156,15 +167,35 @@
   margin: 0;
 }
 
+.footer-crafted {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.footer-crafted a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer-crafted a:hover,
+.footer-crafted a:focus-visible {
+  color: var(--color-growth-teal);
+  text-decoration: underline;
+}
+
 @media (max-width: 1080px) {
   .footer-main {
-    grid-template-columns: 1.2fr repeat(2, 1fr);
+    grid-template-columns: 1.2fr repeat(3, 1fr);
     width: min(100% - 64px, 1480px);
   }
 
   .footer-legal {
-    grid-column: 2 / 4;
+    grid-column: auto;
   }
+
+  .footer-contact { grid-column: 2 / 5; }
 
   .footer-conversation {
     max-width: 340px;
@@ -199,13 +230,21 @@
     grid-column: auto;
   }
 
+  .footer-contact { grid-column: auto; }
+
   .footer-bottom {
+    position: relative;
     width: min(100% - 40px, 1535px);
     min-height: 88px;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     gap: 7px;
+  }
+
+  .footer-crafted {
+    position: static;
+    transform: none;
   }
 }
 

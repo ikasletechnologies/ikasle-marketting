@@ -33,17 +33,6 @@ test('header navigation updates the URL and supports back/forward', async ({ pag
   await expect(page).toHaveURL('/blogs');
 });
 
-test('Meta Advertising related services render as responsive cards', async ({ page }) => {
-  await page.goto('/services/digital-marketing/meta-advertising');
-  const cards = page.locator('.meta-related .related-grid article');
-  await expect(cards).toHaveCount(3);
-  await cards.first().scrollIntoViewIfNeeded();
-  await expect(cards.first()).toHaveCSS('display', 'flex');
-
-  const boxes = await cards.evaluateAll((items) => items.map((item) => item.getBoundingClientRect()));
-  expect(new Set(boxes.map((box) => Math.round(box.y))).size).toBe(1);
-  expect(boxes.every((box) => box.width > 300 && box.height >= 150)).toBe(true);
-});
 test('service detail breadcrumbs show and navigate the full hierarchy', async ({ page }) => {
   await page.goto('/services/social-media-marketing/strategy');
   const breadcrumb = page.getByRole('navigation', { name: 'Breadcrumb' });
@@ -62,7 +51,7 @@ test('services mega-menu opens a social sub-page and highlights it', async ({ pa
   await page.locator('.services-category', { hasText: 'Social Media Marketing' }).hover();
   await page.getByRole('button', { name: 'Content Planning & Calendars' }).click();
   await expect(page).toHaveURL('/services/social-media-marketing/content-planning');
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('A clear plan.');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Social media content planning');
   // The dropdown closes after navigating, so check the (hidden) item directly.
   await expect(page.locator('.services-submenu button', { hasText: 'Content Planning & Calendars' })).toHaveClass(/active/);
 });
@@ -110,24 +99,22 @@ test('IM-3: SEO result rows keep badges, content and indicators aligned', async 
   expect(new Set(geometry.map((row) => row.columns)).size).toBe(1);
 });
 
-test('custom service detail pages include a closing contact CTA', async ({ page }) => {
-  const routes = [
-    '/services/digital-marketing/strategy',
-    '/services/digital-marketing/display-youtube-advertising',
-    '/services/digital-marketing/email-marketing',
-    '/services/digital-marketing/meta-advertising',
-    '/services/social-media-marketing/content-planning',
-  ];
-
-  for (const route of routes) {
+for (const route of [
+  '/services/digital-marketing/strategy',
+  '/services/digital-marketing/email-marketing',
+  '/services/social-media-marketing/content-planning',
+  '/services/seo-search-growth/technical-seo',
+  '/services/brand-growth-creative/brand-strategy-positioning',
+]) {
+  test(`service detail page ${route} includes a closing contact CTA`, async ({ page }) => {
     await page.goto(route);
     const cta = page.locator('.services-cta');
     await expect(cta).toHaveCount(1);
     await expect(cta.getByRole('heading', { name: 'Ready to turn your next idea into action?' })).toBeVisible();
     await expect(cta.getByRole('button', { name: 'Start a Conversation' })).toBeVisible();
-  }
-});
-test('service detail CTA actions stay aligned across categories', async ({ page }) => {
+  });
+}
+test('service detail hero actions sit side by side across categories', async ({ page }) => {
   const routes = [
     '/services/social-media-marketing/analytics-reporting',
     '/services/seo-search-growth/technical-seo',
@@ -136,30 +123,17 @@ test('service detail CTA actions stay aligned across categories', async ({ page 
 
   for (const route of routes) {
     await page.goto(route);
-    const actions = page.locator('.ss-cta-actions');
-    const buttons = actions.getByRole('button');
+    const buttons = page.locator('.sl-actions').getByRole('button');
     await expect(buttons).toHaveCount(2);
-
     const boxes = await buttons.evaluateAll((items) => items.map((item) => item.getBoundingClientRect()));
-    expect(Math.abs(boxes[0].x - boxes[1].x)).toBeLessThanOrEqual(1);
-    expect(Math.abs(boxes[0].width - boxes[1].width)).toBeLessThanOrEqual(1);
+    expect(Math.abs(boxes[0].y - boxes[1].y)).toBeLessThanOrEqual(1);
+    expect(Math.abs(boxes[0].height - boxes[1].height)).toBeLessThanOrEqual(1);
   }
 });
-test('Social Analytics CTA text and actions are aligned', async ({ page }) => {
+test('hero call to action opens the contact page', async ({ page }) => {
   await page.goto('/services/social-media-marketing/analytics-reporting');
-  const cta = page.locator('.ss-cta');
-  await expect(cta).toContainText("Let's discuss your channels, goals and reporting needs.");
-
-  const primary = cta.getByRole('button', { name: 'Discuss Your Reporting Needs' });
-  const back = cta.getByRole('button', { name: 'Back to Social Media Marketing' });
-  await expect(primary).toBeVisible();
-  await expect(back).toBeVisible();
-
-  const [primaryBox, backBox] = await Promise.all([primary.boundingBox(), back.boundingBox()]);
-  expect(primaryBox).not.toBeNull();
-  expect(backBox).not.toBeNull();
-  expect(Math.abs(primaryBox!.x - backBox!.x)).toBeLessThanOrEqual(1);
-  expect(Math.abs(primaryBox!.width - backBox!.width)).toBeLessThanOrEqual(1);
+  await page.locator('.sl-actions').getByRole('button', { name: 'Get Better Social Reports' }).click();
+  await expect(page).toHaveURL('/contact');
 });
 test('footer service links open their hub pages', async ({ page }) => {
   await page.goto('/');
