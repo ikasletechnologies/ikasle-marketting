@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import TargetCursor from '../../effects/TargetCursor';
+import React from 'react';
 import { AboutHero } from './AboutHero';
 import { AboutStory } from './AboutStory';
 import { AboutPurpose } from './AboutPurpose';
@@ -8,10 +7,8 @@ import { AboutValues } from './AboutValues';
 import { AboutCta } from './AboutCta';
 
 export const AboutPage: React.FC<{ onNavigate: (section: string) => void }> = ({ onNavigate }) => {
-  const mainRef = useRef<HTMLElement>(null);
   return (
-    <main ref={mainRef}>
-      <TargetCursor spinDuration={2} hideDefaultCursor parallaxOn container={mainRef} />
+    <main>
       <AboutHero onHomeClick={() => onNavigate('Home')} />
       <AboutStory />
       <AboutPurpose />

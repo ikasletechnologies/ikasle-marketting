@@ -105,41 +105,6 @@
   gap: 11px;
 }
 
-.footer-conversation {
-  margin-top: 22px;
-  padding-top: 20px;
-  border-top: 1px solid #dbe5ec;
-}
-
-.footer-conversation > p {
-  margin: 0 0 8px;
-  color: #5a7086;
-  font-size: 14px;
-}
-
-.footer-conversation button {
-  display: inline-flex;
-  align-items: center;
-  gap: 13px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: #087caf;
-  cursor: pointer;
-  font-family: var(--font-body);
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.footer-conversation button svg {
-  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.footer-conversation button:hover svg,
-.footer-conversation button:focus-visible svg {
-  transform: translateX(5px);
-}
-
 .footer-contact-details { display: grid; gap: 13px; }
 .footer-contact-details a,
 .footer-contact-details address { display: flex; align-items: flex-start; gap: 11px; color: #405973; font-size: 15px; line-height: 1.55; text-decoration: none; }
@@ -196,10 +161,6 @@
   }
 
   .footer-contact { grid-column: 2 / 5; }
-
-  .footer-conversation {
-    max-width: 340px;
-  }
 }
 
 @media (max-width: 760px) {
@@ -269,8 +230,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .footer-column nav button,
-  .footer-column nav a,
-  .footer-conversation button svg {
+  .footer-column nav a {
     transition-duration: 0.01ms;
   }
 }

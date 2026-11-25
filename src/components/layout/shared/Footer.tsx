@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone } from 'lucide-react';
 import faviconImg from '../../../assets/favicon.png';
 import logoImg from '../../../assets/logo-clean.png';
 import './Footer.css';
@@ -80,14 +80,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <button type="button" onClick={() => onNavigate?.('Terms & Conditions')}><img src={faviconImg} alt="" aria-hidden="true" />Terms &amp; Conditions</button>
             <button type="button" onClick={() => onNavigate?.('FAQ')}><img src={faviconImg} alt="" aria-hidden="true" />FAQ</button>
           </nav>
-
-          <div className="footer-conversation">
-            <p>Have a project in mind?</p>
-            <button type="button" onClick={() => onNavigate?.('Contact')}>
-              <span>Start a Conversation</span>
-              <ArrowRight size={20} />
-            </button>
-          </div>
         </div>
 
         <div className="footer-column footer-contact">
