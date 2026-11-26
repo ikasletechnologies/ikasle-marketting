@@ -8,7 +8,8 @@ test('lead pipeline filters by channel and status and exports matching rows', as
   const total = await rows.count();
   expect(total).toBeGreaterThan(10);
 
-  await page.getByLabel('Channel').selectOption('Campus Referral');
+  // Scoped to the filters: the footer also has a "Social media channels" label.
+  await page.getByRole('group', { name: 'Filter leads' }).getByLabel('Channel').selectOption('Campus Referral');
   const campusCount = await rows.count();
   expect(campusCount).toBeGreaterThan(0);
   expect(campusCount).toBeLessThan(total);
@@ -60,7 +61,7 @@ test('campaign dashboard shows KPIs, pacing and a chart with a table view', asyn
   await expect(page.locator('.wk-table tbody tr')).toHaveCount(8);
 
   const before = await page.locator('.dash-num-table tbody tr').count();
-  await page.getByLabel('Channel').selectOption('Meta');
+  await page.getByRole('group', { name: 'Filter campaigns' }).getByLabel('Channel').selectOption('Meta');
   const after = await page.locator('.dash-num-table tbody tr').count();
   expect(after).toBeLessThan(before);
   for (const text of await page.locator('.dash-num-table td[data-label="Channel"]').allTextContents()) expect(text).toBe('Meta');

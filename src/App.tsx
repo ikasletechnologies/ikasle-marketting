@@ -4,6 +4,7 @@ import { Footer } from './components/layout/shared/Footer';
 import ClickSpark from './components/effects/ClickSpark';
 import PageLoader from './components/ui/PageLoader';
 import ChatBot from './components/ui/ChatBot';
+import { ScrollToTop } from './components/ui/FloatingActions';
 import { RouteErrorBoundary } from './components/ui/RouteErrorBoundary';
 import { ServicesCta } from './components/layout/services/ServicesCta';
 import { SOCIAL_SECTION_BY_ID } from './components/layout/services/social/socialTemplatePages';
@@ -21,6 +22,7 @@ const AboutPage = lazyNamed(() => import('./components/layout/about/AboutPage'),
 const ServicesPage = lazyNamed(() => import('./components/layout/services/ServicesPage'), 'ServicesPage');
 const ContactPage = lazyNamed(() => import('./components/layout/contact/ContactPage'), 'ContactPage');
 const CareersPage = lazyNamed(() => import('./components/layout/careers/CareersPage'), 'CareersPage');
+const CareerJobPage = lazyNamed(() => import('./components/layout/careers/CareerJobPage'), 'CareerJobPage');
 const BlogPage = lazyNamed(() => import('./components/layout/blog/BlogPage'), 'BlogPage');
 const BlogPostPage = lazyNamed(() => import('./components/layout/blog/BlogPostPage'), 'BlogPostPage');
 const LeadsPage = lazyNamed(() => import('./components/layout/dashboard/LeadsPage'), 'LeadsPage');
@@ -50,6 +52,8 @@ export const App: React.FC = () => {
 
   const activeSection = sectionFromPath(path);
   const blogSlug = activeSection === 'Blogs' && path.startsWith('/blogs/') ? decodeURIComponent(path.slice('/blogs/'.length)) : '';
+  // /careers/jobs/<slug> is a job detail page; /careers and /careers/jobs show the listing.
+  const jobSlug = activeSection === 'Careers' && path.startsWith('/careers/jobs/') ? decodeURIComponent(path.slice('/careers/jobs/'.length)) : '';
 
   const startPageTransition = (duration = 520) => {
     if (loaderTimerRef.current !== null) window.clearTimeout(loaderTimerRef.current);
@@ -84,9 +88,9 @@ export const App: React.FC = () => {
   // Title, description, canonical and social-card tags per route (IKAS-501).
   // Blog posts set their own (BlogPostPage), so they are skipped here.
   useEffect(() => {
-    if (blogSlug) return;
+    if (blogSlug || jobSlug) return;
     applyPageMeta(getSectionMeta(activeSection));
-  }, [activeSection, blogSlug]);
+  }, [activeSection, blogSlug, jobSlug]);
 
   /** Navigate to an in-app URL (may include ?query). */
   const navigate = (to: string) => {
@@ -122,7 +126,7 @@ export const App: React.FC = () => {
       case 'Contact':
         return <ContactPage onHomeClick={goHome} />;
       case 'Careers':
-        return <CareersPage onHomeClick={goHome} onContactClick={goContact} />;
+        return jobSlug ? <CareerJobPage key={jobSlug} slug={jobSlug} onNavigate={navigate} /> : <CareersPage onNavigate={navigate} />;
       case 'Blogs':
         return blogSlug ? <BlogPostPage slug={blogSlug} onNavigate={navigate} /> : <BlogPage onNavigate={navigate} onContactClick={goContact} />;
       case 'Leads Dashboard':
@@ -199,6 +203,7 @@ export const App: React.FC = () => {
           </Suspense>
         </RouteErrorBoundary>
         <Footer onNavigate={openSection} />
+        <ScrollToTop />
         <ChatBot />
       </div>
     </ClickSpark>

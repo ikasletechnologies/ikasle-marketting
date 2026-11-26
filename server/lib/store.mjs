@@ -41,6 +41,9 @@ export function openStore(filePath) {
   );
   const setEmailStatus = db.prepare('UPDATE submissions SET email_status = ?, email_error = ? WHERE id = ?');
   const setJiraKey = db.prepare('UPDATE submissions SET jira_key = ? WHERE id = ?');
+  const findApplication = db.prepare(
+    "SELECT 1 FROM submissions WHERE kind = 'careers' AND email = ? COLLATE NOCASE AND json_extract(payload, '$.jobId') = ? LIMIT 1",
+  );
   const insertSubscriber = db.prepare(
     'INSERT INTO newsletter_subscribers (email, source) VALUES (?, ?) ON CONFLICT(email) DO NOTHING',
   );
@@ -56,6 +59,10 @@ export function openStore(filePath) {
     },
     markJira(id, key) {
       setJiraKey.run(key, id);
+    },
+    /** True when this email address has already applied for the job. */
+    hasApplication(email, jobId) {
+      return Boolean(findApplication.get(email.trim(), jobId));
     },
     /** Idempotent: re-subscribing an existing address is a no-op. Returns true only for a new subscriber. */
     addSubscriber(email, source) {
