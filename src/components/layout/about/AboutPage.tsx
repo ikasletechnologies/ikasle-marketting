@@ -13,7 +13,7 @@ export const AboutPage: React.FC<{ onNavigate: (section: string) => void }> = ({
       <AboutStory />
       <AboutPurpose />
       <AboutProcess />
-      <AboutHowItWorks onContactClick={() => onNavigate('Contact')} />
+      <AboutHowItWorks />
       <AboutCta onCtaClick={() => onNavigate('Contact')} />
     </main>
   );

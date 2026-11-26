@@ -13,7 +13,6 @@ import './MarketingEcosystemSection.css';
 interface ChannelNode {
   id: string;
   label: string;
-  summary: string;
   section: string;
   letters: number[];
   position: 'top' | 'bottom';
@@ -27,7 +26,6 @@ const CHANNELS: ChannelNode[] = [
   {
     id: 'social',
     label: 'SOCIAL MEDIA',
-    summary: 'Build loyal communities with reels, carousels, and platform-native storytelling.',
     section: 'Social Media Marketing',
     letters: [0, 1],
     position: 'top',
@@ -37,7 +35,6 @@ const CHANNELS: ChannelNode[] = [
   {
     id: 'paid',
     label: 'PAID ADS',
-    summary: 'Capture high-intent demand across Google Search, Meta, and YouTube funnels.',
     section: 'Google Search Ads',
     letters: [3, 4],
     position: 'top',
@@ -47,7 +44,6 @@ const CHANNELS: ChannelNode[] = [
   {
     id: 'content',
     label: 'CONTENT',
-    summary: 'Turn expertise into guides, articles, and campaigns that earn lasting trust.',
     section: 'Content Marketing',
     letters: [7, 8],
     position: 'top',
@@ -57,7 +53,6 @@ const CHANNELS: ChannelNode[] = [
   {
     id: 'seo',
     label: 'SEO',
-    summary: 'Compound organic visibility with technical health, local SEO, and intent mapping.',
     section: 'SEO & Search Growth',
     letters: [1, 2],
     position: 'bottom',
@@ -67,7 +62,6 @@ const CHANNELS: ChannelNode[] = [
   {
     id: 'email',
     label: 'EMAIL MARKETING',
-    summary: 'Nurture enquiries into customers through automated journeys and targeted campaigns.',
     section: 'Email Marketing',
     letters: [4, 5],
     position: 'bottom',
@@ -77,7 +71,6 @@ const CHANNELS: ChannelNode[] = [
   {
     id: 'web',
     label: 'WEB DESIGN',
-    summary: 'High-converting landing pages and websites engineered for speed and clarity.',
     section: 'Website & Landing Page Design',
     letters: [6, 7, 8],
     position: 'bottom',
@@ -105,7 +98,6 @@ export const MarketingEcosystemSection: React.FC<{ onNavigate: (section: string)
   }, [paused]);
 
   const activeChannel = CHANNELS.find((c) => c.id === activeId) ?? CHANNELS[0];
-  const ActiveIcon = activeChannel.Icon;
   const topChannels = CHANNELS.filter((c) => c.position === 'top');
   const bottomChannels = CHANNELS.filter((c) => c.position === 'bottom');
 
@@ -210,25 +202,6 @@ export const MarketingEcosystemSection: React.FC<{ onNavigate: (section: string)
               );
             })}
           </div>
-        </div>
-
-        {/* Live Channel Insight Bar */}
-        <div key={activeChannel.id} className="mes-insight" role="status" aria-live="polite">
-          <div className="mes-insight-left">
-            <span className="mes-insight-badge">
-              <ActiveIcon size={15} strokeWidth={2.2} />
-              <span>{activeChannel.label}</span>
-            </span>
-            <p className="mes-insight-text">{activeChannel.summary}</p>
-          </div>
-          <button
-            type="button"
-            className="mes-insight-cta"
-            onClick={() => onNavigate(activeChannel.section)}
-          >
-            <span>Explore</span>
-            <ArrowUpRight size={15} strokeWidth={2.2} aria-hidden="true" />
-          </button>
         </div>
       </div>
     </section>

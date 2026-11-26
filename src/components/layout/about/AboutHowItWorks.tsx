@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import {
   Compass,
   Layers3,
-  PhoneCall,
   Rocket,
   SearchCheck,
   Sparkles,
@@ -63,7 +62,7 @@ const TAGS = [
   'Brand Storytelling',
 ];
 
-export const AboutHowItWorks: React.FC<{ onContactClick: () => void }> = ({ onContactClick }) => {
+export const AboutHowItWorks: React.FC = () => {
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -106,8 +105,7 @@ export const AboutHowItWorks: React.FC<{ onContactClick: () => void }> = ({ onCo
             { scale: 0.85, opacity: 0, duration: 0.5, stagger: 0.14 },
             0.18
           )
-          .from('.ahiw-tag', { opacity: 0, y: 16, duration: 0.55, stagger: 0.08 }, 0.45)
-          .from('.ahiw-cta-row', { opacity: 0, y: 14, duration: 0.6 }, 0.65);
+          .from('.ahiw-tag', { opacity: 0, y: 16, duration: 0.55, stagger: 0.08 }, 0.45);
       });
     },
     { scope: root }
@@ -155,19 +153,6 @@ export const AboutHowItWorks: React.FC<{ onContactClick: () => void }> = ({ onCo
               {tag}
             </span>
           ))}
-        </div>
-
-        <div className="ahiw-cta-row">
-          <span className="ahiw-cta-icon" aria-hidden="true">
-            <PhoneCall size={16} strokeWidth={2} />
-          </span>
-          <p className="ahiw-cta-text">
-            Ready to turn strategy into measurable growth with IKASLE? &ndash;{' '}
-            <button type="button" className="ahiw-cta-link" onClick={onContactClick}>
-              Contact Us Now
-            </button>
-            .
-          </p>
         </div>
       </div>
     </section>
