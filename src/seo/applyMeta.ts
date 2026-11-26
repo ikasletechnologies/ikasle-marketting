@@ -1,4 +1,5 @@
 import { SITE_NAME, type PageMeta } from './meta.ts';
+import { buildPageJsonLd } from './schema.ts';
 
 /** Updates (or creates) a <meta> tag identified by name= or property=. */
 function setMeta(attr: 'name' | 'property', key: string, content: string | undefined) {
@@ -48,4 +49,13 @@ export function applyPageMeta(meta: PageMeta) {
   setMeta('name', 'twitter:title', meta.title);
   setMeta('name', 'twitter:description', meta.description);
   setMeta('name', 'twitter:image', image);
+
+  let schemaEl = document.head.querySelector<HTMLScriptElement>('script#ikasle-seo-schema');
+  if (!schemaEl) {
+    schemaEl = document.createElement('script');
+    schemaEl.id = 'ikasle-seo-schema';
+    schemaEl.type = 'application/ld+json';
+    document.head.appendChild(schemaEl);
+  }
+  schemaEl.textContent = buildPageJsonLd(origin, meta);
 }

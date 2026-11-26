@@ -1,6 +1,8 @@
 import React from 'react';
 import { ArrowRight, ChevronDown } from 'lucide-react';
-import { FAQ_GROUPS, PRIVACY, TERMS, type LegalDocument } from './legalContent';
+import { ROUTES } from '../../../routes';
+import { BLOG_POSTS, blogPostPath } from '../../../content/blog/posts';
+import { COOKIES, FAQ_GROUPS, PRIVACY, TERMS, type LegalDocument } from './legalContent';
 import './LegalPages.css';
 
 interface LegalHeroProps {
@@ -86,6 +88,8 @@ export const PrivacyPolicyPage: React.FC<PageProps> = (props) => <LegalDocumentP
 
 export const TermsPage: React.FC<PageProps> = (props) => <LegalDocumentPage doc={TERMS} {...props} />;
 
+export const CookiePolicyPage: React.FC<PageProps> = (props) => <LegalDocumentPage doc={COOKIES} {...props} />;
+
 export const FaqPage: React.FC<PageProps> = ({ onHomeClick, onContactClick }) => (
   <main className="legal-page">
     <LegalHero
@@ -119,6 +123,99 @@ export const FaqPage: React.FC<PageProps> = ({ onHomeClick, onContactClick }) =>
             <span>Start a Conversation</span>
             <ArrowRight size={18} aria-hidden="true" />
           </button>
+        </div>
+      </div>
+    </div>
+  </main>
+);
+
+const SITEMAP_GROUPS: { title: string; prefix?: string; names?: string[] }[] = [
+  { title: 'Main Pages', names: ['Home', 'About', 'Services', 'Blogs', 'Careers', 'Contact'] },
+  { title: 'Digital Marketing', prefix: '/services/digital-marketing' },
+  { title: 'Social Media Marketing', prefix: '/services/social-media-marketing' },
+  { title: 'SEO & Search Growth', prefix: '/services/seo-search-growth' },
+  { title: 'Brand Growth & Creative', prefix: '/services/brand-growth-creative' },
+  { title: 'Help & Legal', names: ['Privacy Policy', 'Terms & Conditions', 'Cookie Policy', 'FAQ', 'Sitemap'] },
+];
+
+export const SitemapPage: React.FC<PageProps & { onNavigate?: (to: string) => void }> = ({
+  onHomeClick,
+  onNavigate,
+}) => (
+  <main className="legal-page">
+    <LegalHero
+      overline="SITE DIRECTORY"
+      title="Sitemap"
+      intro="A complete overview of every public page, service, blog article, and resource on IKASLĒ Marketing."
+      current="Sitemap"
+      onHomeClick={onHomeClick}
+    />
+
+    <div className="legal-faq-body">
+      <div className="legal-faq-content">
+        {SITEMAP_GROUPS.map((group) => {
+          const items = group.names
+            ? group.names.map((name) => ({ name, path: ROUTES[name] }))
+            : Object.entries(ROUTES)
+                .filter(([, p]) => p === group.prefix || p.startsWith(`${group.prefix}/`))
+                .map(([name, p]) => ({ name, path: p }));
+          return (
+            <section className="legal-faq-group" key={group.title}>
+              <h2>{group.title}</h2>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '10px', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))' }}>
+                {items.map((item) => (
+                  <li key={item.path}>
+                    <a
+                      href={item.path}
+                      onClick={(e) => {
+                        if (!onNavigate) return;
+                        e.preventDefault();
+                        onNavigate(item.path);
+                      }}
+                      style={{ color: 'var(--color-primary)', textDecoration: 'none', fontWeight: 500 }}
+                    >
+                      {item.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          );
+        })}
+
+        <section className="legal-faq-group">
+          <h2>Blog Articles</h2>
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '10px', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))' }}>
+            {BLOG_POSTS.map((post) => {
+              const p = blogPostPath(post.slug);
+              return (
+                <li key={post.slug}>
+                  <a
+                    href={p}
+                    onClick={(e) => {
+                      if (!onNavigate) return;
+                      e.preventDefault();
+                      onNavigate(p);
+                    }}
+                    style={{ color: 'var(--color-primary)', textDecoration: 'none', fontWeight: 500 }}
+                  >
+                    {post.title}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+
+        <div className="legal-help">
+          <p>Looking for the XML sitemap?</p>
+          <a
+            href="/sitemap.xml"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--color-primary)', fontWeight: 600, textDecoration: 'none' }}
+          >
+            <span>View /sitemap.xml</span>
+            <ArrowRight size={18} aria-hidden="true" />
+          </a>
         </div>
       </div>
     </div>

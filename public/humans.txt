@@ -1,0 +1,10 @@
+/* TEAM */
+Organization: IKASLE Marketing
+Site: https://www.ikaslemarketing.com
+Location: Coimbatore, Tamil Nadu, India
+Contact: business@ikasle.in
+
+/* TECHNOLOGY */
+Stack: React, TypeScript, Vite, Node.js
+Standards: HTML5, CSS3, Schema.org JSON-LD, Open Graph
+

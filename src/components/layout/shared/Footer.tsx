@@ -33,6 +33,9 @@ const SERVICES = [
   'Brand Growth & Creative',
 ];
 
+const GOOGLE_PROFILE_URL =
+  'https://www.google.com/maps/place/Ikasle+Business+Group/@11.0266048,77.0175292,1076m/data=!3m2!1e3!5s0x3ba85784ff312249:0xcdbbd4f2722d8c8!4m14!1m7!3m6!1s0x3ba857124f786eb7:0x54b639fa94ae6c7c!2sIkasle+Business+Group!8m2!3d11.0265995!4d77.0201041!16s%2Fg%2F11xghp381c!3m5!1s0x3ba857124f786eb7:0x54b639fa94ae6c7c!8m2!3d11.0265995!4d77.0201041!16s%2Fg%2F11xghp381c?entry=ttu&g_ep=EgoyMDI2MTEyMi4wIKXMDSoASAFQAw%3D%3D';
+
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
     <footer className="site-footer">
@@ -47,8 +50,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <img src={logoImg} alt="Ikasle Marketing" />
           </button>
           <p>Strategy, creativity and digital marketing for brands ready to grow.</p>
-
-          
         </div>
 
         <div className="footer-column">
@@ -73,15 +74,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </nav>
         </div>
 
-        <div className="footer-column footer-legal">
-          <h2>Help &amp; Legal</h2>
-          <nav aria-label="Help and legal">
-            <button type="button" onClick={() => onNavigate?.('Privacy Policy')}><img src={faviconImg} alt="" aria-hidden="true" />Privacy Policy</button>
-            <button type="button" onClick={() => onNavigate?.('Terms & Conditions')}><img src={faviconImg} alt="" aria-hidden="true" />Terms &amp; Conditions</button>
-            <button type="button" onClick={() => onNavigate?.('FAQ')}><img src={faviconImg} alt="" aria-hidden="true" />FAQ</button>
-          </nav>
-        </div>
-
         <div className="footer-column footer-contact">
           <h2>Contact</h2>
           <div className="footer-contact-details">
@@ -89,11 +81,106 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <a href="mailto:business@ikasle.in"><Mail size={18} aria-hidden="true" /><span>Email: business@ikasle.in</span></a>
             <address><MapPin size={18} aria-hidden="true" /><span>1639/A, 2nd Floor, Hopes, Peelamedu,<br />Coimbatore, Tamil Nadu, India – 641004</span></address>
           </div>
-          <div className="footer-socials" aria-label="Social media links">
-            <a href="#" aria-label="Instagram"><Instagram size={19} /></a>
-            <a href="#" aria-label="LinkedIn"><Linkedin size={19} /></a>
-            <a href="#" aria-label="Facebook"><Facebook size={19} /></a>
-            <a href="#" aria-label="X"><XLogo size={19} /></a>
+          <div className="footer-socials" aria-label="Social media channels">
+            <span className="footer-social-placeholder" role="img" aria-label="Instagram (coming soon)" title="Coming soon"><Instagram size={19} /></span>
+            <span className="footer-social-placeholder" role="img" aria-label="LinkedIn (coming soon)" title="Coming soon"><Linkedin size={19} /></span>
+            <span className="footer-social-placeholder" role="img" aria-label="Facebook (coming soon)" title="Coming soon"><Facebook size={19} /></span>
+            <span className="footer-social-placeholder" role="img" aria-label="X (coming soon)" title="Coming soon"><XLogo size={19} /></span>
+          </div>
+        </div>
+
+        <div className="footer-column footer-profile">
+          <h2>Google Profile</h2>
+          <a
+            className="footer-google-badge"
+            href={GOOGLE_PROFILE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Ikasle Business Group 5.0 Google Reviews profile"
+          >
+            <span className="footer-google-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.8z" />
+                <path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.2 0-5.9-2.1-6.8-5H1.2v3.1C3.2 21.3 7.3 24 12 24z" />
+                <path fill="#FBBC05" d="M5.2 14.3c-.2-.7-.4-1.5-.4-2.3s.1-1.6.4-2.3V6.6H1.2C.4 8.2 0 10.1 0 12s.4 3.8 1.2 5.4l4-3.1z" />
+                <path fill="#EA4335" d="M12 4.8c1.8 0 3.4.6 4.6 1.8l3.5-3.5C18 1.1 15.2 0 12 0 7.3 0 3.2 2.7 1.2 6.6l4 3.1c.9-2.9 3.6-4.9 6.8-4.9z" />
+              </svg>
+            </span>
+            <span className="footer-google-copy">
+              <span className="footer-google-label">GOOGLE REVIEWS</span>
+              <span className="footer-google-rating">
+                <span className="footer-google-stars" aria-hidden="true">★★★★★</span>
+                <strong>5.0 · View profile</strong>
+              </span>
+            </span>
+          </a>
+
+          <div className="footer-countries" aria-label="Countries we serve">
+            <span className="footer-countries-label">COUNTRIES WE SERVE</span>
+            <ul className="footer-countries-list">
+              <li title="India">
+                <svg viewBox="0 0 32 22" width="32" height="22" aria-label="India">
+                  <rect width="32" height="22" rx="2.5" fill="#fff" />
+                  <rect width="32" height="7.3" fill="#FF9933" />
+                  <rect y="14.7" width="32" height="7.3" fill="#138808" />
+                  <circle cx="16" cy="11" r="2.6" fill="none" stroke="#000080" strokeWidth="1" />
+                  <circle cx="16" cy="11" r="0.7" fill="#000080" />
+                </svg>
+              </li>
+              <li title="United States">
+                <svg viewBox="0 0 32 22" width="32" height="22" aria-label="United States">
+                  <rect width="32" height="22" rx="2.5" fill="#fff" />
+                  <path fill="#B22234" d="M0 0h32v1.7H0zm0 3.4h32v1.7H0zm0 3.4h32v1.7H0zm0 3.4h32v1.7H0zm0 3.4h32v1.7H0zm0 3.4h32v1.7H0zm0 3.4h32V22H0z" />
+                  <rect width="14" height="11.9" rx="1" fill="#3C3B6E" />
+                </svg>
+              </li>
+              <li title="United Kingdom">
+                <svg viewBox="0 0 32 22" width="32" height="22" aria-label="United Kingdom">
+                  <rect width="32" height="22" rx="2.5" fill="#012169" />
+                  <path d="M0 0l32 22M32 0L0 22" stroke="#fff" strokeWidth="3.8" />
+                  <path d="M0 0l32 22M32 0L0 22" stroke="#C8102E" strokeWidth="2" />
+                  <path d="M16 0v22M0 11h32" stroke="#fff" strokeWidth="6" />
+                  <path d="M16 0v22M0 11h32" stroke="#C8102E" strokeWidth="3.4" />
+                </svg>
+              </li>
+              <li title="Canada">
+                <svg viewBox="0 0 32 22" width="32" height="22" aria-label="Canada">
+                  <rect width="32" height="22" rx="2.5" fill="#fff" />
+                  <rect width="8" height="22" rx="2" fill="#D80621" />
+                  <rect x="24" width="8" height="22" rx="2" fill="#D80621" />
+                  <path fill="#D80621" d="M16 4l1.2 3.2 2.4-.7-.8 2.6 2.2 1.1-1.3 1.5.4 1.6-3-.6V17h-2.2v-4.3l-3 .6.4-1.6-1.3-1.5 2.2-1.1-.8-2.6 2.4.7z" />
+                </svg>
+              </li>
+              <li title="Australia">
+                <svg viewBox="0 0 32 22" width="32" height="22" aria-label="Australia">
+                  <rect width="32" height="22" rx="2.5" fill="#00008B" />
+                  <rect width="14" height="10" fill="#012169" />
+                  <path d="M0 0l14 10M14 0L0 10" stroke="#fff" strokeWidth="1.8" />
+                  <path d="M7 0v10M0 5h14" stroke="#fff" strokeWidth="2.8" />
+                  <path d="M7 0v10M0 5h14" stroke="#C8102E" strokeWidth="1.6" />
+                  <circle cx="7" cy="15.5" r="1.6" fill="#fff" />
+                  <circle cx="24" cy="6" r="1.1" fill="#fff" />
+                  <circle cx="27" cy="10" r="1" fill="#fff" />
+                  <circle cx="22" cy="11.5" r="1" fill="#fff" />
+                  <circle cx="24.5" cy="16" r="1.1" fill="#fff" />
+                </svg>
+              </li>
+              <li title="European Union">
+                <svg viewBox="0 0 32 22" width="32" height="22" aria-label="European Union">
+                  <rect width="32" height="22" rx="2.5" fill="#003399" />
+                  <circle cx="16" cy="5.5" r="1" fill="#FFCC00" />
+                  <circle cx="19.3" cy="6.6" r="1" fill="#FFCC00" />
+                  <circle cx="21" cy="9.5" r="1" fill="#FFCC00" />
+                  <circle cx="21" cy="12.7" r="1" fill="#FFCC00" />
+                  <circle cx="19.3" cy="15.4" r="1" fill="#FFCC00" />
+                  <circle cx="16" cy="16.5" r="1" fill="#FFCC00" />
+                  <circle cx="12.7" cy="15.4" r="1" fill="#FFCC00" />
+                  <circle cx="11" cy="12.7" r="1" fill="#FFCC00" />
+                  <circle cx="11" cy="9.5" r="1" fill="#FFCC00" />
+                  <circle cx="12.7" cy="6.6" r="1" fill="#FFCC00" />
+                </svg>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -101,6 +188,13 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       <div className="footer-bottom">
         <p>© 2026 IKASLĒ Marketing. All rights reserved.</p>
         <p className="footer-crafted">Crafted by <a href="https://www.ikasletechnologies.com/" target="_blank" rel="noreferrer">Ikasle Technologies</a></p>
+        <nav className="footer-bottom-legal" aria-label="Help and legal">
+          <button type="button" onClick={() => onNavigate?.('Privacy Policy')}>Privacy Policy</button>
+          <button type="button" onClick={() => onNavigate?.('Terms & Conditions')}>Terms &amp; Conditions</button>
+          <button type="button" onClick={() => onNavigate?.('Cookie Policy')}>Cookie Policy</button>
+          <button type="button" onClick={() => onNavigate?.('FAQ')}>FAQ</button>
+          <button type="button" onClick={() => onNavigate?.('Sitemap')}>Sitemap</button>
+        </nav>
       </div>
     </footer>
   );

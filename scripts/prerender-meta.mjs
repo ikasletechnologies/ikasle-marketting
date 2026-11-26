@@ -8,6 +8,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { getSectionMeta, SITE_NAME } from '../src/seo/meta.ts';
 import { getPublicPages } from '../src/seo/pages.ts';
+import { buildPageJsonLd } from '../src/seo/schema.ts';
 import { NOT_FOUND_SECTION, PRIVATE_SECTIONS } from '../src/routes.ts';
 import { siteUrl } from './site-url.mjs';
 
@@ -42,6 +43,7 @@ function headFor(meta) {
     `<meta name="twitter:title" content="${attr(meta.title)}" />`,
     `<meta name="twitter:description" content="${attr(meta.description)}" />`,
     `<meta name="twitter:image" content="${attr(image)}" />`,
+    `<script type="application/ld+json" id="ikasle-seo-schema">${buildPageJsonLd(origin, meta).replace(/</g, '\\u003c')}</script>`,
   ].filter(Boolean).join('\n    ');
 }
 

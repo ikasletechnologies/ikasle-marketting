@@ -1,0 +1,530 @@
+/* ------------------------------------------------------------------
+   Home: Interactive 3D MARKETING Callout Diagram (Studio Edition)
+   ------------------------------------------------------------------ */
+
+.mes-section {
+  position: relative;
+  width: 100%;
+  background:
+    radial-gradient(circle at 50% 52%, rgba(33, 120, 167, 0.07), transparent 58%),
+    linear-gradient(180deg, #ffffff 0%, #f6fbfc 52%, #ffffff 100%);
+  padding: clamp(60px, 6.5vw, 98px) 0;
+  border-top: 1px solid rgba(7, 29, 53, 0.06);
+  border-bottom: 1px solid rgba(7, 29, 53, 0.06);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.mes-dot-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(33, 120, 167, 0.14) 1.2px, transparent 1.2px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(ellipse 68% 65% at 50% 50%, #000 20%, transparent 80%);
+  mask-image: radial-gradient(ellipse 68% 65% at 50% 50%, #000 20%, transparent 80%);
+}
+
+.mes-glow {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  filter: blur(85px);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mes-glow--a {
+  top: -110px;
+  left: -80px;
+  background: rgba(33, 120, 167, 0.18);
+}
+
+.mes-glow--b {
+  right: -80px;
+  bottom: -120px;
+  background: rgba(0, 169, 157, 0.2);
+}
+
+.mes-container {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 48px, 1200px);
+  margin: 0 auto;
+}
+
+.mes-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto clamp(34px, 4.5vw, 54px);
+}
+
+.mes-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 10px;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-primary, #2178A7);
+}
+
+.mes-eyebrow-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary, #2178A7), var(--color-growth-teal, #00A99D));
+}
+
+.mes-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(1.7rem, 2.7vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  color: var(--color-dark-navy, #071D35);
+}
+
+.mes-title-highlight {
+  background: linear-gradient(135deg, var(--color-primary, #2178A7) 0%, var(--color-growth-teal, #00A99D) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ---- Interactive Diagram ---- */
+.mes-diagram {
+  position: relative;
+  max-width: 1060px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mes-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.mes-callout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mes-callout--left {
+  align-items: flex-start;
+  padding-left: clamp(8px, 4vw, 48px);
+}
+
+.mes-callout--center {
+  align-items: center;
+}
+
+.mes-callout--right {
+  align-items: flex-end;
+  padding-right: clamp(8px, 4vw, 48px);
+}
+
+.mes-callout-btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1.5px solid rgba(33, 120, 167, 0.2);
+  box-shadow: 0 8px 22px rgba(7, 29, 53, 0.06);
+  color: var(--color-dark-navy, #071D35);
+  font-family: var(--font-heading);
+  font-size: clamp(12px, 1.05vw, 14px);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition:
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.mes-callout-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(33, 120, 167, 0.1);
+  color: var(--color-primary, #2178A7);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.mes-callout-arrow {
+  opacity: 0.45;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.mes-callout.is-active .mes-callout-btn,
+.mes-callout-btn:hover {
+  transform: translateY(-4px);
+  background: #071D35;
+  border-color: #071D35;
+  color: #ffffff;
+  box-shadow:
+    0 16px 32px rgba(7, 29, 53, 0.18),
+    0 0 0 4px rgba(0, 169, 157, 0.14);
+}
+
+.mes-callout.is-active .mes-callout-icon,
+.mes-callout-btn:hover .mes-callout-icon {
+  background: linear-gradient(135deg, var(--color-primary, #2178A7), var(--color-growth-teal, #00A99D));
+  color: #ffffff;
+}
+
+.mes-callout.is-active .mes-callout-arrow,
+.mes-callout-btn:hover .mes-callout-arrow {
+  opacity: 1;
+  color: #35d7d0;
+  transform: translate(2px, -2px);
+}
+
+/* Light sheen that sweeps across the active pill */
+.mes-callout-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.2) 50%, transparent 65%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+.mes-callout.is-active .mes-callout-btn::after {
+  animation: mes-sheen 2.2s ease-in-out infinite;
+}
+
+@keyframes mes-sheen {
+  0% { transform: translateX(-120%); }
+  55%, 100% { transform: translateX(120%); }
+}
+
+/* ---- Dashed Elbow Connectors ---- */
+.mes-connector {
+  position: relative;
+  width: 34px;
+  height: 44px;
+  pointer-events: none;
+  transition: border-color 0.25s ease;
+}
+
+.mes-connector--down {
+  border-left: 2px dashed rgba(7, 29, 53, 0.24);
+  border-top: 2px dashed rgba(7, 29, 53, 0.24);
+  border-top-left-radius: 8px;
+  margin-left: 28px;
+}
+
+.mes-connector--up {
+  border-right: 2px dashed rgba(7, 29, 53, 0.24);
+  border-bottom: 2px dashed rgba(7, 29, 53, 0.24);
+  border-bottom-right-radius: 8px;
+  margin-right: 28px;
+}
+
+.mes-callout--right .mes-connector--down {
+  border-left: 0;
+  border-right: 2px dashed rgba(7, 29, 53, 0.24);
+  border-top-left-radius: 0;
+  border-top-right-radius: 8px;
+  margin-left: 0;
+  margin-right: 28px;
+}
+
+.mes-callout--left .mes-connector--up {
+  border-right: 0;
+  border-left: 2px dashed rgba(7, 29, 53, 0.24);
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 8px;
+  margin-right: 0;
+  margin-left: 28px;
+}
+
+.mes-connector-dot {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--color-dark-navy, #071D35);
+  transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Pulse ring that radiates from each connector anchor */
+.mes-connector-dot::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 169, 157, 0.55);
+  animation: mes-dot-ping 2.6s ease-out infinite;
+}
+
+@keyframes mes-dot-ping {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+.mes-connector--down .mes-connector-dot {
+  bottom: -4px;
+  left: -5.5px;
+}
+
+.mes-callout--right .mes-connector--down .mes-connector-dot {
+  left: auto;
+  right: -5.5px;
+}
+
+.mes-connector--up .mes-connector-dot {
+  top: -4px;
+  right: -5.5px;
+}
+
+.mes-callout--left .mes-connector--up .mes-connector-dot {
+  right: auto;
+  left: -5.5px;
+}
+
+.mes-callout.is-active .mes-connector {
+  border-color: var(--color-growth-teal, #00A99D);
+}
+
+.mes-callout.is-active .mes-connector-dot {
+  background: var(--color-growth-teal, #00A99D);
+  transform: scale(1.4);
+  box-shadow: 0 0 0 6px rgba(0, 169, 157, 0.22);
+}
+
+/* ---- 3D Sculptural MARKETING Wordmark ---- */
+.mes-word-stage {
+  position: relative;
+  padding: 6px 12px 14px;
+  user-select: none;
+}
+
+.mes-word {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: clamp(2px, 0.45vw, 7px);
+  font-family: var(--font-heading);
+  font-size: clamp(3.1rem, 9.6vw, 8.2rem);
+  font-weight: 900;
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+}
+
+.mes-letter {
+  display: inline-block;
+  animation: mes-letter-float 4.8s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * -0.35s);
+  color: #1659a8;
+  text-shadow:
+    1px 1px 0 #114788,
+    2px 2px 0 #0e3e78,
+    3px 3px 0 #0b3568,
+    4px 4px 0 #092c58,
+    5px 5px 0 #072348,
+    6px 6px 0 #051b38,
+    0 14px 26px rgba(7, 29, 53, 0.22);
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.28s ease,
+    text-shadow 0.28s ease;
+}
+
+/* Individual `translate` so it stacks with the lit-state `transform` lift */
+@keyframes mes-letter-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -6px; }
+}
+
+.mes-letter.is-lit {
+  color: var(--color-growth-teal, #00A99D);
+  transform: translateY(-10px) scale(1.07);
+  text-shadow:
+    1px 1px 0 #008e84,
+    2px 2px 0 #007a71,
+    3px 3px 0 #00665e,
+    4px 4px 0 #00524c,
+    5px 5px 0 #003e39,
+    0 20px 34px rgba(0, 169, 157, 0.36);
+}
+
+.mes-floor-shadow {
+  width: 86%;
+  height: 16px;
+  margin: 6px auto 0;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(7, 29, 53, 0.16) 0%, transparent 72%);
+}
+
+/* ---- Live Channel Insight Bar ---- */
+.mes-insight {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 24px;
+  max-width: 880px;
+  margin: clamp(28px, 3.8vw, 44px) auto 0;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(33, 120, 167, 0.16);
+  box-shadow: 0 12px 28px rgba(7, 29, 53, 0.06);
+  animation: mes-fade-in 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes mes-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mes-insight-left {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  flex: 1;
+  min-width: 0;
+}
+
+.mes-insight-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--color-primary, #2178A7), var(--color-growth-teal, #00A99D));
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.mes-insight-text {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.45;
+  color: #38536b;
+}
+
+.mes-insight-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(33, 120, 167, 0.22);
+  background: #f4fbfc;
+  color: var(--color-dark-navy, #071D35);
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: background-color 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+}
+
+.mes-insight-cta:hover {
+  background: #071D35;
+  border-color: #071D35;
+  color: #ffffff;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 760px) {
+  .mes-container {
+    width: min(100% - 32px, 1200px);
+  }
+
+  .mes-diagram {
+    gap: 18px;
+  }
+
+  .mes-connector {
+    display: none;
+  }
+
+  .mes-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .mes-callout--left,
+  .mes-callout--center,
+  .mes-callout--right {
+    align-items: stretch;
+    padding: 0;
+  }
+
+  .mes-callout:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .mes-callout-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 12px;
+    font-size: 11.5px;
+  }
+
+  .mes-word {
+    font-size: clamp(2.4rem, 12.5vw, 4rem);
+  }
+
+  .mes-insight {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mes-insight,
+  .mes-letter,
+  .mes-connector-dot::after,
+  .mes-callout-btn::after,
+  .mes-callout.is-active .mes-callout-btn::after {
+    animation: none;
+  }
+
+  .mes-callout-btn,
+  .mes-callout-icon,
+  .mes-callout-arrow,
+  .mes-connector,
+  .mes-connector-dot,
+  .mes-letter,
+  .mes-insight-cta {
+    transition: none;
+  }
+}

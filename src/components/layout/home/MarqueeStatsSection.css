@@ -1,0 +1,387 @@
+/* ------------------------------------------------------------------
+   Home: Tilted Kinetic Marquee + Creative 4-Column Stat Cards
+   ------------------------------------------------------------------ */
+
+.ms-section {
+  position: relative;
+  width: 100%;
+  background:
+    radial-gradient(circle at 12% 72%, rgba(33, 120, 167, 0.05), transparent 34%),
+    radial-gradient(circle at 88% 36%, rgba(0, 169, 157, 0.06), transparent 36%),
+    #ffffff;
+  padding: clamp(56px, 6.5vw, 96px) 0 clamp(76px, 8vw, 120px);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ---- Tilted Marquee Band ---- */
+.ms-marquee-wrap {
+  position: relative;
+  width: 106%;
+  margin-left: -3%;
+  margin-bottom: clamp(44px, 5.5vw, 76px);
+  transform: rotate(-2.5deg);
+  transform-origin: center center;
+  padding: 20px 0;
+  user-select: none;
+}
+
+.ms-marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: ms-scroll 34s linear infinite;
+}
+
+.ms-marquee-wrap:hover .ms-marquee-track {
+  animation-play-state: paused;
+}
+
+.ms-marquee-group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.ms-marquee-word {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: clamp(2.6rem, 6.2vw, 5.6rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 0 clamp(14px, 1.8vw, 28px);
+  cursor: default;
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.3s ease,
+    -webkit-text-stroke-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.ms-marquee-word--outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(7, 29, 53, 0.28);
+}
+
+.ms-marquee-word--outline:hover {
+  color: var(--color-dark-navy, #071D35);
+  -webkit-text-stroke: 1.5px var(--color-dark-navy, #071D35);
+  transform: translateY(-5px) scale(1.06);
+  filter: drop-shadow(0 3px 0 rgba(33, 120, 167, 0.35)) drop-shadow(0 12px 20px rgba(7, 29, 53, 0.16));
+}
+
+.ms-marquee-word--solid {
+  background: linear-gradient(135deg, var(--color-primary, #2178A7) 0%, var(--color-growth-teal, #00A99D) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ms-marquee-word--solid:hover {
+  transform: translateY(-5px) scale(1.06);
+  filter: drop-shadow(0 3px 0 rgba(7, 29, 53, 0.22)) drop-shadow(0 12px 22px rgba(0, 169, 157, 0.28));
+}
+
+.ms-marquee-sep {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5.6vw, 5rem);
+  font-weight: 300;
+  line-height: 1;
+  color: rgba(33, 120, 167, 0.38);
+  user-select: none;
+}
+
+@keyframes ms-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* ---- Creative 4-Column Stat Counter Grid ---- */
+.ms-container {
+  width: min(100% - 48px, 1280px);
+  margin: 0 auto;
+}
+
+@media (min-width: 1200px) {
+  .ms-container {
+    width: min(100% - 96px, 1280px);
+  }
+}
+
+.ms-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 26px);
+  align-items: start;
+}
+
+.ms-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 22px;
+  padding: clamp(24px, 2.6vw, 32px);
+  background: #ffffff;
+  border: 1px solid rgba(33, 120, 167, 0.14);
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(7, 29, 53, 0.05);
+  transition:
+    transform 0.34s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease,
+    box-shadow 0.34s ease;
+}
+
+@media (min-width: 1025px) {
+  .ms-card:nth-child(even) {
+    transform: translateY(18px);
+  }
+
+  .ms-card:nth-child(even):hover {
+    transform: translateY(11px);
+  }
+}
+
+.ms-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(33, 120, 167, 0.38);
+  box-shadow: 0 22px 44px rgba(33, 120, 167, 0.13);
+}
+
+/* Featured Dark Contrast Card */
+.ms-card--featured {
+  background:
+    radial-gradient(circle at 90% 10%, rgba(0, 169, 157, 0.24), transparent 52%),
+    radial-gradient(circle at 10% 90%, rgba(33, 120, 167, 0.24), transparent 52%),
+    #071D35;
+  border-color: rgba(53, 215, 208, 0.28);
+  color: #ffffff;
+  box-shadow: 0 22px 46px rgba(7, 29, 53, 0.2);
+}
+
+.ms-card--featured:hover {
+  border-color: #35d7d0;
+  box-shadow: 0 26px 54px rgba(7, 29, 53, 0.28);
+}
+
+.ms-watermark {
+  position: absolute;
+  right: 18px;
+  bottom: 14px;
+  font-family: var(--font-heading);
+  font-size: 3.4rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: rgba(33, 120, 167, 0.06);
+  pointer-events: none;
+  user-select: none;
+}
+
+.ms-card--featured .ms-watermark {
+  color: rgba(255, 255, 255, 0.06);
+}
+
+.ms-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ms-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(33, 120, 167, 0.11), rgba(0, 169, 157, 0.14));
+  color: var(--color-primary, #2178A7);
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.ms-card--featured .ms-icon-wrap {
+  background: linear-gradient(135deg, var(--color-primary, #2178A7), var(--color-growth-teal, #00A99D));
+  color: #ffffff;
+  box-shadow: 0 10px 22px rgba(0, 169, 157, 0.3);
+}
+
+.ms-card:not(.ms-card--featured):hover .ms-icon-wrap {
+  background: linear-gradient(135deg, var(--color-primary, #2178A7), var(--color-growth-teal, #00A99D));
+  color: #ffffff;
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.ms-tag {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #f0f8fa;
+  border: 1px solid rgba(33, 120, 167, 0.12);
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 750;
+  color: var(--color-primary, #2178A7);
+  white-space: nowrap;
+}
+
+.ms-card--featured .ms-tag {
+  background: rgba(53, 215, 208, 0.16);
+  border-color: rgba(53, 215, 208, 0.28);
+  color: #35d7d0;
+}
+
+.ms-card-body {
+  position: relative;
+  z-index: 1;
+}
+
+.ms-value {
+  display: inline-flex;
+  align-items: baseline;
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 3.5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  color: var(--color-dark-navy, #071D35);
+  margin-bottom: 8px;
+}
+
+.ms-card--featured .ms-value {
+  color: #ffffff;
+}
+
+.ms-value-suffix {
+  font-size: 0.72em;
+  margin-left: 2px;
+  color: var(--color-growth-teal, #00A99D);
+}
+
+.ms-card--featured .ms-value-suffix {
+  color: #35d7d0;
+}
+
+.ms-label {
+  font-family: var(--font-body);
+  font-size: clamp(13.5px, 1vw, 15px);
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text-secondary, #3b556e);
+  margin: 0;
+  max-width: 18ch;
+}
+
+.ms-card--featured .ms-label {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* Animated Bottom Progress Meter */
+.ms-meter {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(7, 29, 53, 0.08);
+  overflow: hidden;
+}
+
+.ms-card--featured .ms-meter {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.ms-meter-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-primary, #2178A7), var(--color-growth-teal, #00A99D));
+  transition: width 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+}
+
+.ms-grid.is-visible .ms-meter-fill {
+  width: var(--fill, 85%);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1024px) {
+  .ms-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .ms-container {
+    width: min(100% - 32px, 1280px);
+  }
+
+  .ms-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .ms-card {
+    padding: 18px 14px;
+    gap: 14px;
+    border-radius: 16px;
+  }
+
+  .ms-icon-wrap {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+  }
+
+  .ms-icon-wrap svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .ms-tag {
+    font-size: 9.5px;
+    padding: 3px 7px;
+  }
+
+  .ms-value {
+    font-size: 1.95rem;
+    margin-bottom: 5px;
+  }
+
+  .ms-label {
+    font-size: 12.5px;
+  }
+
+  .ms-watermark {
+    font-size: 2.3rem;
+    right: 12px;
+    bottom: 10px;
+  }
+
+  .ms-marquee-wrap {
+    transform: rotate(-1.8deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ms-marquee-track {
+    animation: none;
+  }
+
+  .ms-card,
+  .ms-icon-wrap,
+  .ms-meter-fill {
+    transition: none;
+  }
+
+  .ms-meter-fill {
+    width: var(--fill, 85%);
+  }
+}

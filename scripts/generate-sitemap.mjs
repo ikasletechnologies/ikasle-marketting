@@ -35,7 +35,25 @@ const entries = pages
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries.join('\n')}\n</urlset>\n`;
 const robots = `User-agent: *\nAllow: /\nDisallow: /dashboard\nDisallow: /api/\n\nSitemap: ${origin}/sitemap.xml\n`;
+const llmsLines = [
+  '# IKASLĒ Marketing',
+  '',
+  '> Coimbatore-based digital marketing, social media, SEO, and brand growth agency helping brands, academies, and education providers grow through measurable enquiries.',
+  '',
+  '## Contact',
+  `- Website: ${origin}/`,
+  '- Email: business@ikasle.in',
+  '- Phone: +91 78451 32962',
+  '- Address: 1639/A, 2nd Floor, Hopes, Peelamedu, Coimbatore, Tamil Nadu 641004, India',
+  '',
+  '## Public Pages',
+  ...pages
+    .filter((page) => !seen.has(`llms:${page.path}`) && seen.add(`llms:${page.path}`))
+    .map((page) => `- [${page.title.replace(' | IKASLĒ Marketing', '')}](${origin}${page.path}): ${page.description}`),
+  '',
+].join('\n');
 
 fs.writeFileSync(path.join(publicDir, 'sitemap.xml'), sitemap);
 fs.writeFileSync(path.join(publicDir, 'robots.txt'), robots);
-console.log(`[seo] Wrote sitemap.xml (${entries.length} URLs) and robots.txt for ${origin}`);
+fs.writeFileSync(path.join(publicDir, 'llms.txt'), llmsLines);
+console.log(`[seo] Wrote sitemap.xml (${entries.length} URLs), robots.txt, and llms.txt for ${origin}`);

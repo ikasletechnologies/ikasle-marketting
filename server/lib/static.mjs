@@ -39,10 +39,11 @@ function isFile(filePath) {
  * dist/<route>/index.html (route-specific meta tags) gets that file; any other
  * extension-less path gets dist/index.html so client-side routing can take over.
  */
-export function createStaticHandler(rootDir) {
+export function createStaticHandler(rootDir, options = {}) {
   const root = path.resolve(rootDir);
   const indexFile = path.join(root, 'index.html');
   const notFoundFile = path.join(root, '404.html');
+  const gonePaths = new Set(options.gonePaths || []);
   if (!isFile(indexFile)) return null;
   const hasNotFoundPage = isFile(notFoundFile);
 
@@ -75,6 +76,14 @@ export function createStaticHandler(rootDir) {
     if (target !== root && !target.startsWith(root + path.sep)) {
       response.writeHead(403, SECURITY_HEADERS);
       response.end('Forbidden');
+      return;
+    }
+
+    const cleanPath = decoded.length > 1 ? decoded.replace(/\/+$/, '') : decoded;
+    if (gonePaths.has(cleanPath)) {
+      if (hasNotFoundPage) return send(response, notFoundFile, request.method, 410);
+      response.writeHead(410, { ...SECURITY_HEADERS, 'Content-Type': 'text/plain; charset=utf-8' });
+      response.end('Gone');
       return;
     }
 

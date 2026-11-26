@@ -1,0 +1,296 @@
+/* ------------------------------------------------------------------
+   About: How It Works (4-Step Dashed Timeline + Feature Pills + CTA)
+   ------------------------------------------------------------------ */
+
+.ahiw-section {
+  position: relative;
+  width: 100%;
+  background: #f9fbfc;
+  padding: clamp(64px, 7vw, 108px) 0;
+  border-top: 1px solid rgba(7, 29, 53, 0.06);
+  border-bottom: 1px solid rgba(7, 29, 53, 0.06);
+  overflow: hidden;
+}
+
+.ahiw-container {
+  width: min(100% - 48px, 1240px);
+  margin: 0 auto;
+}
+
+/* ---- Header ---- */
+.ahiw-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto clamp(44px, 5.5vw, 72px);
+}
+
+.ahiw-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-dark-navy, #071D35);
+  margin-bottom: 14px;
+}
+
+.ahiw-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary, #2178A7), var(--color-growth-teal, #00A99D));
+  flex-shrink: 0;
+}
+
+.ahiw-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.9rem, 3.6vw, 3rem);
+  font-weight: 800;
+  line-height: 1.16;
+  letter-spacing: -0.03em;
+  color: var(--color-dark-navy, #071D35);
+  margin: 0;
+}
+
+/* ---- 4-Step Dashed Timeline ---- */
+.ahiw-steps-wrap {
+  position: relative;
+}
+
+.ahiw-steps-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(20px, 2.4vw, 36px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ahiw-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ahiw-icon-box {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(33, 120, 167, 0.14);
+  color: var(--color-dark-navy, #071D35);
+  box-shadow: 0 6px 18px rgba(7, 29, 53, 0.05);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ahiw-icon-accent {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary, #2178A7), var(--color-growth-teal, #00A99D));
+  border: 2px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.ahiw-step:hover .ahiw-icon-box {
+  transform: translateY(-5px) scale(1.04);
+  border-color: rgba(33, 120, 167, 0.38);
+  box-shadow: 0 14px 28px rgba(33, 120, 167, 0.14);
+}
+
+.ahiw-step:hover .ahiw-icon-accent {
+  transform: scale(1.14) rotate(8deg);
+}
+
+.ahiw-icon-accent {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dashed line row behind Step pills */
+.ahiw-pill-row {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.ahiw-pill-row::before {
+  content: '';
+  position: absolute;
+  left: -18px;
+  right: -18px;
+  top: 50%;
+  border-top: 1.5px dashed rgba(7, 29, 53, 0.16);
+  z-index: 0;
+}
+
+.ahiw-step:first-child .ahiw-pill-row::before {
+  left: 50%;
+}
+
+.ahiw-step:last-child .ahiw-pill-row::before {
+  right: 50%;
+}
+
+.ahiw-step-pill {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 18px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid rgba(7, 29, 53, 0.1);
+  box-shadow: 0 2px 8px rgba(7, 29, 53, 0.04);
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-dark-navy, #071D35);
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.ahiw-step:hover .ahiw-step-pill {
+  border-color: var(--color-primary, #2178A7);
+  color: var(--color-primary, #2178A7);
+}
+
+.ahiw-step-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.05rem, 1.3vw, 1.22rem);
+  font-weight: 750;
+  color: var(--color-dark-navy, #071D35);
+  margin: 0 0 10px;
+}
+
+.ahiw-step-copy {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary, #3b556e);
+  margin: 0;
+  max-width: 28ch;
+}
+
+/* ---- Bottom Feature Pills ---- */
+.ahiw-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: clamp(40px, 5vw, 60px);
+}
+
+.ahiw-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 20px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid rgba(7, 29, 53, 0.09);
+  box-shadow: 0 2px 8px rgba(7, 29, 53, 0.03);
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-dark-navy, #071D35);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ahiw-tag:hover {
+  transform: translateY(-2px);
+  border-color: rgba(33, 120, 167, 0.3);
+  box-shadow: 0 6px 16px rgba(33, 120, 167, 0.08);
+}
+
+/* ---- Bottom CTA ---- */
+.ahiw-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 26px;
+  text-align: center;
+}
+
+.ahiw-cta-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary, #2178A7), var(--color-growth-teal, #00A99D));
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(33, 120, 167, 0.24);
+  flex-shrink: 0;
+}
+
+.ahiw-cta-text {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  color: var(--text-secondary, #3b556e);
+  margin: 0;
+}
+
+.ahiw-cta-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-heading);
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--color-primary, #2178A7);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.ahiw-cta-link:hover {
+  color: var(--color-growth-teal, #00A99D);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 960px) {
+  .ahiw-steps-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px 24px;
+  }
+
+  .ahiw-pill-row::before {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .ahiw-container {
+    width: min(100% - 32px, 1240px);
+  }
+
+  .ahiw-steps-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+

@@ -3,7 +3,7 @@ import { AboutHero } from './AboutHero';
 import { AboutStory } from './AboutStory';
 import { AboutPurpose } from './AboutPurpose';
 import { AboutProcess } from './AboutProcess';
-import { AboutValues } from './AboutValues';
+import { AboutHowItWorks } from './AboutHowItWorks';
 import { AboutCta } from './AboutCta';
 
 export const AboutPage: React.FC<{ onNavigate: (section: string) => void }> = ({ onNavigate }) => {
@@ -13,7 +13,7 @@ export const AboutPage: React.FC<{ onNavigate: (section: string) => void }> = ({
       <AboutStory />
       <AboutPurpose />
       <AboutProcess />
-      <AboutValues />
+      <AboutHowItWorks onContactClick={() => onNavigate('Contact')} />
       <AboutCta onCtaClick={() => onNavigate('Contact')} />
     </main>
   );

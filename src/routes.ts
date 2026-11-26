@@ -51,7 +51,9 @@ export const ROUTES: Record<string, string> = {
   'Brand Launch & Refresh': '/services/brand-growth-creative/brand-launch-refresh',
   'Privacy Policy': '/privacy-policy',
   'Terms & Conditions': '/terms-and-conditions',
+  'Cookie Policy': '/cookie-policy',
   FAQ: '/faq',
+  Sitemap: '/sitemap',
   Careers: '/careers',
   'Leads Dashboard': '/dashboard/leads',
   'Campaigns Dashboard': '/dashboard/campaigns',
@@ -82,10 +84,7 @@ export const sectionFromPath = (path: string): string => {
 
   if (matched) return matched;
 
-  // 3. Fallback for top-level prefixes
-  if (clean === '/services' || clean.startsWith('/services/')) return 'Services';
-  if (clean === '/about' || clean.startsWith('/about/')) return 'About';
-  if (clean === '/contact' || clean.startsWith('/contact/')) return 'Contact';
+  // 3. Fallback for blog article slugs and dashboard root
   if (clean === '/blogs' || clean.startsWith('/blogs/')) return 'Blogs';
   if (clean === '/dashboard') return 'Leads Dashboard';
 

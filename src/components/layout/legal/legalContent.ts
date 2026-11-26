@@ -242,3 +242,43 @@ export const FAQ_GROUPS: FaqGroup[] = [
     ],
   },
 ];
+
+export const COOKIES: LegalDocument = {
+  overline: 'LEGAL',
+  title: 'Cookie Policy',
+  intro:
+    'How IKASLĒ Marketing uses cookies and similar technologies to keep our website reliable, measure performance, and improve your browsing experience.',
+  updated: 'November 2026',
+  sections: [
+    {
+      id: 'what-are-cookies',
+      title: 'What are cookies?',
+      body: [
+        'Cookies are small text files stored on your browser or device when you visit a website. They help websites remember preferences, keep features working smoothly, and understand how visitors interact with pages.',
+      ],
+    },
+    {
+      id: 'types-we-use',
+      title: 'Types of cookies we use',
+      list: [
+        'Essential cookies: Required for core site navigation, form security, and reliable page delivery.',
+        'Performance & analytics cookies: Help us understand page visits, traffic sources, and how visitors use our site so we can improve content and speed.',
+        'Preference cookies: Remember helpful display or session settings during your visit.',
+      ],
+    },
+    {
+      id: 'managing-cookies',
+      title: 'Managing your cookie preferences',
+      body: [
+        'You can control, block, or delete cookies at any time through your browser settings. Please note that disabling essential cookies may affect how certain features on our site behave.',
+      ],
+    },
+    {
+      id: 'contact',
+      title: 'Questions about this policy',
+      body: [
+        'If you have any questions about how we use cookies, email us at business@ikasle.in or reach out via our Contact page.',
+      ],
+    },
+  ],
+};

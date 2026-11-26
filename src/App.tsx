@@ -28,7 +28,9 @@ const CampaignsPage = lazyNamed(() => import('./components/layout/dashboard/Camp
 const NotFoundPage = lazyNamed(() => import('./components/layout/shared/NotFoundPage'), 'NotFoundPage');
 const PrivacyPolicyPage = lazyNamed(() => import('./components/layout/legal/LegalPages'), 'PrivacyPolicyPage');
 const TermsPage = lazyNamed(() => import('./components/layout/legal/LegalPages'), 'TermsPage');
+const CookiePolicyPage = lazyNamed(() => import('./components/layout/legal/LegalPages'), 'CookiePolicyPage');
 const FaqPage = lazyNamed(() => import('./components/layout/legal/LegalPages'), 'FaqPage');
+const SitemapPage = lazyNamed(() => import('./components/layout/legal/LegalPages'), 'SitemapPage');
 const DigitalMarketingPage = lazyNamed(() => import('./components/layout/services/digital/DigitalMarketingPage'), 'DigitalMarketingPage');
 const BrandPage = lazyNamed(() => import('./components/layout/services/brand/BrandPage'), 'BrandPage');
 const SeoPage = lazyNamed(() => import('./components/layout/services/seo/SeoPage'), 'SeoPage');
@@ -131,8 +133,12 @@ export const App: React.FC = () => {
         return <PrivacyPolicyPage onHomeClick={goHome} onContactClick={goContact} />;
       case 'Terms & Conditions':
         return <TermsPage onHomeClick={goHome} onContactClick={goContact} />;
+      case 'Cookie Policy':
+        return <CookiePolicyPage onHomeClick={goHome} onContactClick={goContact} />;
       case 'FAQ':
         return <FaqPage onHomeClick={goHome} onContactClick={goContact} />;
+      case 'Sitemap':
+        return <SitemapPage onHomeClick={goHome} onNavigate={navigate} />;
       case 'Digital Marketing':
         return (
           <DigitalMarketingPage
