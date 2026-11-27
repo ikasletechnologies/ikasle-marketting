@@ -28,9 +28,14 @@ export const PostCover: React.FC<{ category: BlogCategory; large?: boolean }> = 
   const Icon = CATEGORY_ICONS[category];
   return (
     <div className={`blog-cover blog-cover-${CATEGORY_TONES[category]}${large ? ' blog-cover-large' : ''}`} aria-hidden="true">
+      <span className="blog-cover-grid" />
+      <span className="blog-cover-glow" />
       <span className="blog-cover-ring" />
       <span className="blog-cover-ring blog-cover-ring-2" />
-      <Icon size={large ? 56 : 40} strokeWidth={1.6} />
+      <span className="blog-cover-icon-wrap">
+        <Icon size={large ? 44 : 30} strokeWidth={1.75} />
+      </span>
+      <span className="blog-cover-label">{category}</span>
     </div>
   );
 };

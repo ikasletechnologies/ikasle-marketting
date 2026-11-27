@@ -1,4 +1,4 @@
-﻿.hero-section {
+.hero-section {
   position: relative;
   display: flex;
   min-height: clamp(535px, calc(100svh - 80px), 720px);
