@@ -1,0 +1,257 @@
+/* Hub hero visual: filled service icons around a central icon tile. Stage is 100cqw × 60cqw. */
+
+.hha-stage {
+  position: relative;
+  width: min(100%, 620px);
+  margin: 0 auto;
+  container-type: inline-size;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hha-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 100 / 60;
+}
+
+/* ---------- Orbit + connectors ---------- */
+
+.hha-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.hha-orbit {
+  fill: none;
+  stroke: rgba(33, 120, 167, 0.22);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 7;
+  vector-effect: non-scaling-stroke;
+  animation: hhaFlow 2.4s linear infinite, hhaFade 900ms 200ms ease both;
+}
+
+.hha-link {
+  stroke: rgba(33, 120, 167, 0.14);
+  stroke-width: 1.5;
+  stroke-dasharray: 2 5;
+  vector-effect: non-scaling-stroke;
+  animation:
+    hhaFlow 1.2s linear infinite reverse,
+    hhaLinkSpot var(--cycle) calc(var(--i) * var(--spot) + 1.2s) ease-in-out infinite;
+}
+
+/* ---------- Centre ---------- */
+
+.hha-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  justify-items: center;
+  translate: -50% -50%;
+  animation: hhaCenterIn 1s 100ms cubic-bezier(0.2, 1.3, 0.35, 1) both;
+}
+
+.hha-center-tile {
+  position: relative;
+  display: grid;
+  width: 21cqw;
+  height: 21cqw;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 5.5cqw;
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.98), rgba(232, 243, 251, 0.9));
+  box-shadow:
+    0 0.5cqw 1cqw rgba(7, 29, 53, 0.06),
+    0 4cqw 7cqw -2cqw rgba(16, 62, 110, 0.38),
+    inset 0 -0.8cqw 1.6cqw rgba(33, 120, 167, 0.1),
+    inset 0 1px 0 #fff;
+  animation: hhaTilt 7s ease-in-out infinite;
+}
+
+.hha-center-icon {
+  display: grid;
+  width: 12.5cqw;
+  height: 12.5cqw;
+  filter: drop-shadow(0 1cqw 1.2cqw rgba(16, 62, 110, 0.25));
+  animation: hhaIconBob 3.4s ease-in-out infinite;
+}
+
+.hha-center-icon svg,
+.hha-tile-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hha-halo {
+  position: absolute;
+  top: 0;
+  width: 21cqw;
+  height: 21cqw;
+  border: 1.5px solid rgba(0, 169, 157, 0.35);
+  border-radius: 5.5cqw;
+  animation: hhaHalo 3.2s ease-out infinite;
+}
+
+.hha-halo--2 { animation-delay: 1.6s; }
+
+.hha-caption {
+  margin-top: 1.8cqw;
+  padding: 0.8cqw 1.8cqw;
+  border-radius: 99px;
+  background: var(--color-dark-navy);
+  color: #fff;
+  font: 700 1.9cqw/1 var(--font-body);
+  white-space: nowrap;
+  box-shadow: 0 1cqw 2cqw -0.8cqw rgba(7, 29, 53, 0.5);
+}
+
+/* ---------- Icon tiles ---------- */
+
+.hha-tile {
+  position: absolute;
+  display: grid;
+  justify-items: center;
+  translate: -50% -50%;
+  animation: hhaTileIn 900ms calc(300ms + var(--i) * 80ms) cubic-bezier(0.2, 1.3, 0.35, 1) both;
+}
+
+.hha-tile-body {
+  display: grid;
+  width: 11.5cqw;
+  height: 11.5cqw;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 3.2cqw;
+  background: linear-gradient(155deg, #ffffff, #eef6fb);
+  box-shadow:
+    0 0.3cqw 0.6cqw rgba(7, 29, 53, 0.05),
+    0 2.4cqw 4cqw -1.4cqw rgba(16, 62, 110, 0.35),
+    inset 0 1px 0 #fff;
+  animation:
+    hhaBob 4.2s calc(var(--i) * -0.55s) ease-in-out infinite,
+    hhaSpot var(--cycle) calc(var(--i) * var(--spot) + 1.2s) ease-in-out infinite;
+}
+
+.hha-tile-icon {
+  display: grid;
+  width: 7cqw;
+  height: 7cqw;
+}
+
+.hha-label {
+  position: absolute;
+  top: calc(100% + 1cqw);
+  padding: 0.6cqw 1.3cqw;
+  border-radius: 99px;
+  background: #fff;
+  color: var(--color-dark-navy);
+  font: 700 1.75cqw/1 var(--font-body);
+  white-space: nowrap;
+  box-shadow: 0 1cqw 2cqw -0.8cqw rgba(16, 62, 110, 0.45);
+  opacity: 0;
+  animation: hhaLabel var(--cycle) calc(var(--i) * var(--spot) + 1.2s) ease-in-out infinite;
+}
+
+.hha-label.is-top {
+  top: auto;
+  bottom: calc(100% + 1cqw);
+}
+
+/* ---------- Sparkles ---------- */
+
+.hha-spark {
+  position: absolute;
+  width: 1.4cqw;
+  height: 1.4cqw;
+  background: linear-gradient(135deg, #2fd6c7, #2178a7);
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  animation: hhaTwinkle 2.6s ease-in-out infinite;
+}
+
+.hha-spark--1 { left: 30%; top: 18%; }
+.hha-spark--2 { left: 72%; top: 78%; animation-delay: 0.9s; width: 1.8cqw; height: 1.8cqw; }
+.hha-spark--3 { left: 64%; top: 14%; animation-delay: 1.7s; }
+
+.hha-paused,
+.hha-paused * { animation-play-state: paused !important; }
+
+/* ---------- Keyframes ---------- */
+
+@keyframes hhaFlow { to { stroke-dashoffset: -20; } }
+@keyframes hhaFade { from { opacity: 0; } to { opacity: 1; } }
+
+@keyframes hhaCenterIn {
+  from { opacity: 0; scale: 0.6; }
+  to { opacity: 1; scale: 1; }
+}
+
+/* Tiles burst out from the centre to their spot on the ellipse. */
+@keyframes hhaTileIn {
+  from { opacity: 0; translate: calc(-50% + var(--dx)) calc(-50% + var(--dy)); scale: 0.3; }
+  to { opacity: 1; translate: -50% -50%; scale: 1; }
+}
+
+@keyframes hhaTilt {
+  0%, 100% { transform: perspective(600px) rotateY(-10deg) rotateX(6deg); }
+  50% { transform: perspective(600px) rotateY(10deg) rotateX(-4deg); }
+}
+
+@keyframes hhaIconBob {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-0.8cqw) scale(1.04); }
+}
+
+@keyframes hhaHalo {
+  0% { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.45); }
+}
+
+@keyframes hhaBob {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -1.2cqw; }
+}
+
+/* Each tile is in the spotlight for one slot of the cycle. */
+@keyframes hhaSpot {
+  0%, 100% { scale: 1; border-color: rgba(255, 255, 255, 0.95); }
+  3%, 9% {
+    scale: 1.16;
+    border-color: rgba(0, 169, 157, 0.6);
+    box-shadow:
+      0 0 0 0.8cqw rgba(0, 169, 157, 0.12),
+      0 2.8cqw 5cqw -1.4cqw rgba(0, 120, 112, 0.45),
+      inset 0 1px 0 #fff;
+  }
+  13% { scale: 1; border-color: rgba(255, 255, 255, 0.95); }
+}
+
+@keyframes hhaLabel {
+  0%, 100% { opacity: 0; transform: translateY(0.6cqw); }
+  3%, 10% { opacity: 1; transform: none; }
+  13% { opacity: 0; transform: translateY(0.6cqw); }
+}
+
+@keyframes hhaLinkSpot {
+  0%, 100% { stroke: rgba(33, 120, 167, 0.14); }
+  3%, 10% { stroke: rgba(0, 169, 157, 0.85); }
+  13% { stroke: rgba(33, 120, 167, 0.14); }
+}
+
+@keyframes hhaTwinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.6) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.1) rotate(45deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hha-stage *,
+  .hha-stage {
+    animation: none !important;
+  }
+}

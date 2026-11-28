@@ -8,6 +8,7 @@ import targetIcon from '../../../assets/service-target.png';
 import socialIcon from '../../../assets/service-social.png';
 import seoIcon from '../../../assets/service-seo.png';
 import brandIcon from '../../../assets/service-brand.png';
+import ikasleLogo from '../../../assets/logo-clean.png';
 import './ServicesSection.css';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -161,13 +162,10 @@ const BrandScene: React.FC = () => (
         <span key={c} className="hs-swatch" style={{ background: c, '--a': `${i * 72}deg` } as CSSProperties} />
       ))}
     </div>
-    <svg viewBox="0 0 100 100" className="hs-mark">
-      <path className="hs-mark-a" d="M14 8 C40 22 44 78 14 92 Z" fill="#0b4f8a" />
-      <path className="hs-mark-b" d="M40 50 C44 22 64 8 92 8 C88 36 70 50 40 50Z" fill="#0aa5a3" />
-      <path className="hs-mark-c" d="M40 50 C70 50 88 64 92 92 C64 92 44 78 40 50Z" fill="#5fc9d6" />
-    </svg>
+    <div className="hs-logo-plate">
+      <img className="hs-logo-img" src={ikasleLogo} alt="" draggable={false} />
+    </div>
     <span className="hs-type">Aa</span>
-    <span className="hs-wordmark">IKASLĒ</span>
   </div>
 );
 
@@ -216,12 +214,10 @@ const animateScene = (id: string) => {
   } else {
     gsap.to('.hs-orbit', { rotation: 360, duration: 14, ease: 'none', repeat: -1 });
     gsap.to('.hs-swatch', { rotation: -360, duration: 14, ease: 'none', repeat: -1 });
-    gsap.timeline({ repeat: -1, repeatDelay: 2.2 })
-      .fromTo('.hs-mark-a', { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.7, ease: 'power3.out' })
-      .fromTo('.hs-mark-b', { scale: 0, rotation: -70, svgOrigin: '40 50' }, { scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(1.7)' }, '-=0.35')
-      .fromTo('.hs-mark-c', { scale: 0, rotation: 70, svgOrigin: '40 50' }, { scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(1.7)' }, '-=0.5')
-      .fromTo('.hs-wordmark', { letterSpacing: '0.9em', opacity: 0 }, { letterSpacing: '0.28em', opacity: 1, duration: 0.8, ease: 'power3.out' }, '-=0.3')
-      .to('.hs-mark path, .hs-wordmark', { opacity: 0, duration: 0.4 }, '+=2.4');
+    gsap.timeline()
+      .fromTo('.hs-logo-plate', { scale: 0.6, opacity: 0, rotation: -6 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.8, ease: 'back.out(1.7)' })
+      .fromTo('.hs-logo-img', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 0.9, ease: 'power3.out' }, '-=0.35')
+      .to('.hs-logo-plate', { y: -6, duration: 2.2, ...loop });
     gsap.to('.hs-type', { y: -8, rotation: -4, duration: 2, ...loop });
   }
 };

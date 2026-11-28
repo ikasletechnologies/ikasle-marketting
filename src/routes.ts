@@ -3,6 +3,7 @@ export const ROUTES: Record<string, string> = {
   Home: '/',
   About: '/about',
   Services: '/services',
+  Clients: '/clients',
   Blogs: '/blogs',
   Contact: '/contact',
   'Digital Marketing': '/services/digital-marketing',

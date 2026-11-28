@@ -1,54 +1,17 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import { CLIENTS } from '../../../content/clients/clients';
 import './ClientLogosSection.css';
 
-interface ClientLogo {
-  name: string;
-  src: string;
-  url: string;
+const LOOP_LOGOS = [...CLIENTS, ...CLIENTS];
+
+interface ClientLogosSectionProps {
+  /** Use 'h1' when this section is the page's main heading (Clients page). */
+  headingLevel?: 'h1' | 'h2';
 }
 
-const CLIENT_LOGOS: ClientLogo[] = [
-  {
-    name: 'Aadhan Caterers',
-    src: '/clientlogo/aadhancaterers.jpeg',
-    url: 'https://www.google.com/search?q=Aadhan+Caterers+Coimbatore',
-  },
-  {
-    name: 'Acme Bricks',
-    src: '/clientlogo/acme-bricks.webp',
-    url: 'https://acmebricks.in',
-  },
-  {
-    name: 'Akvinz',
-    src: '/clientlogo/akvinz.png',
-    url: 'https://akvinz.com',
-  },
-  {
-    name: 'Get Events',
-    src: '/clientlogo/get-events.png',
-    url: 'https://www.getcorporateevents.com',
-  },
-  {
-    name: 'Giftery',
-    src: '/clientlogo/giftery.png',
-    url: 'https://gifterys.com',
-  },
-  {
-    name: 'Rent-O-Mate',
-    src: '/clientlogo/rent-o-mate.png',
-    url: 'https://rentomate.life',
-  },
-  {
-    name: 'Uzhavar Connect',
-    src: '/clientlogo/uzhavar-connect.webp',
-    url: 'https://uzhavarconnect.com',
-  },
-];
-
-const LOOP_LOGOS = [...CLIENT_LOGOS, ...CLIENT_LOGOS];
-
-export const ClientLogosSection: React.FC = () => {
+export const ClientLogosSection: React.FC<ClientLogosSectionProps> = ({ headingLevel = 'h2' }) => {
+  const Heading = headingLevel;
   return (
     <section className="cl-section" aria-label="Trusted client brands">
       <div className="cl-container">
@@ -58,9 +21,9 @@ export const ClientLogosSection: React.FC = () => {
               <span className="cl-eyebrow-line" aria-hidden="true" />
               TRUSTED PARTNERS
             </span>
-            <h2 className="cl-title">
+            <Heading className="cl-title">
               Brands scaling <span className="cl-title-highlight">with IKASLĒ.</span>
-            </h2>
+            </Heading>
           </div>
 
           <p className="cl-sub">
@@ -77,7 +40,7 @@ export const ClientLogosSection: React.FC = () => {
       >
         <div className="cl-track">
           {LOOP_LOGOS.map(({ name, src, url }, idx) => {
-            const isDuplicate = idx >= CLIENT_LOGOS.length;
+            const isDuplicate = idx >= CLIENTS.length;
             return (
               <a
                 key={`${name}-${idx}`}

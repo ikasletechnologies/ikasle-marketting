@@ -84,17 +84,6 @@
   will-change: transform;
 }
 
-.sm-hero-art img {
-  display: block;
-  width: min(100%, 600px);
-  height: auto;
-  mix-blend-mode: multiply;
-  -webkit-mask-image: radial-gradient(ellipse 80% 84% at 50% 50%, #000 64%, transparent 100%);
-  mask-image: radial-gradient(ellipse 80% 84% at 50% 50%, #000 64%, transparent 100%);
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
 /* List */
 .sm-list { padding: clamp(28px, 3.4vw, 46px) 24px clamp(28px, 3.4vw, 44px); }
 .sm-list-inner { width: min(100%, 1380px); margin: 0 auto; }

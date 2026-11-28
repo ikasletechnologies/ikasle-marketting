@@ -5,9 +5,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { splitReveal } from '../../../../lib/splitReveal';
 import { useGSAP } from '@gsap/react';
-import heroArt from '../../../../assets/brand-hero-art.png';
 import { BRAND_ICONS } from './BrandIcons';
 import './BrandPage.css';
+import { HubHeroArt } from '../HubHeroArt';
 
 gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
@@ -51,8 +51,7 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onHomeClick, onServicesCli
       tl.from('.br-breadcrumb', { opacity: 0, y: -12, duration: 0.8 }, 0)
         .from('.br-overline', { opacity: 0, x: -30, duration: 1 }, 0.1)
         .from('.br-hero-copy > p', { opacity: 0, y: 20, duration: 1 }, 0.9)
-        .fromTo('.br-hero-art', { clipPath: 'inset(0 0 0 100%)' }, { clipPath: 'inset(0 0 0 0%)', duration: 1.5 }, 0.15)
-        .from('.br-hero-art img', { scale: 1.2, duration: 2, ease: 'power3.out' }, 0.15);
+        .fromTo('.br-hero-art', { clipPath: 'inset(0 0 0 100%)' }, { clipPath: 'inset(0 0 0 0%)', duration: 1.5 }, 0.15);
       SplitText.create('.br-hero-title', {
         type: 'lines',
         mask: 'lines',
@@ -61,13 +60,6 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onHomeClick, onServicesCli
       });
     });
 
-    // Slow parallax drift of the scene while you scroll past.
-    mm.add('(prefers-reduced-motion: no-preference)', () => {
-      gsap.fromTo('.br-hero-art img', { yPercent: -3 }, {
-        yPercent: 3, ease: 'none',
-        scrollTrigger: { trigger: '.br-hero', start: 'top top', end: 'bottom top', scrub: true },
-      });
-    });
 
     // Cards build in; every icon has its own idle motion.
     mm.add('(prefers-reduced-motion: no-preference)', () => {
@@ -170,7 +162,20 @@ export const BrandPage: React.FC<BrandPageProps> = ({ onHomeClick, onServicesCli
           </div>
         </div>
         <div className="br-hero-art" aria-hidden="true">
-          <img src={heroArt} alt="" />
+          <HubHeroArt
+            center={BRAND_ICONS.logo}
+            caption="10 focused services"
+            icons={[
+              { label: 'Discovery', icon: BRAND_ICONS.discovery },
+              { label: 'Strategy', icon: BRAND_ICONS.strategy },
+              { label: 'Messaging', icon: BRAND_ICONS.messaging },
+              { label: 'Guidelines', icon: BRAND_ICONS.guidelines },
+              { label: 'Collateral', icon: BRAND_ICONS.collateral },
+              { label: 'Web Design', icon: BRAND_ICONS.website },
+              { label: 'Campaigns', icon: BRAND_ICONS.creative },
+              { label: 'Launch', icon: BRAND_ICONS.launch },
+            ]}
+          />
         </div>
       </section>
 

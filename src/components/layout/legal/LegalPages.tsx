@@ -130,7 +130,7 @@ export const FaqPage: React.FC<PageProps> = ({ onHomeClick, onContactClick }) =>
 );
 
 const SITEMAP_GROUPS: { title: string; prefix?: string; names?: string[] }[] = [
-  { title: 'Main Pages', names: ['Home', 'About', 'Services', 'Blogs', 'Careers', 'Contact'] },
+  { title: 'Main Pages', names: ['Home', 'About', 'Services', 'Clients', 'Blogs', 'Careers', 'Contact'] },
   { title: 'Digital Marketing', prefix: '/services/digital-marketing' },
   { title: 'Social Media Marketing', prefix: '/services/social-media-marketing' },
   { title: 'SEO & Search Growth', prefix: '/services/seo-search-growth' },
@@ -151,8 +151,7 @@ export const SitemapPage: React.FC<PageProps & { onNavigate?: (to: string) => vo
       onHomeClick={onHomeClick}
     />
 
-    <div className="legal-faq-body">
-      <div className="legal-faq-content">
+    <div className="sitemap-directory">
         {SITEMAP_GROUPS.map((group) => {
           const items = group.names
             ? group.names.map((name) => ({ name, path: ROUTES[name] }))
@@ -160,21 +159,21 @@ export const SitemapPage: React.FC<PageProps & { onNavigate?: (to: string) => vo
                 .filter(([, p]) => p === group.prefix || p.startsWith(`${group.prefix}/`))
                 .map(([name, p]) => ({ name, path: p }));
           return (
-            <section className="legal-faq-group" key={group.title}>
+            <section className="sitemap-card" key={group.title}>
               <h2>{group.title}</h2>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '10px', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))' }}>
+              <ul>
                 {items.map((item) => (
                   <li key={item.path}>
                     <a
                       href={item.path}
                       onClick={(e) => {
-                        if (!onNavigate) return;
+                        if (!onNavigate || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
                         e.preventDefault();
                         onNavigate(item.path);
                       }}
-                      style={{ color: 'var(--color-primary)', textDecoration: 'none', fontWeight: 500 }}
                     >
                       {item.name}
+                      <ArrowRight size={16} aria-hidden="true" />
                     </a>
                   </li>
                 ))}
@@ -183,9 +182,9 @@ export const SitemapPage: React.FC<PageProps & { onNavigate?: (to: string) => vo
           );
         })}
 
-        <section className="legal-faq-group">
+        <section className="sitemap-card sitemap-card--wide">
           <h2>Blog Articles</h2>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '10px', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))' }}>
+          <ul>
             {BLOG_POSTS.map((post) => {
               const p = blogPostPath(post.slug);
               return (
@@ -193,13 +192,13 @@ export const SitemapPage: React.FC<PageProps & { onNavigate?: (to: string) => vo
                   <a
                     href={p}
                     onClick={(e) => {
-                      if (!onNavigate) return;
+                      if (!onNavigate || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
                       e.preventDefault();
                       onNavigate(p);
                     }}
-                    style={{ color: 'var(--color-primary)', textDecoration: 'none', fontWeight: 500 }}
                   >
                     {post.title}
+                    <ArrowRight size={16} aria-hidden="true" />
                   </a>
                 </li>
               );
@@ -207,17 +206,15 @@ export const SitemapPage: React.FC<PageProps & { onNavigate?: (to: string) => vo
           </ul>
         </section>
 
-        <div className="legal-help">
+        <div className="legal-help sitemap-xml">
           <p>Looking for the XML sitemap?</p>
           <a
             href="/sitemap.xml"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--color-primary)', fontWeight: 600, textDecoration: 'none' }}
           >
             <span>View /sitemap.xml</span>
             <ArrowRight size={18} aria-hidden="true" />
           </a>
         </div>
-      </div>
     </div>
   </main>
 );

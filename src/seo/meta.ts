@@ -28,6 +28,7 @@ const PAGE_DESCRIPTIONS: Record<string, string> = {
   Home: 'IKASLĒ Marketing helps brands, academies and education providers grow with digital marketing, social media, SEO and brand strategy built around real enquiries.',
   About: 'Meet IKASLĒ Marketing, a Coimbatore-based growth agency combining strategy, creativity and digital marketing to help ambitious brands move forward.',
   Services: 'Explore IKASLĒ Marketing services: digital marketing, social media marketing, SEO & search growth, and brand growth & creative, as one plan or individually.',
+  Clients: 'Brands that grow with IKASLĒ Marketing: our clients across hospitality, tech, D2C and B2B, partnering with us on digital marketing, social media and branding.',
   Blogs: 'Practical guides on digital marketing, social media, SEO and student acquisition from the IKASLĒ Marketing team.',
   Contact: 'Tell us about your goals. Contact IKASLĒ Marketing in Coimbatore by form, email or phone to plan your next stage of growth.',
   Careers: 'Careers at IKASLĒ Marketing in Coimbatore. Browse open jobs in design, video, social media and performance marketing, and apply online.',

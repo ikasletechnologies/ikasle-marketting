@@ -73,7 +73,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange, onCtaCli
     else if (hoverCategory !== title) switchTimer.current = window.setTimeout(() => setHoverCategory(title), 160);
   };
   const closeDropdown = () => { clearSwitch(); setHoverCategory(null); };
-  const navLinks = ['Home', 'About', 'Services', 'Blogs', 'Contact'];
+  const navLinks = ['Home', 'About', 'Services', 'Clients', 'Blogs', 'Contact'];
 
   const currentPath = typeof window !== 'undefined' ? normalise(window.location.pathname) : '/';
   const effectiveSection = activeTab ?? sectionFromPath(currentPath);

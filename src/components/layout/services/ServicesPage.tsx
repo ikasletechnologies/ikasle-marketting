@@ -12,7 +12,11 @@ const HUB_BY_ID: Record<string, string> = {
 
 export const ServicesPage: React.FC<{ onNavigate: (section: string) => void }> = ({ onNavigate }) => (
   <main>
-    <ServicesHero onHomeClick={() => onNavigate('Home')} />
+    <ServicesHero
+      onHomeClick={() => onNavigate('Home')}
+      onContactClick={() => onNavigate('Contact')}
+      onServiceClick={(id) => onNavigate(HUB_BY_ID[id] ?? 'Services')}
+    />
     <ServicesListing onServiceClick={(id) => onNavigate(HUB_BY_ID[id] ?? 'Contact')} />
     <ServicesCta onCtaClick={() => onNavigate('Contact')} />
   </main>

@@ -14,6 +14,7 @@ const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 const env = process.env;
 
 const PORT = Number(env.PORT || 5000);
+const HOST = env.HOST || '0.0.0.0';
 const SMTP_HOST = env.SMTP_HOST;
 const SMTP_PORT = Number(env.SMTP_PORT || 587);
 const SMTP_SECURE = env.SMTP_SECURE === 'true' || SMTP_PORT === 465;
@@ -647,8 +648,8 @@ const server = http.createServer(async (request, response) => {
   sendJson(response, 404, { ok: false, message: 'Not found.' });
 });
 
-server.listen(PORT, () => {
-  console.log(`Ikasle server listening on http://localhost:${PORT}`);
+server.listen(PORT, HOST, () => {
+  console.log(`Ikasle server listening on http://${HOST}:${PORT}`);
   console.log(`  email: ${transporter ? 'on' : 'off'} | storage: ${store ? 'on' : 'off'} | chat: ${NVIDIA_API_KEY ? 'on' : 'off'} | jira: ${jira.enabled ? 'on' : 'off'} | static: ${serveStatic ? DIST_DIR : 'off'}`);
 });
 

@@ -7,11 +7,13 @@ const apiTarget = process.env.API_PROXY_TARGET || 'http://localhost:5000'
 
 export default defineConfig({
   server: {
+    host: '0.0.0.0',
     port: 3045,
     // The API runs as a separate Node process in development (npm run dev starts both).
     proxy: { '/api': apiTarget },
   },
   preview: {
+    host: '0.0.0.0',
     port: 4173,
     proxy: { '/api': apiTarget },
   },

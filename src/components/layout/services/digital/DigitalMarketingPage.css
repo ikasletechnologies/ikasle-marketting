@@ -85,17 +85,6 @@
   will-change: transform;
 }
 
-.dm-hero-art img {
-  display: block;
-  width: min(100%, 560px);
-  height: auto;
-  mix-blend-mode: multiply;
-  -webkit-mask-image: radial-gradient(ellipse 78% 82% at 50% 50%, #000 62%, transparent 100%);
-  mask-image: radial-gradient(ellipse 78% 82% at 50% 50%, #000 62%, transparent 100%);
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
 /* List */
 .dm-list { padding: clamp(36px, 4vw, 52px) 24px clamp(32px, 4vw, 52px); }
 .dm-list-inner { width: min(100%, 1380px); margin: 0 auto; }

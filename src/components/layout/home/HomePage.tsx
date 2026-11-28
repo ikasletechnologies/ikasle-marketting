@@ -3,11 +3,9 @@ import { HeroSection } from './HeroSection';
 import { lazyNamed } from '../../../lib/lazyNamed';
 
 // Below-the-fold sections (and the GSAP/WebGL code they use) load after the hero is on screen.
-const ClientLogosSection = lazyNamed(() => import('./ClientLogosSection'), 'ClientLogosSection');
 const ServicesSection = lazyNamed(() => import('../services/ServicesSection'), 'ServicesSection');
 const CoreServicesShowcase = lazyNamed(() => import('./CoreServicesShowcase'), 'CoreServicesShowcase');
 const WhyChooseUs = lazyNamed(() => import('./WhyChooseUs'), 'WhyChooseUs');
-const MarqueeStatsSection = lazyNamed(() => import('./MarqueeStatsSection'), 'MarqueeStatsSection');
 const JourneySection = lazyNamed(() => import('./JourneySection'), 'JourneySection');
 const MarketingEcosystemSection = lazyNamed(() => import('./MarketingEcosystemSection'), 'MarketingEcosystemSection');
 const NewsletterSignup = lazyNamed(() => import('../../ui/NewsletterSignup'), 'NewsletterSignup');
@@ -21,23 +19,25 @@ const HUB_BY_ID: Record<string, string> = {
 
 export const HomePage: React.FC<{ onNavigate: (section: string) => void }> = ({ onNavigate }) => (
   <main>
-    <HeroSection onStartJourney={() => onNavigate('Contact')} onExploreServices={() => onNavigate('Services')} />
+    <HeroSection
+      onStartJourney={() => onNavigate('Contact')}
+      onExploreServices={() => onNavigate('Services')}
+      onNavigate={onNavigate}
+    />
     {/* Reserve space while the sections load so the page does not jump. */}
     <Suspense fallback={<div style={{ minHeight: '100vh' }} aria-busy="true" />}>
-      <ClientLogosSection />
       <ServicesSection
         onServiceClick={(id) => onNavigate(HUB_BY_ID[id] ?? 'Services')}
         onNavigate={onNavigate}
         onViewAllClick={() => onNavigate('Services')}
       />
+      <MarketingEcosystemSection onNavigate={onNavigate} />
       <WhyChooseUs />
-      <MarqueeStatsSection />
       <CoreServicesShowcase
         onServiceClick={(id) => onNavigate(HUB_BY_ID[id] ?? 'Services')}
         onViewAllClick={() => onNavigate('Services')}
       />
       <JourneySection />
-      <MarketingEcosystemSection onNavigate={onNavigate} />
       <div style={{ width: 'min(1180px, calc(100% - 32px))', margin: '0 auto', padding: '24px 0 72px' }}>
         <NewsletterSignup source="home" />
       </div>

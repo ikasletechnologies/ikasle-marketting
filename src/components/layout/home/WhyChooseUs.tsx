@@ -95,7 +95,7 @@ export const WhyChooseUs: React.FC = () => {
     {
       id: 'dedicated-support',
       title: 'Dedicated Support',
-      description: 'We provide 24/7 support and a dedicated account manager.',
+      description: 'We provide 12/6 support and a dedicated account manager.',
       color: '#d97706',
       iconBg: 'rgba(217, 119, 6, 0.08)',
       icon: (

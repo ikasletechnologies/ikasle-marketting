@@ -5,10 +5,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { splitReveal } from '../../../../lib/splitReveal';
 import { useGSAP } from '@gsap/react';
-import heroArt from '../../../../assets/social-hero-art.png';
 import { ServicesCta } from '../ServicesCta';
 import { SOCIAL_ICONS } from './SocialIcons';
 import './SocialMediaPage.css';
+import { HubHeroArt } from '../HubHeroArt';
 
 gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
@@ -74,7 +74,6 @@ export const SocialMediaPage: React.FC<SocialMediaPageProps> = ({
         autoSplit: true,
         onSplit: (self) => splitReveal(self.lines, { yPercent: 115, duration: 1.2, stagger: 0.14 }, tl, 0.3),
       });
-      gsap.to('.sm-hero-art img', { y: -12, rotation: 0.6, duration: 3.2, repeat: -1, yoyo: true, ease: 'sine.inOut' });
     });
 
     mm.add('(prefers-reduced-motion: no-preference) and (hover: hover)', () => {
@@ -200,7 +199,20 @@ export const SocialMediaPage: React.FC<SocialMediaPageProps> = ({
           </div>
 
           <div className="sm-hero-art" aria-hidden="true">
-            <img src={heroArt} alt="" />
+            <HubHeroArt
+              center={SOCIAL_ICONS.strategy}
+              caption="10 focused services"
+              icons={[
+                { label: 'Profile Setup', icon: SOCIAL_ICONS.profile },
+                { label: 'Management', icon: SOCIAL_ICONS.management },
+                { label: 'Content Plans', icon: SOCIAL_ICONS.planning },
+                { label: 'Creative Posts', icon: SOCIAL_ICONS.posts },
+                { label: 'Reels', icon: SOCIAL_ICONS.reels },
+                { label: 'Community', icon: SOCIAL_ICONS.community },
+                { label: 'Social Ads', icon: SOCIAL_ICONS.advertising },
+                { label: 'Influencers', icon: SOCIAL_ICONS.influencer },
+              ]}
+            />
           </div>
         </div>
       </section>
@@ -253,16 +265,6 @@ export const SocialMediaPage: React.FC<SocialMediaPageProps> = ({
           <span>Back to All Services</span>
         </button>
       </div>
-
-      <section className="sm-ready" aria-labelledby="sm-ready-title">
-        <div className="sm-ready-inner">
-          <h2 id="sm-ready-title">Ready to start a conversation?</h2>
-          <button type="button" className="sm-ready-button" onClick={onContactClick}>
-            <span>Start a Conversation</span>
-            <ArrowRight size={19} strokeWidth={2} aria-hidden="true" />
-          </button>
-        </div>
-      </section>
     </main>
   );
 };

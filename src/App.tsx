@@ -21,6 +21,7 @@ const HomePage = lazyNamed(() => import('./components/layout/home/HomePage'), 'H
 const AboutPage = lazyNamed(() => import('./components/layout/about/AboutPage'), 'AboutPage');
 const ServicesPage = lazyNamed(() => import('./components/layout/services/ServicesPage'), 'ServicesPage');
 const ContactPage = lazyNamed(() => import('./components/layout/contact/ContactPage'), 'ContactPage');
+const ClientsPage = lazyNamed(() => import('./components/layout/clients/ClientsPage'), 'ClientsPage');
 const CareersPage = lazyNamed(() => import('./components/layout/careers/CareersPage'), 'CareersPage');
 const CareerJobPage = lazyNamed(() => import('./components/layout/careers/CareerJobPage'), 'CareerJobPage');
 const BlogPage = lazyNamed(() => import('./components/layout/blog/BlogPage'), 'BlogPage');
@@ -123,6 +124,8 @@ export const App: React.FC = () => {
         return <AboutPage onNavigate={openSection} />;
       case 'Services':
         return <ServicesPage onNavigate={openSection} />;
+      case 'Clients':
+        return <ClientsPage onNavigate={openSection} />;
       case 'Contact':
         return <ContactPage onHomeClick={goHome} />;
       case 'Careers':

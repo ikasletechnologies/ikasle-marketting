@@ -1,15 +1,14 @@
 import React, { useRef } from 'react';
-import { ArrowLeft, ArrowRight, Send } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { splitReveal } from '../../../../lib/splitReveal';
 import { useGSAP } from '@gsap/react';
-import heroArt from '../../../../assets/digital-hero-art.png';
-import motionBackground from '../../../../assets/about-cta-blue-flow.png';
 import { ServicesCta } from '../ServicesCta';
 import { DIGITAL_ICONS } from './DigitalIcons';
 import './DigitalMarketingPage.css';
+import { HubHeroArt } from '../HubHeroArt';
 
 gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
@@ -98,8 +97,6 @@ export const DigitalMarketingPage: React.FC<DigitalMarketingPageProps> = ({
         onSplit: (self) => splitReveal(self.lines, { yPercent: 115, duration: 1.2, stagger: 0.14 }, tl, 0.3),
       });
 
-      // Art floats, and drifts a little with the pointer.
-      gsap.to('.dm-hero-art img', { y: -10, duration: 3, repeat: -1, yoyo: true, ease: 'sine.inOut' });
     });
 
     mm.add('(prefers-reduced-motion: no-preference) and (hover: hover)', () => {
@@ -231,7 +228,20 @@ export const DigitalMarketingPage: React.FC<DigitalMarketingPageProps> = ({
           </div>
 
           <div className="dm-hero-art" aria-hidden="true">
-            <img src={heroArt} alt="" />
+            <HubHeroArt
+              center={DIGITAL_ICONS.strategy}
+              caption="10 focused services"
+              icons={[
+                { label: 'Research', icon: DIGITAL_ICONS.research },
+                { label: 'Search Ads', icon: DIGITAL_ICONS.google },
+                { label: 'YouTube Ads', icon: DIGITAL_ICONS.video },
+                { label: 'Meta Ads', icon: DIGITAL_ICONS.meta },
+                { label: 'Content', icon: DIGITAL_ICONS.content },
+                { label: 'Email', icon: DIGITAL_ICONS.email },
+                { label: 'Lead Gen', icon: DIGITAL_ICONS.leads },
+                { label: 'Landing Pages', icon: DIGITAL_ICONS.landing },
+              ]}
+            />
           </div>
         </div>
       </section>
@@ -279,20 +289,6 @@ export const DigitalMarketingPage: React.FC<DigitalMarketingPageProps> = ({
           <span>Back to All Services</span>
         </button>
       </div>
-
-      <section className="dm-motion" style={{ backgroundImage: `url(${motionBackground})` }} aria-labelledby="dm-motion-title">
-        <div className="dm-motion-inner">
-          <span className="dm-motion-plane" aria-hidden="true">
-            <Send size={46} strokeWidth={1.3} />
-          </span>
-          <span className="dm-motion-divider" aria-hidden="true" />
-          <h2 id="dm-motion-title">Let’s put your next move into motion.</h2>
-          <button type="button" className="dm-motion-button" onClick={onContactClick}>
-            <span>Start a Conversation</span>
-            <ArrowRight size={19} strokeWidth={2} aria-hidden="true" />
-          </button>
-        </div>
-      </section>
     </main>
   );
 };

@@ -88,10 +88,11 @@
 /* ---------- Listing ---------- */
 .cj-jobs { padding: 36px 0 90px; }
 .cj-toolbar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 14px; padding: 18px; border: 1px solid var(--cj-line); border-radius: 18px; background: var(--cj-soft); }
-.cj-filters { display: grid; flex: 1; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
-.cj-filter { display: grid; gap: 6px; }
+.cj-filters { display: grid; flex: 1; min-width: 0; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+.cj-filter { display: grid; grid-template-columns: minmax(0, 1fr); align-content: end; min-width: 0; gap: 6px; }
 .cj-filter span { color: var(--cj-muted); font: 700 11.5px var(--font-heading); letter-spacing: 0.06em; text-transform: uppercase; }
-.cj-filter select { height: 44px; padding: 0 12px; border: 1px solid #cfe2ea; border-radius: 12px; background: #fff; color: var(--cj-ink); font: 600 14px var(--font-body); cursor: pointer; }
+.cj-filter select { box-sizing: border-box; width: 100%; min-width: 0; height: 44px; padding: 0 12px; border: 1px solid #cfe2ea; border-radius: 12px; background: #fff; color: var(--cj-ink); font: 600 14px var(--font-body); cursor: pointer; }
+.cj-filter select:focus-visible, .cj-clear:focus-visible { outline: 2px solid var(--cj-blue); outline-offset: 2px; }
 .cj-clear { display: inline-flex; height: 44px; align-items: center; gap: 6px; padding: 0 16px; border: 0; border-radius: 12px; background: #fff; color: var(--cj-blue); font: 700 13.5px var(--font-heading); cursor: pointer; }
 .cj-clear svg { width: 15px; }
 .cj-clear:disabled { color: #9ab0c0; cursor: default; }
@@ -278,14 +279,14 @@
 }
 @media (max-width: 760px) {
   .cj-grid, .cj-grid--3 { grid-template-columns: 1fr; }
-  .cj-filters { grid-template-columns: 1fr 1fr; }
+  .cj-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cj-toolbar { flex-direction: column; align-items: stretch; }
   .cj-aside { grid-template-columns: 1fr; }
   .cj-offer ul, .cj-form-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
   .cj-shell { width: min(100% - 32px, 1180px); }
-  .cj-filters { grid-template-columns: 1fr; }
+  .cj-filters { grid-template-columns: minmax(0, 1fr); }
   .cj-card { padding: 20px; }
   .cj-card-actions { flex-direction: column; }
   .cj-hero-actions .cj-btn, .cj-submit { width: 100%; }

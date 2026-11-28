@@ -19,7 +19,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { splitReveal } from '../../../../lib/splitReveal';
 import { useGSAP } from '@gsap/react';
-import heroArt from '../../../../assets/seo-hero-art.png';
+import { SEO_ICONS } from './SeoIcons';
+import { HubHeroArt } from '../HubHeroArt';
 import { ServicesCta } from '../ServicesCta';
 import './SeoPage.css';
 
@@ -73,7 +74,6 @@ export const SeoPage: React.FC<SeoPageProps> = ({ onHomeClick, onServicesClick, 
         autoSplit: true,
         onSplit: (self) => splitReveal(self.lines, { yPercent: 115, duration: 1.2, stagger: 0.14 }, tl, 0.3),
       });
-      gsap.to('.seo-hero-art img', { y: -8, x: 6, duration: 3.4, repeat: -1, yoyo: true, ease: 'sine.inOut' });
     });
 
     mm.add('(prefers-reduced-motion: no-preference) and (hover: hover)', () => {
@@ -194,7 +194,20 @@ export const SeoPage: React.FC<SeoPageProps> = ({ onHomeClick, onServicesClick, 
           </div>
 
           <div className="seo-hero-art" aria-hidden="true">
-            <img src={heroArt} alt="" />
+            <HubHeroArt
+              center={SEO_ICONS.audit}
+              caption="10 focused services"
+              icons={[
+                { label: 'Keywords', icon: SEO_ICONS.keyword },
+                { label: 'Technical', icon: SEO_ICONS.technical },
+                { label: 'On-Page', icon: SEO_ICONS.onpage },
+                { label: 'Local SEO', icon: SEO_ICONS.local },
+                { label: 'Business Profile', icon: SEO_ICONS.gbp },
+                { label: 'Content', icon: SEO_ICONS.content },
+                { label: 'Off-Page & PR', icon: SEO_ICONS.offpage },
+                { label: 'E-Commerce', icon: SEO_ICONS.ecommerce },
+              ]}
+            />
           </div>
         </div>
       </section>
@@ -247,16 +260,6 @@ export const SeoPage: React.FC<SeoPageProps> = ({ onHomeClick, onServicesClick, 
           <span>Back to All Services</span>
         </button>
       </div>
-
-      <section className="seo-ready" aria-labelledby="seo-ready-title">
-        <div className="seo-ready-inner">
-          <h2 id="seo-ready-title">Turn search visibility into your next opportunity.</h2>
-          <button type="button" className="seo-ready-button" onClick={onContactClick}>
-            <span>Start a Conversation</span>
-            <ArrowRight size={19} strokeWidth={2} aria-hidden="true" />
-          </button>
-        </div>
-      </section>
     </main>
   );
 };
