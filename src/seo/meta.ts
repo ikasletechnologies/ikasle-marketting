@@ -6,6 +6,7 @@
  * blog-post meta lives in ./pages.ts.
  */
 import { NOT_FOUND_SECTION, PRIVATE_SECTIONS, ROUTES } from '../routes.ts';
+import type { Job } from '../content/careers/jobs.ts';
 
 export const SITE_NAME = 'IKASLĒ Marketing';
 export const DEFAULT_OG_IMAGE = '/hero-sculpture.png';
@@ -19,6 +20,8 @@ export interface PageMeta {
   type: 'website' | 'article';
   noindex: boolean;
   publishedAt?: string;
+  /** Set only for open job openings: adds JobPosting structured data. */
+  job?: Job;
 }
 
 const PAGE_DESCRIPTIONS: Record<string, string> = {
@@ -27,7 +30,7 @@ const PAGE_DESCRIPTIONS: Record<string, string> = {
   Services: 'Explore IKASLĒ Marketing services: digital marketing, social media marketing, SEO & search growth, and brand growth & creative, as one plan or individually.',
   Blogs: 'Practical guides on digital marketing, social media, SEO and student acquisition from the IKASLĒ Marketing team.',
   Contact: 'Tell us about your goals. Contact IKASLĒ Marketing in Coimbatore by form, email or phone to plan your next stage of growth.',
-  Careers: 'Join IKASLĒ Marketing. See open roles and apply to help brands grow through strategy, creativity and digital marketing.',
+  Careers: 'Careers at IKASLĒ Marketing in Coimbatore. Browse open jobs in design, video, social media and performance marketing, and apply online.',
   'Privacy Policy': 'How IKASLĒ Marketing collects, uses and protects the information you share with us.',
   'Terms & Conditions': 'The terms that apply when you use the IKASLĒ Marketing website and services.',
   'Cookie Policy': 'How IKASLĒ Marketing uses cookies and similar technologies to keep our website fast, secure and helpful.',

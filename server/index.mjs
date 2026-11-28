@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+import fs from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -36,6 +38,9 @@ const CHAT_MAX_HISTORY_CHARS = 8000;
 const CHAT_MAX_HISTORY_MESSAGES = 12;
 const FORM_RATE_LIMIT = Number(env.FORM_RATE_LIMIT || 5);
 const MAX_BODY_BYTES = 64 * 1024;
+// Job applications carry a base64 resume (max 5 MB of file, about 6.7 MB of JSON).
+const RESUME_MAX_BYTES = 5 * 1024 * 1024;
+const CAREERS_MAX_BODY_BYTES = 8 * 1024 * 1024;
 
 const DATA_DIR = path.resolve(projectRoot, env.DATA_DIR || 'server/data');
 const DIST_DIR = path.resolve(projectRoot, env.DIST_DIR || 'dist');
@@ -49,6 +54,15 @@ const transporter = SMTP_HOST && SMTP_USER && SMTP_PASS && CONTACT_FROM
       auth: { user: SMTP_USER, pass: SMTP_PASS },
     })
   : null;
+
+// Job openings are shared with the front end. If the source file is not deployed next to the
+// server, applications still work but the job id cannot be checked against open roles.
+let careers = null;
+try {
+  careers = await import('../src/content/careers/jobs.ts');
+} catch (error) {
+  console.warn('Job openings could not be loaded; applications will not be checked against open roles:', error?.message);
+}
 
 let store = null;
 try {
@@ -84,7 +98,7 @@ function sendJson(response, status, body, extraHeaders = {}) {
   response.end(JSON.stringify(body));
 }
 
-function readBody(request) {
+function readBody(request, maxBytes = MAX_BODY_BYTES) {
   return new Promise((resolve, reject) => {
     const chunks = [];
     let size = 0;
@@ -92,7 +106,7 @@ function readBody(request) {
     request.on('data', (chunk) => {
       if (failed) return;
       size += chunk.length;
-      if (size > MAX_BODY_BYTES) {
+      if (size > maxBytes) {
         failed = true;
         reject(new HttpError(413, 'Request body is too large.'));
         request.resume();
@@ -296,57 +310,145 @@ async function handleContact(request, response) {
   }
 }
 
-async function handleCareers(request, response) {
-  const body = await readBody(request);
-  const application = {
-    fullName: text(body.fullName, 120),
-    email: text(body.email, 254),
-    phone: text(body.phone, 50),
-    experience: text(body.experience, 120),
-    portfolio: text(body.portfolio, 300),
-    availability: text(body.availability, 120),
-    message: text(body.message, 5000),
-  };
+const RESUME_TYPES = {
+  pdf: { mime: 'application/pdf', magic: [0x25, 0x50, 0x44, 0x46] },
+  doc: { mime: 'application/msword', magic: [0xd0, 0xcf, 0x11, 0xe0] },
+  docx: { mime: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', magic: [0x50, 0x4b, 0x03, 0x04] },
+};
 
-  const { fullName, email, phone, experience, portfolio, availability, message } = application;
-  if (!isValidName(fullName) || !isValidEmail(email) || !phone || !isValidPhone(phone) || !experience || !availability || !message || (portfolio && !isValidUrl(portfolio))) {
-    sendJson(response, 400, { ok: false, message: 'Please provide valid application details.' });
+/** Decodes and checks an uploaded resume: extension, size and file signature must all match. */
+function readResume(resume) {
+  if (!resume || typeof resume !== 'object') return { error: 'Please upload your resume.' };
+  const name = text(resume.name, 200);
+  const extension = name.split('.').pop()?.toLowerCase();
+  const type = RESUME_TYPES[extension];
+  if (!type || typeof resume.data !== 'string') return { error: 'Your resume must be a PDF, DOC or DOCX file.' };
+  const buffer = Buffer.from(resume.data, 'base64');
+  if (!buffer.length) return { error: 'Your resume file is empty.' };
+  if (buffer.length > RESUME_MAX_BYTES) return { error: 'Your resume must be 5 MB or smaller.' };
+  if (!type.magic.every((byte, index) => buffer[index] === byte)) return { error: 'Your resume file does not look like a valid PDF, DOC or DOCX document.' };
+  const safeName = name.replace(/[^\w.\- ]+/g, '_').slice(-120) || `resume.${extension}`;
+  return { buffer, extension, mime: type.mime, safeName };
+}
+
+function hasApplied(email, jobId) {
+  if (!store) return false;
+  try {
+    return store.hasApplication(email, jobId);
+  } catch (error) {
+    console.error('Could not check for duplicate applications:', error);
+    return false;
+  }
+}
+
+async function handleCareers(request, response) {
+  const body = await readBody(request, CAREERS_MAX_BODY_BYTES);
+  const jobId = text(body.jobId, 40);
+  const job = careers?.JOBS.find((item) => item.id === jobId);
+  if (careers && (!job || !careers.isAcceptingApplications(job))) {
+    sendJson(response, 410, { ok: false, message: 'This position is no longer accepting applications.' });
     return;
   }
 
-  const id = saveSubmission('careers', application);
+  const application = {
+    jobId,
+    position: job?.title || text(body.position, 160),
+    fullName: text(body.fullName, 120),
+    email: text(body.email, 254),
+    phone: text(body.phone, 50),
+    location: text(body.location, 120),
+    experience: text(body.experience, 60),
+    currentCompany: text(body.currentCompany, 160),
+    currentSalary: text(body.currentSalary, 60),
+    expectedSalary: text(body.expectedSalary, 60),
+    noticePeriod: text(body.noticePeriod, 60),
+    linkedin: text(body.linkedin, 300),
+    portfolio: text(body.portfolio, 300),
+    coverLetter: text(body.coverLetter, 5000),
+    additionalInfo: text(body.additionalInfo, 3000),
+    consent: body.consent === true,
+    status: 'applied',
+  };
+
+  const { fullName, email, phone, location, experience, noticePeriod, linkedin, portfolio, coverLetter, position } = application;
+  const invalid = !jobId || !position || !isValidName(fullName) || !isValidEmail(email) || !phone || !isValidPhone(phone)
+    || !location || !experience || !noticePeriod || coverLetter.length < 50
+    || (linkedin && !isValidUrl(linkedin)) || (portfolio && !isValidUrl(portfolio));
+  if (invalid) {
+    sendJson(response, 400, { ok: false, message: 'Please provide valid application details.' });
+    return;
+  }
+  if (!application.consent) {
+    sendJson(response, 400, { ok: false, message: 'Please accept the privacy policy to apply.' });
+    return;
+  }
+
+  const resume = readResume(body.resume);
+  if (resume.error) {
+    sendJson(response, 400, { ok: false, message: resume.error });
+    return;
+  }
+
+  if (hasApplied(email, jobId)) {
+    sendJson(response, 409, { ok: false, message: `You have already applied for the ${position} role with this email address. Our team will be in touch.` });
+    return;
+  }
+
+  // Keep the resume on disk next to the database; only its file name is stored with the application.
+  let resumeFile = null;
+  try {
+    const dir = path.join(DATA_DIR, 'resumes');
+    fs.mkdirSync(dir, { recursive: true });
+    resumeFile = `${new Date().toISOString().slice(0, 10)}-${jobId}-${randomUUID()}.${resume.extension}`;
+    fs.writeFileSync(path.join(dir, resumeFile), resume.buffer);
+  } catch (error) {
+    console.error('Could not store resume file:', error);
+    resumeFile = null;
+  }
+
+  const id = saveSubmission('careers', { ...application, resumeFile, resumeName: resume.safeName });
   const emailed = await deliver(
     id,
     {
       from: CONTACT_FROM,
       to: CAREERS_RECIPIENT,
       replyTo: email,
-      subject: `[Careers application] Social Media Manager - ${fullName}`,
+      subject: `[Careers application] ${position} (${jobId}) - ${fullName}`,
       text: [
-        'Role: Social Media Manager',
+        `Role: ${position} (${jobId})`,
         `Name: ${fullName}`,
         `Email: ${email}`,
         `Phone: ${phone}`,
-        `Experience: ${experience}`,
-        `Portfolio / LinkedIn: ${portfolio || 'Not provided'}`,
-        `Availability: ${availability}`,
+        `Location: ${location}`,
+        `Total experience: ${experience}`,
+        `Current company: ${application.currentCompany || 'Not provided'}`,
+        `Current salary: ${application.currentSalary || 'Not provided'}`,
+        `Expected salary: ${application.expectedSalary || 'Not provided'}`,
+        `Notice period: ${noticePeriod}`,
+        `LinkedIn: ${linkedin || 'Not provided'}`,
+        `Portfolio / GitHub: ${portfolio || 'Not provided'}`,
+        `Resume: attached${resumeFile ? ` (stored as ${resumeFile})` : ''}`,
         '',
-        'About the applicant:',
-        message,
+        'Cover letter:',
+        coverLetter,
+        '',
+        'Additional information:',
+        application.additionalInfo || 'None',
       ].join('\n'),
+      attachments: [{ filename: resume.safeName, content: resume.buffer, contentType: resume.mime }],
     },
     {
       from: CONTACT_FROM,
       to: email,
-      subject: 'We received your Ikasle Marketing application',
-      text: `Hi ${fullName},\n\nThanks for applying for the Social Media Manager role at Ikasle Marketing. We received your details and will review them shortly.\n\nRegards,\nIkasle Marketing`,
+      subject: `We received your application for ${position}`,
+      text: `Hi ${fullName},\n\nThank you for applying for the ${position} role (${jobId}) at Ikasle Marketing. We have received your application and resume, and our team will review them shortly.\n\nRegards,\nIkasle Marketing`,
     },
   );
 
   if (emailed || id !== null) {
-    sendJson(response, 200, { ok: true, message: 'Application sent successfully.' });
+    sendJson(response, 200, { ok: true, message: 'Application submitted successfully.' });
   } else {
-    sendJson(response, transporter ? 500 : 503, { ok: false, message: 'We could not send your application right now. Please try again.' });
+    sendJson(response, transporter ? 500 : 503, { ok: false, message: 'We could not submit your application right now. Please try again.' });
   }
 }
 

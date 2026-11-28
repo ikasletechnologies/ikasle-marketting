@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Bot, MessageCircle, Send, Sparkles, X } from 'lucide-react';
+import { Send, X } from 'lucide-react';
+import { AiIcon, WhatsAppButton } from './FloatingActions';
 import { sendChatMessage, type ChatMessage } from '../../services/chatService';
 import './ChatBot.css';
 
@@ -42,7 +43,7 @@ export const ChatBot: React.FC = () => {
       {isOpen && (
         <section className="chatbot-panel" aria-label="Ikasle chat assistant">
           <header className="chatbot-header">
-            <span className="chatbot-avatar" aria-hidden="true"><Bot size={20} /></span>
+            <span className="chatbot-avatar" aria-hidden="true"><AiIcon size={20} /></span>
             <div>
               <strong>Ikasle Assistant</strong>
               <small><i /> Here to help</small>
@@ -74,9 +75,10 @@ export const ChatBot: React.FC = () => {
         </section>
       )}
 
+      {!isOpen && <WhatsAppButton />}
+
       <button type="button" className="chatbot-launcher" onClick={() => setIsOpen((open) => !open)} aria-expanded={isOpen} aria-label={isOpen ? 'Close chat assistant' : 'Open chat assistant'}>
-        <span className="chatbot-launcher-icon">{isOpen ? <X size={22} /> : <MessageCircle size={22} />}</span>
-        {!isOpen && <span className="chatbot-launcher-copy"><Sparkles size={14} /> Chat with us</span>}
+        <span className="chatbot-launcher-icon">{isOpen ? <X size={22} /> : <AiIcon size={26} />}</span>
       </button>
     </div>
   );

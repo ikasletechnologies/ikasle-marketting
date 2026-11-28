@@ -5,6 +5,7 @@
 import { NOT_FOUND_SECTION, PRIVATE_SECTIONS, ROUTES } from '../routes.ts';
 import { BLOG_POSTS, blogPostPath, getPostBySlug } from '../content/blog/posts.ts';
 import { DEFAULT_OG_IMAGE, SITE_NAME, getSectionMeta, titleFor, type PageMeta } from './meta.ts';
+import { getJobPages } from './jobs.ts';
 
 /** Meta for /blogs/<slug>; unknown slugs get a noindex "not found" entry. */
 export function getBlogPostMeta(slug: string): PageMeta {
@@ -26,5 +27,5 @@ export function getPublicPages(): PageMeta[] {
   const sections = Object.keys(ROUTES)
     .filter((section) => !PRIVATE_SECTIONS.has(section))
     .map(getSectionMeta);
-  return [...sections, ...BLOG_POSTS.map((post) => getBlogPostMeta(post.slug))];
+  return [...sections, ...BLOG_POSTS.map((post) => getBlogPostMeta(post.slug)), ...getJobPages()];
 }

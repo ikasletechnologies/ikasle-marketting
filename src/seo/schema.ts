@@ -80,6 +80,36 @@ export function buildPageJsonLd(origin: string, meta: PageMeta): string {
     });
   }
 
+  // Only open roles get JobPosting data (getJobMeta leaves `job` unset for closed ones).
+  if (meta.job && !meta.noindex) {
+    const job = meta.job;
+    const list = (items: string[]) => `<ul>${items.map((item) => `<li>${item}</li>`).join('')}</ul>`;
+    const [city, region] = job.location.split(',').map((part) => part.trim());
+    graph.push({
+      '@type': 'JobPosting',
+      title: job.title,
+      description: [
+        ...job.about.map((paragraph) => `<p>${paragraph}</p>`),
+        '<p><strong>Key responsibilities</strong></p>', list(job.responsibilities),
+        '<p><strong>Qualifications</strong></p>', list(job.qualifications),
+      ].join(''),
+      identifier: { '@type': 'PropertyValue', name: SITE_NAME, value: job.id },
+      datePosted: job.postedAt,
+      ...(job.deadline ? { validThrough: `${job.deadline}T23:59:59+05:30` } : {}),
+      employmentType: { 'Full-time': 'FULL_TIME', 'Part-time': 'PART_TIME', Internship: 'INTERN', Contract: 'CONTRACTOR' }[job.employmentType],
+      hiringOrganization: { '@type': 'Organization', name: SITE_NAME, sameAs: origin, logo: `${origin}/logo-clean.png` },
+      jobLocation: {
+        '@type': 'Place',
+        address: { '@type': 'PostalAddress', addressLocality: city, addressRegion: region, addressCountry: 'IN' },
+      },
+      ...(job.workMode === 'Remote' ? { jobLocationType: 'TELECOMMUTE', applicantLocationRequirements: { '@type': 'Country', name: 'India' } } : {}),
+      skills: job.skills.join(', '),
+      experienceRequirements: job.experience,
+      directApply: true,
+      url,
+    });
+  }
+
   return JSON.stringify({
     '@context': 'https://schema.org',
     '@graph': graph,

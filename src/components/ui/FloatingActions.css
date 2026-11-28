@@ -1,0 +1,148 @@
+/* ------------------------------------------------------------ AI sparkle icon */
+.ai-icon { overflow: visible; }
+.ai-icon-main { transform-box: fill-box; transform-origin: center; animation: ai-breathe 3.2s ease-in-out infinite; }
+.ai-icon-small { transform-box: fill-box; transform-origin: center; animation: ai-twinkle 2.4s ease-in-out infinite; }
+.ai-icon-dot { animation: ai-blink 2.4s ease-in-out 1.2s infinite; }
+
+@keyframes ai-breathe { 0%, 100% { transform: scale(1) rotate(0deg); } 50% { transform: scale(1.08) rotate(12deg); } }
+@keyframes ai-twinkle { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.35) rotate(45deg); opacity: 0.4; } }
+@keyframes ai-blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+/* ------------------------------------------------------------ WhatsApp */
+.wa-float {
+  position: relative;
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #2fe06f, #12a950);
+  box-shadow: 0 14px 30px -12px rgba(18, 140, 70, 0.75);
+  color: #fff;
+  animation: wa-in 600ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+.wa-float:hover { box-shadow: 0 18px 34px -12px rgba(18, 140, 70, 0.9); transform: translateY(-3px) scale(1.05); }
+.wa-float:focus-visible { outline: 3px solid #12a950; outline-offset: 3px; }
+.wa-float svg { position: relative; z-index: 1; animation: wa-nudge 6s ease-in-out 3s infinite; }
+.wa-float:hover svg { animation-play-state: paused; }
+
+.wa-float-ping { position: absolute; inset: 0; border-radius: 50%; background: #25d366; animation: wa-ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite; }
+.wa-float-badge {
+  position: absolute;
+  z-index: 2;
+  top: -3px;
+  right: -3px;
+  display: grid;
+  width: 19px;
+  height: 19px;
+  place-items: center;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #ff4d4f;
+  color: #fff;
+  font: 800 10px var(--font-heading);
+  animation: wa-badge 600ms cubic-bezier(0.34, 1.56, 0.64, 1) 1.2s both;
+}
+
+.wa-float-tip {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 12px);
+  display: grid;
+  gap: 1px;
+  padding: 9px 13px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 14px 30px -14px rgba(7, 29, 53, 0.45);
+  color: #0b2540;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(8px, -50%);
+  transition: opacity 220ms ease, transform 220ms ease;
+  animation: wa-tip-intro 5s ease 2.5s 1 both;
+}
+.wa-float-tip::after { content: ''; position: absolute; top: 50%; right: -5px; width: 10px; height: 10px; background: #fff; transform: translateY(-50%) rotate(45deg); }
+.wa-float-tip b { font: 800 13px var(--font-heading); }
+.wa-float-tip small { color: #5b768d; font: 500 11.5px var(--font-body); }
+.wa-float:hover .wa-float-tip, .wa-float:focus-visible .wa-float-tip { opacity: 1; transform: translate(0, -50%); animation: none; }
+
+@keyframes wa-in { from { opacity: 0; transform: translateY(20px) scale(0.6); } to { opacity: 1; transform: none; } }
+@keyframes wa-ping { 0% { opacity: 0.55; transform: scale(1); } 80%, 100% { opacity: 0; transform: scale(1.7); } }
+@keyframes wa-nudge { 0%, 88%, 100% { transform: rotate(0); } 90% { transform: rotate(-14deg); } 93% { transform: rotate(12deg); } 96% { transform: rotate(-6deg); } }
+@keyframes wa-badge { from { transform: scale(0); } to { transform: scale(1); } }
+@keyframes wa-tip-intro { 0% { opacity: 0; transform: translate(8px, -50%); } 8%, 85% { opacity: 1; transform: translate(0, -50%); } 100% { opacity: 0; transform: translate(8px, -50%); } }
+
+/* ------------------------------------------------------------ Back to top (left side) */
+.scroll-top {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 1090;
+  display: grid;
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #071d35;
+  box-shadow: 0 14px 30px -12px rgba(7, 29, 53, 0.7);
+  color: #fff;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(24px) scale(0.6) rotate(-90deg);
+  transition: opacity 350ms ease, transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1), background 250ms ease;
+}
+.scroll-top.is-visible { opacity: 1; pointer-events: auto; transform: none; }
+.scroll-top:hover { background: linear-gradient(145deg, #0875bc, #11b9b0); }
+.scroll-top:focus-visible { outline: 3px solid #35d7d0; outline-offset: 3px; }
+
+.scroll-top-ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.scroll-top-track { fill: none; stroke: rgba(255, 255, 255, 0.14); stroke-width: 3; }
+.scroll-top-bar { fill: none; stroke: #35d7d0; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; transition: stroke-dashoffset 120ms linear; }
+
+.scroll-top-arrow { position: relative; z-index: 1; display: grid; overflow: hidden; place-items: center; }
+.scroll-top.is-visible .scroll-top-arrow svg { animation: top-bob 2.2s ease-in-out infinite; }
+.scroll-top:hover .scroll-top-arrow svg { animation: top-loop 700ms cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+.scroll-top.is-launching .scroll-top-arrow svg { animation: top-launch 800ms cubic-bezier(0.55, 0, 0.1, 1) both; }
+
+.scroll-top-trail { position: absolute; bottom: 50%; left: 50%; width: 3px; height: 0; margin-left: -1.5px; border-radius: 3px; background: linear-gradient(180deg, #35d7d0, transparent); opacity: 0; }
+.scroll-top.is-launching .scroll-top-trail { animation: top-trail 800ms ease-out both; }
+
+.scroll-top-tip {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 12px);
+  padding: 7px 11px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 12px 26px -14px rgba(7, 29, 53, 0.45);
+  color: #0b2540;
+  font: 700 12.5px var(--font-heading);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-6px, -50%);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.scroll-top:hover .scroll-top-tip, .scroll-top:focus-visible .scroll-top-tip { opacity: 1; transform: translate(0, -50%); }
+
+@keyframes top-bob { 0%, 100% { transform: translateY(2px); } 50% { transform: translateY(-3px); } }
+@keyframes top-loop { 0% { transform: translateY(0); opacity: 1; } 45% { transform: translateY(-24px); opacity: 0; } 46% { transform: translateY(24px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+@keyframes top-launch { 0% { transform: translateY(0); } 20% { transform: translateY(4px) scaleY(0.85); } 60% { transform: translateY(-30px); opacity: 0; } 61% { transform: translateY(26px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+@keyframes top-trail { 0% { height: 0; opacity: 0; } 30% { height: 34px; opacity: 1; transform: translateY(-6px); } 100% { height: 0; opacity: 0; transform: translateY(-40px); } }
+
+@media (max-width: 560px) {
+  .scroll-top { left: 16px; bottom: 16px; width: 48px; height: 48px; }
+  .scroll-top-tip { display: none; }
+  .wa-float { width: 50px; height: 50px; }
+  .wa-float-tip { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-icon *, .wa-float, .wa-float-ping, .wa-float-badge, .wa-float-tip, .scroll-top, .scroll-top *, .scroll-top-arrow svg { animation: none !important; transition: none !important; }
+  .wa-float-ping { display: none; }
+}

@@ -29,10 +29,11 @@ if (which === 'subscribers') {
   header = ['email', 'source', 'created_at'];
   rows = store.listSubscribers().map((r) => [r.email, r.source, r.created_at]);
 } else {
-  header = ['id', 'kind', 'created_at', 'full_name', 'email', 'phone', 'company', 'service', 'budget', 'message', 'email_status', 'jira_key'];
+  header = ['id', 'kind', 'created_at', 'full_name', 'email', 'phone', 'company', 'service', 'budget', 'message', 'resume_file', 'email_status', 'jira_key'];
   rows = store.listSubmissions().map((r) => {
     const p = JSON.parse(r.payload);
-    return [r.id, r.kind, r.created_at, r.full_name, r.email, p.phone, p.company, p.service, p.budget, p.message, r.email_status, r.jira_key];
+    // Careers rows: company = current company, service = position applied for, message = cover letter.
+    return [r.id, r.kind, r.created_at, r.full_name, r.email, p.phone, p.company ?? p.currentCompany, p.service ?? p.position, p.budget, p.message ?? p.coverLetter, p.resumeFile, r.email_status, r.jira_key];
   });
 }
 
